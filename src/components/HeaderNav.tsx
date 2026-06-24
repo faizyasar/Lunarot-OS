@@ -1,6 +1,6 @@
 interface HeaderNavProps {
-  currentView: 'oracle' | 'showcase';
-  onViewChange: (view: 'oracle' | 'showcase') => void;
+  currentView: 'oracle' | 'showcase' | 'about';
+  onViewChange: (view: 'oracle' | 'showcase' | 'about') => void;
   title?: string;
   subtitle?: string;
 }
@@ -43,6 +43,17 @@ export default function HeaderNav({
           }`}
         >
           ◆ STYLE SHOWCASE
+        </button>
+
+        <button
+          onClick={() => onViewChange('about')}
+          className={`px-3 py-1 border transition-all duration-300 font-bold cursor-pointer tracking-[0.25em] ${
+            currentView === 'about'
+              ? 'border-[#efede8] bg-black/60 text-[#efede8] shadow-[0_0_10px_rgba(239,237,232,0.25)]'
+              : 'border-white/20 text-white/50 hover:text-white hover:border-white/55'
+          }`}
+        >
+          ◆ ABOUT
         </button>
       </div>
 

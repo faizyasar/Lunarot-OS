@@ -7,6 +7,7 @@ import IntakeScreen from './components/IntakeScreen';
 import MainScreen from './components/MainScreen';
 import HeaderNav from './components/HeaderNav';
 import ShowcaseScreen from './components/ShowcaseScreen';
+import AboutScreen from './components/AboutScreen';
 
 const SHOWCASE_DEFAULT_PLANETS: Planet[] = [
   { name: 'Sun', symbol: '☉', deg: 120, sign: 'Leo', color: '#c8a45a' },
@@ -19,7 +20,7 @@ const SHOWCASE_DEFAULT_PLANETS: Planet[] = [
 const SHOWCASE_DEFAULT_ACTIVE = new Set(['Sun', 'Moon', 'Rising']);
 
 export default function App() {
-  const [view, setView] = useState<'oracle' | 'showcase'>('oracle');
+  const [view, setView] = useState<'oracle' | 'showcase' | 'about'>('oracle');
   const [screen, setScreen] = useState<'intro' | 'intake' | 'main'>('intro');
   const [user, setUser] = useState<NatalUser | null>(null);
 
@@ -96,9 +97,12 @@ export default function App() {
               />
             )}
           </>
-        ) : (
+        ) : view === 'showcase' ? (
           /* Style Guide Sandbox / Documentation Showcase Screen */
           <ShowcaseScreen />
+        ) : (
+          /* About Page / Archive Dossier Screen */
+          <AboutScreen />
         )}
         
       </div>
