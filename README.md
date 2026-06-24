@@ -1,6 +1,6 @@
 # Lunarot OS
 
-An immersive, retro-gothic-alchemical terminal style framework designed as a premium baseline for building web applications. Fusing modern WebGL/Canvas effects, alchemical styling, and responsive dimensional locking, this system provides a visual shell that feels alive, mysterious, and state-of-the-art.
+UI of the Lunarot Ecosystem
 
 ---
 
@@ -73,15 +73,4 @@ A WebGL/Canvas backdrop drawing radial concentric orbits, Sephirotic coordinate 
 
 ---
 
-## ✦ Local Development
-
-1. **Install dependencies**:
-   ```bash
-   npm install
-   ```
-2. **Start the development server**:
-   ```bash
-   npm run dev
-   ```
-3. **Open the browser**:
-   Navigate to `http://localhost:3000` to interact with the **Astrological Tarot Oracle** or switch over to the **Developer Style Showcase** to inspect the style guide.
+For me not for you :P
