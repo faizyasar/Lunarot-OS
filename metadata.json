@@ -1,0 +1,8 @@
+{
+  "name": "Sacred Draw, Lunarot Engine",
+  "description": "A mystically forbidden divination app, illegally downloaded from a defunct witchcraft corporation from the 2000s for performing sacred card draws within a dark, star-filled, and atmospheric celestial interface. Full of hidden subtexts and high contextual, 2000s horrorcore from eg. the likes of https://ankokukoubou.com/ ",
+  "requestFramePermissions": [],
+  "majorCapabilities": [
+    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
+  ]
+}
