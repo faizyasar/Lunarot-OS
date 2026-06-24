@@ -19,8 +19,8 @@ Custom alchemical colors defined in `src/index.css`:
 - **Cormorant Garamond** (`font-garamond`): Prose style, optimized for body sentences and poetic descriptions.
 - **JetBrains Mono** (`font-mono`): Retrogaming telemetry fonts for console codes, specs, and status grids.
 
-### 3. Absolute Scaling (`--c-scale`)
-To guarantee that pages fit perfectly inside custom frames (like Carrd or custom viewports) without double scrollbars, the style sheet locks the dimensions of outer containers and automatically updates a scale factor (`--c-scale`) using CSS media queries:
+### 3. Absolute Scaling Because I hate scrolling because scrolling is ugly and stupid (`--c-scale`)
+To GUARANTEE that pages fit perfectly inside custom frames (like Carrd or custom viewports) without double scrollbars, the style sheet locks the dimensions of outer containers and automatically updates a scale factor (`--c-scale`) using CSS media queries:
 ```css
 :root { --c-scale: 0.95; }
 @media (max-width: 1023px) { :root { --c-scale: 0.72; } }
