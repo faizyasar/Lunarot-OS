@@ -76,9 +76,10 @@ export default function AboutScreen() {
               <p>
                 Visual layouts take inspiration from the late-90s and mid-2000s Japanese personal websites (個人サイト) dedicated to dark-horror art, occult symbols, and text-based divination. Chief among these influences is the raw, haunting beauty of classic webs like <span className="text-[var(--gold)] font-mono text-[10px]">ankokukoubou.com</span>.
               </p>
-              <InteractiveText className="block text-white/90 italic border-l-2 border-[var(--gold)]/40 pl-4 py-1 my-3">
-                "In the silence of the early net, the shadows of raw HTML contained rituals that modern flat design has forgotten."
-              </InteractiveText>
+              <InteractiveText
+                text='"In the silence of the early net, the shadows of raw HTML contained rituals that modern flat design has forgotten."'
+                className="block text-white/90 italic border-l-2 border-[var(--gold)]/40 pl-4 py-1 my-3"
+              />
               <p>
                 Rather than using generic modern styling, Lunarot OS enforces high-contrast, harmonized alchemical color tokens: <b className="text-[var(--gold)] font-mono text-[10.5px]">Void (#000000)</b>, <b className="text-white/40 font-mono text-[10.5px]">Ash (#080808)</b>, <b className="text-[var(--gold)] font-mono text-[10.5px]">Elden Gold (#c8a45a)</b>, and <b className="text-white font-mono text-[10.5px]">Parchment (#efede8)</b>.
               </p>
