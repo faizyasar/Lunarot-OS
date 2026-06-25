@@ -1,0 +1,12 @@
+[submodule "projects/Lunarot-Ankoku"]
+	path = projects/Lunarot-Ankoku
+	url = https://github.com/faizyasar/Lunarot-Ankoku.git
+[submodule "projects/Lunarot-Tarot-old"]
+	path = projects/Lunarot-Tarot-old
+	url = https://github.com/faizyasar/Lunarot-Tarot-old.git
+[submodule "projects/Lunarot-Pachinko"]
+	path = projects/Lunarot-Pachinko
+	url = https://github.com/faizyasar/Lunarot-Pachinko.git
+[submodule "projects/Lunarot-Tarot"]
+	path = projects/Lunarot-Tarot
+	url = https://github.com/faizyasar/Lunarot-Tarot.git
