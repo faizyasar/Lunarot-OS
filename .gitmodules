@@ -10,3 +10,6 @@
 [submodule "projects/Lunarot-Tarot"]
 	path = projects/Lunarot-Tarot
 	url = https://github.com/faizyasar/Lunarot-Tarot.git
+[submodule "projects/Lunarot-Directory"]
+	path = projects/Lunarot-Directory
+	url = https://github.com/faizyasar/Lunarot-Directory
