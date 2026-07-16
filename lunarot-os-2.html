@@ -1,0 +1,1858 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lunarot OS 2 - Standalone UI Reference Template</title>
+  
+  <!-- Typography Imports -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;800&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+  
+  <style>
+    /* InterVariable Font face imports */
+    @font-face {
+        font-family: "InterVariableFramer";
+        src: url("https://rsms.me/inter/font-files/InterVariable.woff2?v=4.0") format("woff2-variations");
+        font-weight: 100 900;
+        font-style: normal;
+        font-display: swap;
+    }
+    @font-face {
+        font-family: "InterVariableFramer";
+        src: url("https://rsms.me/inter/font-files/InterVariable-Italic.woff2?v=4.0") format("woff2-variations");
+        font-weight: 100 900;
+        font-style: italic;
+        font-display: swap;
+    }
+
+    /* ─── DESIGN SYSTEM VARIABLES ─── */
+    :root {
+      --void: #000000;
+      --parchment: #efede8;
+      --gold: #c8a45a;
+      --gold-dim: #998358;
+      --ash: #080808;
+      --cream: #ffffff;
+      --ember: #c8a45a;
+      --c-scale: 0.95;
+    }
+
+    /* Viewport Adaptations */
+    @media (max-width: 1023px) { :root { --c-scale: 0.72; } }
+    @media (max-width: 480px) { :root { --c-scale: 0.58; } }
+    @media (max-height: 850px) { :root { --c-scale: 0.82; } }
+    @media (max-height: 750px) { :root { --c-scale: 0.70; } }
+    @media (max-height: 650px) { :root { --c-scale: 0.60; } }
+    @media (max-height: 570px) { :root { --c-scale: 0.50; } }
+
+    /* ─── RESET & ROOT LOCKING ─── */
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+    
+    html, body {
+      height: 100vh;
+      min-height: 100vh;
+      max-height: 100vh;
+      overflow: hidden !important;
+      background-color: var(--void);
+      color: var(--parchment);
+      font-family: 'Cormorant Garamond', serif;
+      user-select: none;
+      -webkit-user-select: none;
+    }
+
+    /* Ambient Dark Vignette Background */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      z-index: 0;
+      pointer-events: none;
+      background: radial-gradient(circle at 50% 50%, #080808 0%, #000000 100%);
+    }
+
+    /* ─── ANIMATIONS ─── */
+    @keyframes ecur {
+      from { opacity: .4; text-shadow: none; }
+      to { opacity: 1; text-shadow: 0 0 8px var(--gold), 0 0 20px rgba(200,164,90,.4); }
+    }
+    @keyframes esettle {
+      0% { color: var(--gold); text-shadow: 0 0 18px rgba(200,164,90,.9); }
+      70% { color: #e8cca0; text-shadow: 0 0 4px rgba(200,164,90,.2); }
+      100% { color: var(--cream); text-shadow: none; }
+    }
+    @keyframes breathe {
+      0%, 100% { opacity: .3; }
+      50% { opacity: 1; }
+    }
+    @keyframes fade-in {
+      to { opacity: 1; }
+    }
+    @keyframes screen-quake {
+      0%, 100% { transform: translate3d(0, 0, 0); }
+      10% { transform: translate3d(-2px, 1.5px, 0); }
+      20% { transform: translate3d(2.5px, -1px, 0); }
+      35% { transform: translate3d(-1px, -2px, 0); }
+      50% { transform: translate3d(2px, 2.5px, 0); }
+      65% { transform: translate3d(-2.5px, -1px, 0); }
+      80% { transform: translate3d(1.5px, 2px, 0); }
+      90% { transform: translate3d(-1px, -1.5px, 0); }
+    }
+
+    .screen-shake {
+      animation: screen-quake 0.35s infinite;
+    }
+
+    /* ─── FONTS & TYPOGRAPHY ─── */
+    .font-cinzel { font-family: 'Cinzel', serif; }
+    .font-garamond { font-family: 'Cormorant Garamond', serif; }
+    .font-mono { font-family: 'JetBrains Mono', monospace; }
+
+    /* ─── STRUCTURE LAYOUT ─── */
+    #appWrapper {
+      position: fixed;
+      inset: 0;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      padding: calc(30px * var(--c-scale)) calc(40px * var(--c-scale));
+      z-index: 10;
+      pointer-events: none;
+    }
+
+    #appWrapper * {
+      pointer-events: auto;
+    }
+
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 1px solid rgba(200, 164, 90, 0.15);
+      padding-bottom: calc(14px * var(--c-scale));
+    }
+
+    footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-top: 1px solid rgba(200, 164, 90, 0.15);
+      padding-top: calc(14px * var(--c-scale));
+      font-family: 'JetBrains Mono', monospace;
+      font-size: calc(8px * var(--c-scale));
+      letter-spacing: 0.15em;
+      color: rgba(255, 255, 255, 0.4);
+    }
+
+    /* ─── CANVASES & BACKDROPS ─── */
+    #constellationCanvas {
+      position: fixed;
+      inset: 0;
+      z-index: 1;
+      pointer-events: none;
+    }
+
+    #asciiWavesCanvas {
+      position: fixed;
+      inset: 0;
+      z-index: 2;
+      pointer-events: none;
+    }
+
+    #asciiContainer {
+      position: fixed;
+      inset: 0;
+      z-index: 3;
+      pointer-events: none;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    #asciiEyes {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: calc(10px * var(--c-scale));
+      line-height: 1.1;
+      color: rgba(200, 164, 90, 0.08);
+      text-shadow: 0 0 4px rgba(200, 164, 90, 0.15);
+      white-space: pre;
+      pointer-events: none;
+      transform-style: preserve-3d;
+      transition: transform 0.1s ease, color 0.15s ease, text-shadow 0.15s ease;
+    }
+
+    /* ─── GOTHIC DECAY PANELS ─── */
+    .gothic-panel {
+      position: relative;
+      background: rgba(0, 0, 0, 0.85);
+      border: 1px solid var(--gold-dim);
+      padding: calc(24px * var(--c-scale)) calc(28px * var(--c-scale));
+      width: 100%;
+      height: 100%;
+      box-shadow: 0 10px 40px rgba(0, 0, 0, 0.9), inset 0 0 25px rgba(0, 0, 0, 0.95);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      display: flex;
+      flex-direction: column;
+      overflow-y: auto;
+    }
+
+    .gothic-panel::before {
+      content: '';
+      position: absolute;
+      inset: 4px;
+      border: 1px dashed rgba(200, 164, 90, 0.25);
+      pointer-events: none;
+    }
+
+    .gothic-panel.panel-gold {
+      border-color: var(--gold-dim);
+    }
+    .gothic-panel.panel-white {
+      border-color: rgba(255, 255, 255, 0.2);
+    }
+    .gothic-panel.panel-white::before {
+      border-color: rgba(255, 255, 255, 0.08);
+    }
+
+    /* Scrollbars for panel */
+    .gothic-panel::-webkit-scrollbar {
+      width: 4px;
+    }
+    .gothic-panel::-webkit-scrollbar-track {
+      background: transparent;
+    }
+    .gothic-panel::-webkit-scrollbar-thumb {
+      background: var(--gold-dim);
+      border-radius: 2px;
+    }
+
+    .panel-title-tag, .panel-footer-tag {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: calc(7px * var(--c-scale));
+      color: var(--gold);
+      letter-spacing: 0.2em;
+      position: absolute;
+      background-color: var(--void);
+      padding: 2px 6px;
+      z-index: 5;
+    }
+    .panel-title-tag {
+      top: -6px;
+      left: 20px;
+      border-left: 1px solid var(--gold-dim);
+      border-right: 1px solid var(--gold-dim);
+    }
+    .panel-footer-tag {
+      bottom: -6px;
+      right: 20px;
+      border-left: 1px solid var(--gold-dim);
+      border-right: 1px solid var(--gold-dim);
+    }
+
+    .gothic-panel.panel-white .panel-title-tag, 
+    .gothic-panel.panel-white .panel-footer-tag {
+      color: #ffffff;
+      border-color: rgba(255, 255, 255, 0.2);
+    }
+
+    /* ─── FORM & INPUT CONTROLS ─── */
+    .gothic-input-group {
+      border: 1px solid rgba(200, 164, 90, 0.15);
+      background: rgba(8, 8, 8, 0.6);
+      border-radius: 2px;
+      padding: 0 12px;
+      margin-bottom: 12px;
+    }
+    .gothic-panel.panel-white .gothic-input-group {
+      border-color: rgba(255, 255, 255, 0.08);
+    }
+
+    .input-header-line {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: calc(6px * var(--c-scale));
+      color: rgba(255, 255, 255, 0.3);
+      letter-spacing: 0.15em;
+      padding-top: 6px;
+      text-transform: uppercase;
+    }
+
+    .input-row {
+      display: flex;
+      align-items: center;
+      border-bottom: 1px dashed rgba(200, 164, 90, 0.12);
+      padding: 10px 0;
+    }
+    .gothic-panel.panel-white .input-row {
+      border-color: rgba(255, 255, 255, 0.06);
+    }
+    .input-row:last-child {
+      border-bottom: none;
+    }
+
+    .input-label {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: calc(8px * var(--c-scale));
+      color: rgba(255, 255, 255, 0.5);
+      width: 100px;
+      letter-spacing: 0.1em;
+    }
+
+    .input-field, .input-select {
+      background: transparent;
+      border: none;
+      outline: none;
+      color: var(--cream);
+      font-family: 'Cormorant Garamond', serif;
+      font-size: calc(13px * var(--c-scale));
+      width: 100%;
+    }
+    .input-field-text {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: calc(10px * var(--c-scale));
+      letter-spacing: 0.1em;
+      color: var(--gold);
+    }
+    .input-select {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: calc(9px * var(--c-scale));
+      color: var(--gold);
+      background: var(--void);
+      cursor: pointer;
+    }
+    .input-select option {
+      background: var(--void);
+      color: var(--parchment);
+    }
+
+    /* Date/Time pickers style overrides */
+    .input-field-date::-webkit-calendar-picker-indicator,
+    .input-field-time::-webkit-calendar-picker-indicator {
+      filter: invert(0.7) sepia(1) saturate(3) hue-rotate(15deg);
+      cursor: pointer;
+    }
+
+    /* ─── BUTTONS ─── */
+    .gothic-btn {
+      position: relative;
+      background: transparent;
+      border: 1px solid var(--gold-dim);
+      color: var(--gold);
+      font-family: 'JetBrains Mono', monospace;
+      font-size: calc(8px * var(--c-scale));
+      letter-spacing: 0.18em;
+      padding: 10px 18px;
+      cursor: pointer;
+      text-transform: uppercase;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.5);
+      transition: all 0.25s cubic-bezier(0.19, 1, 0.22, 1);
+      border-radius: 1px;
+    }
+
+    .gothic-btn.btn-primary {
+      background: var(--parchment);
+      color: var(--void);
+      border-color: var(--parchment);
+      font-weight: bold;
+    }
+
+    .gothic-btn:hover {
+      transform: scale(1.02);
+      box-shadow: 0 0 14px rgba(200, 164, 90, 0.45);
+    }
+    .gothic-btn.btn-primary:hover {
+      box-shadow: 0 0 14px rgba(255, 255, 255, 0.6);
+      background: var(--cream);
+    }
+
+    .gothic-btn.btn-full {
+      width: 100%;
+    }
+
+    /* ─── VIEW STACK SYSTEM ─── */
+    #viewContainer {
+      flex: 1;
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      perspective: 1000px;
+    }
+
+    #viewStackOuter {
+      position: relative;
+      width: calc(460px * var(--c-scale));
+      height: calc(600px * var(--c-scale));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transform-style: preserve-3d;
+    }
+
+    .view-card-wrapper {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      transform-style: preserve-3d;
+      transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+      cursor: grab;
+    }
+
+    .view-card-wrapper:active {
+      cursor: grabbing;
+    }
+
+    /* ─── INTRO BOOT LOADER ─── */
+    .boot-loader-box {
+      width: 100%;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: calc(8px * var(--c-scale));
+      color: rgba(255, 255, 255, 0.75);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      height: 100%;
+      padding: 10px 0;
+    }
+    .boot-header {
+      display: flex;
+      justify-content: space-between;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+      padding-bottom: 8px;
+      color: var(--gold);
+    }
+    .boot-logs {
+      flex: 1;
+      margin: 15px 0;
+      overflow-y: auto;
+      line-height: 1.8;
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+    .boot-progress-bar-container {
+      border-top: 1px solid rgba(255, 255, 255, 0.1);
+      padding-top: 8px;
+    }
+    .boot-progress-info {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 6px;
+    }
+    .boot-progress-ascii {
+      color: var(--gold);
+      letter-spacing: 0.1em;
+    }
+
+    /* ─── SWATCHES GRID ─── */
+    .swatch-grid {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 8px;
+      margin-top: 4px;
+    }
+    .swatch-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: calc(6px * var(--c-scale));
+      line-height: 1.4;
+      text-transform: uppercase;
+    }
+    .swatch-box {
+      width: 100%;
+      height: 32px;
+      border: 1px solid rgba(255,255,255,0.15);
+      margin-bottom: 4px;
+      border-radius: 1px;
+    }
+
+    .typo-tag {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: calc(7px * var(--c-scale));
+      color: rgba(255, 255, 255, 0.35);
+      letter-spacing: 0.1em;
+      display: block;
+      margin-bottom: 4px;
+      margin-top: 8px;
+    }
+
+    .code-block {
+      background: rgba(8, 8, 8, 0.85);
+      border: 1px solid rgba(200, 164, 90, 0.12);
+      font-family: 'JetBrains Mono', monospace;
+      font-size: calc(7.5px * var(--c-scale));
+      color: rgba(255, 255, 255, 0.7);
+      padding: 10px;
+      white-space: pre-wrap;
+      line-height: 1.4;
+      border-radius: 2px;
+    }
+
+    /* ─── FLAME ETCHED GHOST TYPING EFFECT ─── */
+    .etch-word {
+      color: var(--gold);
+      text-shadow: 0 0 10px rgba(200,164,90,0.8), 0 0 20px rgba(200,164,90,0.3);
+      font-weight: bold;
+      animation: esettle 1s forwards ease-out;
+      display: inline-block;
+    }
+    .etch-ghost {
+      color: var(--gold);
+      text-shadow: 0 0 15px rgba(200,164,90,0.9);
+      animation: ecur 0.15s infinite;
+      display: inline-block;
+    }
+    .etch-cursor {
+      color: var(--gold);
+      animation: breathe 0.6s infinite;
+    }
+
+    /* ─── CHAR SPAN HOVER EFFECTS ─── */
+    .char-span {
+      display: inline-block;
+      transition: transform 0.25s cubic-bezier(0.175, 0.885, 0.32, 1.275), color 0.2s ease;
+    }
+    .char-span:hover {
+      transform: scale(1.3) rotate(8deg);
+      color: var(--gold);
+      text-shadow: 0 0 8px rgba(200,164,90,0.6);
+    }
+
+    /* ─── COMPACT EYE BOX ─── */
+    .compact-eye-box {
+      width: 100%;
+      display: flex;
+      justify-content: center;
+      margin-bottom: 12px;
+    }
+    .compact-eye {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: calc(9px * var(--c-scale));
+      line-height: 1.15;
+      color: rgba(200, 164, 90, 0.35);
+      text-shadow: 0 0 6px rgba(200, 164, 90, 0.2);
+      white-space: pre;
+      text-align: center;
+    }
+
+    /* Proximity warping container */
+    #proxTitle {
+      font-family: "InterVariableFramer", "Inter Variable", "Inter", sans-serif;
+      font-size: calc(10px * var(--c-scale));
+      letter-spacing: 0.25em;
+      color: rgba(255, 255, 255, 0.55);
+      display: inline-flex;
+      align-items: center;
+      cursor: pointer;
+    }
+    #proxTitle span {
+      display: inline-block;
+      font-variation-settings: 'wght' 300;
+    }
+
+    .intake-container {
+      width: 100%;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Background Canvas: Planets and Constellations (StarsCanvas) -->
+  <canvas id="constellationCanvas"></canvas>
+  
+  <!-- Background Canvas: ASCII Waves Backdrop -->
+  <canvas id="asciiWavesCanvas"></canvas>
+
+  <!-- Background ASCII Eyes -->
+  <div id="asciiContainer">
+    <pre id="asciiEyes"></pre>
+  </div>
+
+  <!-- Foreground Interface Shell -->
+  <div id="appWrapper">
+    <header>
+      <div style="display: flex; align-items: center; gap: 8px;">
+        <span style="color: var(--gold); font-weight: bold;">◇</span>
+        <div id="proxTitle" class="font-mono"></div>
+      </div>
+      <div style="font-family: 'JetBrains Mono', monospace; font-size: calc(8px * var(--c-scale)); letter-spacing: 0.2em; color: rgba(255, 255, 255, 0.35);">
+        ASTRAL_SHELL_OK // SYS_ACTIVE
+      </div>
+    </header>
+
+    <!-- Draggable Stacked Cards -->
+    <div id="viewContainer">
+      <div id="viewStackOuter">
+        
+        <!-- Card 1: Oracle Gate Card -->
+        <div class="view-card-wrapper" data-index="0">
+          <div class="gothic-panel panel-gold">
+            <span class="panel-title-tag">ORACLE_GATEWAY</span>
+            <span class="panel-footer-tag">GATE_HANDSHAKE</span>
+            
+            <div id="intakeScreen" class="intake-container">
+              <div style="text-align: center; margin-bottom: 8px;">
+                <div style="font-family: 'JetBrains Mono', monospace; font-size: 7px; color: rgba(255,255,255,0.4); letter-spacing: 0.45em; text-transform: uppercase; margin-bottom: 4px;">
+                  // LUNAROT ENGINE OS //
+                </div>
+                <div style="font-family: 'Cinzel', serif; font-size: 16px; font-weight: 800; letter-spacing: 0.3em; text-transform: uppercase; margin-bottom: 8px; color: var(--parchment); text-shadow: 0 0 10px rgba(255,255,255,0.1);">
+                  REGISTRY LOG-IN
+                </div>
+              </div>
+
+              <div class="compact-eye-box">
+                <pre id="compactEyeFrame" class="compact-eye"></pre>
+              </div>
+
+              <div style="width: 100%; padding: 0 8px 16px 8px;">
+                <div style="display: flex; justify-content: space-between; margin-bottom: 8px;">
+                  <span class="panel-title-tag" style="position: relative; left: 0; top: 0;">CONDUIT ADDR</span>
+                  <span class="panel-footer-tag" style="position: relative; right: 0; bottom: 0;">RE_ENTRY</span>
+                </div>
+                
+                <div class="gothic-input-group" style="margin-top: 10px;">
+                  <div class="input-row">
+                    <span class="input-label">TOKEN_ID :</span>
+                    <input type="text" maxlength="20" placeholder="VESSEL_N" class="input-field input-field-text" value="COGNITION_VESSEL" />
+                  </div>
+                  <div class="input-row">
+                    <span class="input-label">SOLAR_EPOCH :</span>
+                    <input type="date" class="input-field input-field-date" value="1999-08-11" />
+                  </div>
+                  <div class="input-row" style="border: none;">
+                    <span class="input-label">TEMP_AXIS :</span>
+                    <input type="time" class="input-field input-field-time" value="12:12" />
+                  </div>
+                </div>
+              </div>
+
+              <div style="width: 100%; text-align: center;">
+                <button id="btnExecuteLink" class="gothic-btn btn-primary btn-full">
+                  ◆ EXECUTE SYSTEM LINK // BOOT OS
+                </button>
+                <div style="font-family: 'JetBrains Mono', monospace; font-size: 6px; letter-spacing: 0.25em; color: rgba(255,255,255,0.3); text-transform: uppercase; margin-top: 8px;">
+                  PORT 3000 // CHANCELLERY OF THE VOID
+                </div>
+              </div>
+            </div>
+
+            <div id="bootScreen" class="boot-loader-box" style="display: none;">
+              <div class="boot-header">
+                <span>[ LUNAROT ENGINE OS v5.18 ]</span>
+                <span style="color: #ffffff; animation: breathe 1.5s infinite;">RE-LINKING CONDUIT</span>
+              </div>
+              <div id="bootLogsContent" class="boot-logs"></div>
+              <div class="boot-progress-bar-container">
+                <div class="boot-progress-info">
+                  <span>INITIALIZING CHANNELS</span>
+                  <span id="bootProgressPct">0%</span>
+                </div>
+                <div id="bootProgressAscii" class="boot-progress-ascii">[░░░░░░░░░░░░░░░░░░░░░░░░░]</div>
+              </div>
+            </div>
+
+            <div id="mainGateScreen" class="intake-container" style="display: none;">
+              <div style="padding: 10px; text-align: center; height: 100%; display: flex; flex-direction: column; justify-content: space-between;">
+                <div>
+                  <div style="display: flex; justify-content: space-between; margin-bottom: 24px;">
+                    <span class="panel-title-tag" style="position: relative; left: 0; top: 0;">ORACLE_GATE_OPEN</span>
+                    <span class="panel-footer-tag" style="position: relative; right: 0; bottom: 0;">CONFLUX_STATUS</span>
+                  </div>
+                  
+                  <div style="font-family: 'Cinzel', serif; font-size: 14px; letter-spacing: 0.2em; color: var(--gold); text-shadow: 0 0 10px rgba(200,164,90,0.3); margin-bottom: 12px; margin-top: 10px;">
+                    ◆ CONSCIOUSNESS VESSEL REACHED ◆
+                  </div>
+                  <div class="font-garamond" style="font-size: 12px; line-height: 1.6; color: #cfc9c0; margin-bottom: 20px;">
+                    Your solar alignment epoch has been recorded inside the alchemical matrix registry. The planetary channels are drifting, ready to transmit coordinates.
+                  </div>
+                  
+                  <div id="mainTypewriterContainer" class="font-garamond" style="font-size: 12px; text-align: left; min-height: 60px; line-height: 1.6; color: var(--parchment);"></div>
+                </div>
+                
+                <div style="margin-top: 24px; margin-bottom: 8px;">
+                  <button id="btnRecoil" class="gothic-btn btn-secondary btn-full">
+                    ◆ RECOIL CONSCIOUSNESS
+                  </button>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+        <!-- Card 2: Aesthetic Tokens Card -->
+        <div class="view-card-wrapper" data-index="1">
+          <div class="gothic-panel panel-gold">
+            <span class="panel-title-tag">AESTHETIC_TOKENS</span>
+            <span class="panel-footer-tag">THEME_ROOT</span>
+            
+            <div style="display: flex; flex-direction: column; gap: 16px;">
+              <p style="color: rgba(255,255,255,0.4); font-weight: bold; text-transform: uppercase; letter-spacing: 0.2em; border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 4px; font-size: 8px;">
+                ◆ Core Color Swatches
+              </p>
+              <div class="swatch-grid">
+                <div class="swatch-item">
+                  <div class="swatch-box" style="background-color: #000000;"></div>
+                  <span style="color: rgba(255,255,255,0.4);">void</span>
+                  <span style="color: rgba(255,255,255,0.3);">#000000</span>
+                </div>
+                <div class="swatch-item">
+                  <div class="swatch-box" style="background-color: #080808;"></div>
+                  <span style="color: rgba(255,255,255,0.4);">ash</span>
+                  <span style="color: rgba(255,255,255,0.3);">#080808</span>
+                </div>
+                <div class="swatch-item">
+                  <div class="swatch-box" style="background-color: #c8a45a;"></div>
+                  <span style="color: var(--gold);">gold</span>
+                  <span style="color: rgba(255,255,255,0.3);">#c8a45a</span>
+                </div>
+                <div class="swatch-item">
+                  <div class="swatch-box" style="background-color: #efede8;"></div>
+                  <span style="color: rgba(255,255,255,0.4);">parchment</span>
+                  <span style="color: rgba(255,255,255,0.3);">#efede8</span>
+                </div>
+                <div class="swatch-item">
+                  <div class="swatch-box" style="background-color: #ffffff;"></div>
+                  <span style="color: rgba(255,255,255,0.4);">cream</span>
+                  <span style="color: rgba(255,255,255,0.3);">#ffffff</span>
+                </div>
+              </div>
+
+              <div style="margin-top: 8px;">
+                <p style="color: rgba(255,255,255,0.4); font-weight: bold; text-transform: uppercase; letter-spacing: 0.2em; border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 4px; font-size: 8px;">
+                  ◆ Typography Scales
+                </p>
+                <div>
+                  <span class="typo-tag">// CINZEL SERIF (HEADERS)</span>
+                  <div style="font-family: 'Cinzel', serif; font-size: 16px; font-weight: 800; letter-spacing: 0.1em; text-transform: uppercase; color: var(--gold); text-shadow: 0 0 10px rgba(200,164,90,0.3); margin-bottom: 4px;">
+                    Sacred Conflux
+                  </div>
+                </div>
+                <div>
+                  <span class="typo-tag">// GARAMOND SERIF (PROSE/POETRY)</span>
+                  <p class="font-garamond" style="color: #cfc9c0; font-size: 12px; line-height: 1.5; font-style: italic;">
+                    The ritual has begun. Your birth coordinates are unsealed inside our cloud matrices.
+                  </p>
+                </div>
+                <div style="margin-top: 8px;">
+                  <span class="typo-tag">// JETBRAINS MONO (OS DETAILS)</span>
+                  <p class="font-mono" style="font-size: 8.5px; color: rgba(255,255,255,0.7); letter-spacing: 0.15em;">
+                    SYS.REGISTRY_0x9FA2 // TELEMETRY CONNECT ONLINE
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Card 3: Sacred Input Fields Card -->
+        <div class="view-card-wrapper" data-index="2">
+          <div class="gothic-panel panel-white">
+            <span class="panel-title-tag">SACRED_INPUT_FIELDS</span>
+            <span class="panel-footer-tag">FORM_ELEMENTS</span>
+            
+            <div style="display: flex; flex-direction: column; gap: 14px;">
+              <div class="gothic-input-group">
+                <div class="input-header-line"><span>◆ Text Identifier</span></div>
+                <div class="input-row">
+                  <span class="input-label">TOKEN_ID :</span>
+                  <input type="text" class="input-field input-field-text" value="VESSEL_PLAYGROUND" />
+                </div>
+              </div>
+              <div class="gothic-input-group">
+                <div class="input-header-line"><span>◆ Solar Alignment</span></div>
+                <div class="input-row">
+                  <span class="input-label">SOLAR_EPOCH :</span>
+                  <input type="date" class="input-field input-field-date" value="2026-06-24" />
+                </div>
+              </div>
+              <div class="gothic-input-group">
+                <div class="input-header-line"><span>◆ Temporal Axis</span></div>
+                <div class="input-row">
+                  <span class="input-label">TEMP_AXIS :</span>
+                  <input type="time" class="input-field input-field-time" value="19:24" />
+                </div>
+              </div>
+              <div class="gothic-input-group">
+                <div class="input-header-line"><span>◆ Registry Dropdown</span></div>
+                <div class="input-row">
+                  <span class="input-label">SELECT_VAL :</span>
+                  <select class="input-select">
+                    <option value="sec_1">SECTOR I: ANTECEDENT</option>
+                    <option value="sec_2">SECTOR II: CONCURRENT</option>
+                    <option value="sec_3">SECTOR III: CONSEQUENT</option>
+                    <option value="sec_4" selected>SECTOR IV: WATCHGATE</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Card 4: Poetic Typography Card -->
+        <div class="view-card-wrapper" data-index="3">
+          <div class="gothic-panel panel-gold">
+            <span class="panel-title-tag">POETIC_TYPOGRAPHY</span>
+            <span class="panel-footer-tag">ETCH_SEQUENCE</span>
+            
+            <div style="display: flex; flex-direction: column; gap: 16px;">
+              <div>
+                <span class="typo-tag">// INTERACTIVE CHAR HOVER</span>
+                <div id="hoverTextShowcase" class="font-garamond" style="font-size: 13px; letter-spacing: 0.05em; line-height: 1.5; color: var(--parchment);">
+                  Hover your mouse over this text block to watch characters rotate and scale dynamically.
+                </div>
+              </div>
+              
+              <div style="border-top: 1px solid rgba(255, 255, 255, 0.05); padding-top: 12px;">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
+                  <span class="typo-tag">// FLAME ETCHED TYPEWRITER PRINTING</span>
+                  <button id="btnReplayEtch" class="gothic-btn btn-secondary" style="padding: 4px 10px; font-size: 7px;">
+                    RE-PLAY ETCH
+                  </button>
+                </div>
+                <div id="typewriterShowcase" class="typewriter-playground font-garamond" style="font-size: 11.5px; line-height: 1.6; min-height: 60px; color: var(--parchment);"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Card 5: Atmosphere & Telemetry (ASCII eyes controller) -->
+        <div class="view-card-wrapper" data-index="4">
+          <div class="gothic-panel panel-gold">
+            <span class="panel-title-tag">ATMOSPHERE_TELEMETRY</span>
+            <span class="panel-footer-tag">OS_EYES_CONTROL</span>
+            
+            <div style="display: flex; flex-direction: column; gap: 12px;">
+              <p style="color: rgba(255,255,255,0.4); font-weight: bold; text-transform: uppercase; letter-spacing: 0.2em; border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 4px; font-size: 8px;">
+                ◆ Background ASCII Eyes Telemetry
+              </p>
+              <p class="font-garamond" style="font-size: 11.5px; color: #cfc9c0; line-height: 1.5;">
+                The background tracking eyes are rendered inside a preformatted grid. Use these overrides to command their focus or trigger wild alchemical spasms:
+              </p>
+              <div class="control-actions" style="display: flex; flex-direction: column; gap: 8px; margin-top: 10px;">
+                <button id="showcaseEyeCrazy" class="gothic-btn btn-secondary" style="padding: 6px 12px; font-size: 7.5px;">
+                  ◆ TRIGGER CRAZY MODE
+                </button>
+                <button id="showcaseEyeTrack" class="gothic-btn btn-secondary" style="padding: 6px 12px; font-size: 7.5px;">
+                  ◆ LOCK TRACK BUTTON
+                </button>
+                <button id="showcaseEyeReset" class="gothic-btn btn-primary" style="padding: 6px 12px; font-size: 7.5px;">
+                  ◆ RESET TRACKING
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Card 6: Integration Guide Card -->
+        <div class="view-card-wrapper" data-index="5">
+          <div class="gothic-panel panel-gold">
+            <span class="panel-title-tag">INTEGRATION_GUIDE</span>
+            <span class="panel-footer-tag">CODE_COPY</span>
+            
+            <div style="display: flex; flex-direction: column; gap: 10px;">
+              <p style="color: rgba(255,255,255,0.4); font-weight: bold; text-transform: uppercase; letter-spacing: 0.2em; border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 4px; font-size: 8px;">
+                ◆ Static HTML Layout Structure
+              </p>
+              <div class="font-sans" style="font-size: 10.5px; line-height: 1.5; color: #cfc9c0;">
+                Copy this clean HTML template directly into your static code blocks to construct a baseline:
+              </div>
+              <div class="code-block">&lt;div class="gothic-panel panel-gold"&gt;
+  &lt;span class="panel-title-tag"&gt;SECURE_GATE&lt;/span&gt;
+  &lt;p&gt;Content here...&lt;/p&gt;
+  &lt;span class="panel-footer-tag"&gt;V.1.0&lt;/span&gt;
+&lt;/div&gt;
+
+&lt;button class="gothic-btn btn-primary"&gt;Execute Link&lt;/button&gt;
+&lt;button class="gothic-btn btn-secondary"&gt;Ritual Shield&lt;/button&gt;</div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <footer>
+      <span>SACRED COF DECAY COMPILER v5.18-C // standalone shell online</span>
+      <span>CHANCELLERY OF THE VOID</span>
+    </footer>
+  </div>
+
+  <script>
+    // ─── BACKGROUND STAR FIELD & CONSTELLATIONS ───
+    const canvas = document.getElementById('constellationCanvas');
+    const ctx = canvas.getContext('2d');
+    
+    let time = 0;
+    const planets = [
+      { name: 'Sun', symbol: '☉', deg: 0, color: '#c8a45a' },
+      { name: 'Moon', symbol: '☽', deg: 72, color: '#efede8' },
+      { name: 'Mars', symbol: '♂', deg: 144, color: '#a05050' },
+      { name: 'Venus', symbol: '♀', deg: 216, color: '#d8b8c8' },
+      { name: 'Mercury', symbol: '☿', deg: 288, color: '#a8d8e8' }
+    ];
+    const activePlanets = new Set(['Sun', 'Moon']);
+    const pointer = { x: 0, y: 0, active: false };
+
+    function hexToRgb(hex) {
+      const bigint = parseInt(hex.slice(1), 16);
+      const r = (bigint >> 16) & 255;
+      const g = (bigint >> 8) & 255;
+      const b = bigint & 255;
+      return `${r}, ${g}, ${b}`;
+    }
+
+    function resize() {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+    }
+    window.addEventListener('resize', resize);
+    resize();
+
+    window.addEventListener('mousemove', (e) => {
+      pointer.x = e.clientX;
+      pointer.y = e.clientY;
+      pointer.active = true;
+    });
+    window.addEventListener('mouseleave', () => { pointer.active = false; });
+
+    function drawAlchemicalSigil(c, x, y, size, seed) {
+      c.save();
+      c.translate(x + size/2, y + size/2);
+      c.strokeStyle = 'rgba(200, 164, 90, 0.12)';
+      c.lineWidth = 0.5;
+      
+      const type = seed % 3;
+      const r = size * 0.35;
+      
+      c.beginPath();
+      switch (type) {
+        case 0:
+          c.arc(0, 0, r, 0, Math.PI * 2);
+          c.moveTo(-r, 0); c.lineTo(r, 0);
+          c.moveTo(0, -r); c.lineTo(0, r);
+          break;
+        case 1:
+          c.moveTo(0, -r); c.lineTo(r * 0.86, r * 0.5);
+          c.lineTo(-r * 0.86, r * 0.5); c.closePath();
+          c.arc(0, 0, r * 0.5, 0, Math.PI * 2);
+          break;
+        case 2:
+          c.rect(-r * 0.7, -r * 0.7, r * 1.4, r * 1.4);
+          for (let a = 0; a < Math.PI * 2; a += Math.PI / 4) {
+            c.moveTo(Math.cos(a) * r * 0.6, Math.sin(a) * r * 0.6);
+            c.lineTo(Math.cos(a) * r, Math.sin(a) * r);
+          }
+          break;
+      }
+      c.stroke();
+      c.restore();
+    }
+
+    let lastStarsUpdate = performance.now();
+    const starsFpsInterval = 1000 / 30; // Throttle to 30 FPS
+
+    let sigilsCanvas = null;
+    function getSigilsCanvas() {
+      if (sigilsCanvas) return sigilsCanvas;
+      const cellSize = 30;
+      sigilsCanvas = document.createElement('canvas');
+      sigilsCanvas.width = 180;
+      sigilsCanvas.height = 150;
+      const c = sigilsCanvas.getContext('2d');
+      if (!c) return sigilsCanvas;
+
+      c.strokeStyle = 'rgba(255, 255, 255, 0.02)';
+      c.lineWidth = 0.5;
+      for (let r = 0; r <= 5; r++) {
+        c.beginPath(); c.moveTo(0, r * cellSize); c.lineTo(180, r * cellSize); c.stroke();
+      }
+      for (let col = 0; col <= 6; col++) {
+        c.beginPath(); c.moveTo(col * cellSize, 0); c.lineTo(col * cellSize, 150); c.stroke();
+      }
+
+      for (let r = 0; r < 5; r++) {
+        for (let col = 0; col < 6; col++) {
+          const seedVal = (r * 13 + col * 37 + 7);
+          drawAlchemicalSigil(c, col * cellSize, r * cellSize, cellSize, seedVal);
+        }
+      }
+      return sigilsCanvas;
+    }
+
+    function renderStars(timestamp) {
+      requestAnimationFrame(renderStars);
+
+      const elapsed = timestamp - lastStarsUpdate;
+      if (elapsed < starsFpsInterval) return;
+      lastStarsUpdate = timestamp - (elapsed % starsFpsInterval);
+
+      if (!canvas || !ctx) return;
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      time += (elapsed / 1000) * 0.027; // Frame-rate independent drift update
+
+      const cx = canvas.width / 2;
+      const cy = canvas.height / 2;
+      const px = pointer.x;
+      const py = pointer.y;
+      const hasPointer = pointer.active && px > 0 && py > 0;
+
+      const applyInterference = (x, y, maxDist = 130, pullAmt = 7) => {
+        if (!hasPointer) return { dx: 0, dy: 0 };
+        const dxCoord = x - px;
+        const dyCoord = y - py;
+        const dist = Math.hypot(dxCoord, dyCoord);
+        if (dist < maxDist) {
+          const force = (maxDist - dist) / maxDist;
+          const angle = Math.atan2(dyCoord, dxCoord);
+          return {
+            dx: Math.cos(angle) * force * pullAmt,
+            dy: Math.sin(angle) * force * pullAmt
+          };
+        }
+        return { dx: 0, dy: 0 };
+      };
+
+      // Background Grid
+      ctx.lineWidth = 0.5;
+      ctx.strokeStyle = 'rgba(255, 255, 255, 0.012)';
+      const gridSize = 60;
+      for (let x = 0; x < canvas.width; x += gridSize) {
+        ctx.beginPath(); ctx.moveTo(x, 0); ctx.lineTo(x, canvas.height); ctx.stroke();
+      }
+      for (let y = 0; y < canvas.height; y += gridSize) {
+        ctx.beginPath(); ctx.moveTo(0, y); ctx.lineTo(canvas.width, y); ctx.stroke();
+      }
+
+      // Orbits
+      const orbits = [110, 190, 275, 360, 440];
+      orbits.forEach((r, idx) => {
+        ctx.beginPath();
+        if (idx % 2 === 1) ctx.setLineDash([3, 7]);
+        else ctx.setLineDash([]);
+        ctx.strokeStyle = 'rgba(215, 205, 190, 0.035)';
+        ctx.arc(cx, cy, r, 0, Math.PI * 2);
+        ctx.stroke();
+        ctx.setLineDash([]);
+      });
+
+      // Astrolabe pyramid projected cone (lower left maps)
+      const gcx = 190;
+      const gcy = canvas.height - 180;
+      if (gcy > 300) {
+        const gr = 70;
+        const gWarp = applyInterference(gcx, gcy, 120, 6);
+        const gx = gcx + gWarp.dx;
+        const gy = gcy + gWarp.dy;
+
+        ctx.beginPath();
+        ctx.strokeStyle = 'rgba(255, 255, 255, 0.05)';
+        ctx.arc(gx, gy, gr, 0, Math.PI * 2);
+        ctx.stroke();
+
+        ctx.beginPath();
+        ctx.ellipse(gx, gy, gr, gr * 0.45, 0, 0, Math.PI * 2);
+        ctx.ellipse(gx, gy, gr, gr * 0.18, 0, 0, Math.PI * 2);
+        ctx.ellipse(gx, gy, gr * 0.6, gr, 0, 0, Math.PI * 2);
+        ctx.ellipse(gx, gy, gr * 0.25, gr, 0, 0, Math.PI * 2);
+        ctx.strokeStyle = 'rgba(255, 255, 255, 0.02)';
+        ctx.stroke();
+
+        ctx.beginPath();
+        ctx.moveTo(gx - gr - 15, gy); ctx.lineTo(gx + gr + 15, gy);
+        ctx.moveTo(gx, gy - gr - 15); ctx.lineTo(gx, gy + gr + 15);
+        ctx.strokeStyle = 'rgba(255, 255, 255, 0.035)';
+        ctx.stroke();
+
+        ctx.fillStyle = 'rgba(255, 255, 255, 0.15)';
+        ctx.font = '6px "JetBrains Mono", monospace';
+        ctx.textAlign = 'center';
+        ctx.fillText('SOL_COORD_GRID [V4]', gx, gy + gr + 30);
+      }
+
+      // Sigils Matrix (lower right)
+      const cellSize = 30;
+      const gStartX = canvas.width - 180 - 50;
+      const gStartY = canvas.height - 150 - 110;
+      if (gStartY > 250 && gStartX > cx + 100) {
+        const sCanvas = getSigilsCanvas();
+        if (sCanvas) {
+          ctx.drawImage(sCanvas, gStartX, gStartY);
+        }
+      }
+
+      // Planetary coordinates mapping
+      planets.forEach((p, idx) => {
+        const isActive = activePlanets.has(p.name);
+        const slowDrift = p.deg + time * 8;
+        const rad = ((slowDrift - 90) * Math.PI) / 180;
+        const currentRadius = orbits[idx % orbits.length] || 275;
+        
+        const rx = cx + currentRadius * Math.cos(rad);
+        const ry = cy + currentRadius * Math.sin(rad);
+        const inf = applyInterference(rx, ry, 130, 8);
+        const fx = rx + inf.dx;
+        const fy = ry + inf.dy;
+
+        const alpha = isActive ? 0.9 : 0.08;
+        const size = isActive ? 5.5 : 2.5;
+
+        // Radial orbit coordinates
+        ctx.beginPath();
+        ctx.setLineDash([2, 5]);
+        ctx.strokeStyle = `rgba(${hexToRgb(p.color)}, ${alpha * 0.35})`;
+        ctx.moveTo(cx, cy); ctx.lineTo(fx, fy);
+        ctx.stroke();
+        ctx.setLineDash([]);
+
+        // Planet nodes
+        ctx.beginPath();
+        ctx.arc(fx, fy, size, 0, Math.PI * 2);
+        ctx.strokeStyle = `rgba(${hexToRgb(p.color)}, ${alpha * 0.8})`;
+        ctx.fillStyle = isActive ? `rgba(${hexToRgb(p.color)}, 0.15)` : 'rgba(0,0,0,0.4)';
+        ctx.fill(); ctx.stroke();
+
+        if (isActive) {
+          ctx.beginPath();
+          ctx.arc(fx, fy, 1.5, 0, Math.PI * 2);
+          ctx.fillStyle = p.color;
+          ctx.fill();
+
+          ctx.font = '12px "Cormorant Garamond", serif';
+          ctx.textAlign = 'center';
+          ctx.textBaseline = 'middle';
+          ctx.fillStyle = p.color;
+          ctx.fillText(p.symbol, fx, fy - 15);
+
+          ctx.font = '6px "JetBrains Mono", monospace';
+          ctx.fillStyle = 'rgba(215, 205, 190, 0.7)';
+          ctx.fillText(`${p.name.toUpperCase()} [${p.deg.toFixed(1)}°]`, fx, fy + 14);
+        }
+      });
+    }
+    requestAnimationFrame(renderStars);
+
+
+    // ─── ASCII WAVES BACKDROP ───
+    const wavesCanvas = document.getElementById('asciiWavesCanvas');
+    const wavesCtx = wavesCanvas.getContext('2d');
+    
+    function resizeWaves() {
+      wavesCanvas.width = window.innerWidth;
+      wavesCanvas.height = window.innerHeight;
+    }
+    window.addEventListener('resize', resizeWaves);
+    resizeWaves();
+
+    const waveCharacters = " .:-+*=%@#";
+    const elementSize = 14;
+    const waveColor = "rgba(200, 164, 90, 0.12)";
+    const waveSpeed = 15;
+    const waveTension = 5;
+    const noiseScale = 12;
+    const waveIntensity = 10;
+    
+    const waveCell = Math.max(4, elementSize);
+    const waveColStep = waveCell * 0.6;
+    
+    const charCache = {};
+    function getCharCanvas(ch) {
+      if (charCache[ch]) return charCache[ch];
+      const charCanvas = document.createElement('canvas');
+      charCanvas.width = Math.ceil(waveCell);
+      charCanvas.height = Math.ceil(waveCell);
+      const cCtx = charCanvas.getContext('2d');
+      if (cCtx) {
+        cCtx.font = `400 ${waveCell}px ui-monospace, Consolas, monospace`;
+        cCtx.textBaseline = "top";
+        cCtx.textAlign = "left";
+        cCtx.fillStyle = waveColor;
+        cCtx.fillText(ch, 0, 0);
+      }
+      charCache[ch] = charCanvas;
+      return charCanvas;
+    }
+
+    let lastWavesUpdate = performance.now();
+    const wavesFpsInterval = 1000 / 30;
+
+    const startWaveTime = performance.now();
+
+    function renderWaves(now) {
+      requestAnimationFrame(renderWaves);
+
+      const elapsed = now - lastWavesUpdate;
+      if (elapsed < wavesFpsInterval) return;
+      lastWavesUpdate = now - (elapsed % wavesFpsInterval);
+
+      const w = wavesCanvas.width;
+      const h = wavesCanvas.height;
+      wavesCtx.clearRect(0, 0, w, h);
+
+      const t = ((now - startWaveTime) / 1000) * (waveSpeed / 20);
+      const cols = Math.ceil(w / waveColStep) + 1;
+      const rows = Math.ceil(h / waveCell) + 1;
+
+      const scaleVal = noiseScale / 100;
+      const intensityVal = waveIntensity / 10;
+      const ox = t * 1.5; // drift X
+      const oy = 0;
+
+      const nt = t * (waveTension / 10);
+      const nt_07 = nt * 0.7;
+      const nt_05 = nt * 0.5;
+      const nt_03 = nt * 0.3;
+
+      const noise = (x, y) => {
+        const a = Math.sin(x * 1.3 + nt) * Math.cos(y * 1.1 - nt_07);
+        const b = Math.sin((x + y) * 0.7 + nt_05);
+        const c = Math.sin(x * 0.4 - y * 0.6 + nt_03);
+        return (a + b + c) / 3;
+      };
+
+      const rampMax = waveCharacters.length - 1;
+
+      for (let j = 0; j < rows; j++) {
+        const py = j * waveCell;
+        const sinVal = Math.sin((j + t) * 0.1) * 2;
+        const yScale = j * scaleVal + oy;
+
+        for (let i = 0; i < cols; i++) {
+          const px = i * waveColStep;
+          const cosVal = Math.cos((i + t) * 0.1) * 2;
+          const nx = i * scaleVal + ox + sinVal;
+          const ny = yScale + cosVal;
+          const v = noise(nx, ny);
+
+          const norm = Math.max(0, Math.min(1, (v * intensityVal + 1) / 2));
+          const ch = waveCharacters.charAt(Math.round(norm * rampMax));
+          if (ch !== " ") {
+            wavesCtx.drawImage(getCharCanvas(ch), px, py);
+          }
+        }
+      }
+    }
+    requestAnimationFrame(renderWaves);
+
+
+    // ─── ASCII BACKGROUND PUPIL-TRACKING EYES ───
+    const preEyes = document.getElementById('asciiEyes');
+    const mouse = { x: window.innerWidth / 2, y: window.innerHeight / 2, tx: window.innerWidth / 2, ty: window.innerHeight / 2 };
+    const blink = { state: 'open', timer: 0, progress: 1 };
+    
+    const stateObj = {
+      action: 'mouse', // mouse, track-element
+      targetId: '',
+      crazyUntil: 0,
+      trackingUntil: 0,
+      lastMouseX: window.innerWidth / 2,
+      lastMouseY: window.innerHeight / 2,
+      mouseIdleTime: 0,
+      activeCardId: '',
+      lastRandomLook: 0
+    };
+
+    window.addEventListener('mousemove', (e) => {
+      mouse.tx = e.clientX;
+      mouse.ty = e.clientY;
+    });
+
+    // Control listener
+    window.addEventListener('ascii-eyes-control-custom', (e) => {
+      const detail = e.detail || {};
+      const now = performance.now();
+      
+      if (detail.action === 'crazy') {
+        stateObj.crazyUntil = now + (detail.duration || 4000);
+        blink.state = 'closing';
+        blink.progress = 0;
+        blink.timer = 0;
+      } else if (detail.action === 'track-element') {
+        stateObj.action = 'track-element';
+        stateObj.targetId = detail.targetId;
+        stateObj.trackingUntil = now + (detail.duration || 99999);
+      } else if (detail.action === 'reset') {
+        stateObj.action = 'mouse';
+        stateObj.targetId = '';
+        stateObj.trackingUntil = 0;
+      }
+    });
+
+    const COLS = 104;
+    const ROWS = 24;
+    const CX_L = 30;
+    const CX_R = 74;
+    const CY = 12;
+    const EYE_W = 22;
+    const HEIGHT_MAX = 5.2;
+
+    let blinkTimer = Math.random() * 2000 + 3000;
+
+    let lastEyesUpdate = performance.now();
+    const eyesFpsInterval = 1000 / 30; // Throttle to 30 FPS
+
+    function runEyes(timestamp) {
+      requestAnimationFrame(runEyes);
+
+      const elapsed = timestamp - lastEyesUpdate;
+      if (elapsed < eyesFpsInterval) return;
+      lastEyesUpdate = timestamp - (elapsed % eyesFpsInterval);
+
+      const now = performance.now();
+      const isCrazy = now < stateObj.crazyUntil;
+      
+      let targetX = mouse.tx;
+      let targetY = mouse.ty;
+
+      if (stateObj.action === 'track-element' && stateObj.targetId) {
+        const el = document.getElementById(stateObj.targetId);
+        if (el) {
+          const rect = el.getBoundingClientRect();
+          targetX = rect.left + rect.width / 2;
+          targetY = rect.top + rect.height / 2;
+        } else {
+          stateObj.action = 'mouse';
+        }
+      }
+
+      // Smooth pupillary easing (frame-rate independent scaling)
+      const speedScale = elapsed / 16.67;
+      const easeRate = stateObj.action === 'track-element' ? 0.15 : 0.08;
+      const scaledEase = 1 - Math.pow(1 - easeRate, speedScale);
+      mouse.x += (targetX - mouse.x) * scaledEase;
+      mouse.y += (targetY - mouse.y) * scaledEase;
+
+      // Eyelid blinking loops
+      blink.timer += elapsed;
+      if (isCrazy) {
+        blink.progress = 0.35 + 0.65 * Math.sin(timestamp * 0.08) * (Math.random() > 0.5 ? 1 : 0.2);
+        blink.state = 'open';
+      } else {
+        if (blink.state === 'open' && blink.timer > blinkTimer) {
+          blink.state = 'closing'; blink.timer = 0;
+        } else if (blink.state === 'closing') {
+          blink.progress -= 0.18 * speedScale;
+          if (blink.progress <= 0) {
+            blink.progress = 0; blink.state = 'closed'; blink.timer = 0;
+          }
+        } else if (blink.state === 'closed') {
+          if (blink.timer > 100) { blink.state = 'opening'; blink.timer = 0; }
+        } else if (blink.state === 'opening') {
+          blink.progress += 0.15 * speedScale;
+          if (blink.progress >= 1) {
+            blink.progress = 1; blink.state = 'open'; blink.timer = 0;
+            blinkTimer = Math.random() * 4000 + 4000;
+          }
+        }
+      }
+
+      // Pupil translations
+      const dxViewport = mouse.x - window.innerWidth / 2;
+      const dyViewport = mouse.y - window.innerHeight / 2;
+      const dist = Math.hypot(dxViewport, dyViewport) || 1;
+      const limit = 220;
+      const factor = Math.min(dist, limit) / limit;
+      const angle = Math.atan2(dyViewport, dxViewport);
+      
+      let pupilShiftX = Math.cos(angle) * factor * 4.2;
+      let pupilShiftY = Math.sin(angle) * factor * 1.8;
+
+      if (isCrazy) {
+        pupilShiftX += Math.sin(timestamp * 0.1) * 2.5;
+        pupilShiftY += Math.cos(timestamp * 0.12) * 1.3;
+      }
+
+      let out = '';
+      const hEye = HEIGHT_MAX * blink.progress;
+      const IRIS_RINGS_NORMAL = ['◈', '◇', '✦', '·'];
+      const IRIS_RINGS_CRAZY = ['⍼', '☠', '☣', '✖', '✥', '╬', '█', '0', '1'];
+      const IRIS_RINGS = isCrazy ? IRIS_RINGS_CRAZY : IRIS_RINGS_NORMAL;
+      const PUPIL_CHAR = isCrazy ? (Math.random() > 0.5 ? '⛧' : '✖') : '◉';
+      const R_PUPIL = isCrazy ? 1.7 : 1.3;
+      const R_IRIS = isCrazy ? 4.2 : 3.6;
+
+      for (let r = 0; r < ROWS; r++) {
+        let line = '';
+        for (let c = 0; c < COLS; c++) {
+          let inLeft = Math.abs(c - CX_L) <= EYE_W / 2;
+          let inRight = Math.abs(c - CX_R) <= EYE_W / 2;
+          
+          if (inLeft || inRight) {
+            const eyeCenterX = inLeft ? CX_L : CX_R;
+            const tx = (c - eyeCenterX) / (EYE_W / 2);
+            const lensFactor = Math.cos(tx * Math.PI / 2);
+            const boundaryHalfH = hEye * lensFactor;
+            const dy = r - CY;
+            const isInside = Math.abs(dy) <= boundaryHalfH;
+
+            if (isInside) {
+              if (blink.progress < 0.12 && !isCrazy) {
+                line += '—';
+              } else {
+                const pCenterX = eyeCenterX + pupilShiftX;
+                const pCenterY = CY + pupilShiftY;
+                const distToPupil = Math.hypot((c - pCenterX) * 0.75, r - pCenterY);
+
+                if (distToPupil < R_PUPIL) line += PUPIL_CHAR;
+                else if (distToPupil < R_IRIS) {
+                  const idx = Math.floor((distToPupil - R_PUPIL) * 1.5) % IRIS_RINGS.length;
+                  line += IRIS_RINGS[idx];
+                } else {
+                  const densityVal = (r * 11 + c * 3) % (isCrazy ? 8 : 17);
+                  if (densityVal === 0) line += isCrazy ? '✖' : '·';
+                  else if (densityVal === 1) line += isCrazy ? '⍼' : '°';
+                  else line += ' ';
+                }
+              }
+            } else {
+              const distToBoundary = Math.abs(Math.abs(dy) - boundaryHalfH);
+              if (distToBoundary < 0.65) {
+                line += (dy < 0) ? '⎴' : '⎵';
+              } else {
+                const cellCheck = (r * 7 + c * 13) % 233;
+                if (cellCheck === 4) line += isCrazy ? '☠' : '+';
+                else if (cellCheck === 12 && r % 4 === 0) line += '·';
+                else line += ' ';
+              }
+            }
+          } else {
+            const cellCheck = (r * 7 + c * 13) % 233;
+            if (cellCheck === 4 && r % 3 === 0) line += '·';
+            else if (cellCheck === 99 && c % 12 === 0) line += isCrazy ? '⍼' : '+';
+            else if (isCrazy && cellCheck === 33) line += Math.random() > 0.5 ? '1' : '0';
+            else line += ' ';
+          }
+        }
+        out += line + '\n';
+      }
+
+      preEyes.innerText = out;
+      
+      if (isCrazy) {
+        const shakeX = (Math.random() - 0.5) * 18;
+        const shakeY = (Math.random() - 0.5) * 18;
+        preEyes.style.transform = `translate3d(${shakeX}px, ${shakeY}px, 0)`;
+        preEyes.style.color = '#ffffff';
+        preEyes.style.textShadow = '0 0 12px rgba(255, 255, 255, 0.9)';
+      } else {
+        preEyes.style.transform = 'none';
+        preEyes.style.color = 'rgba(200, 164, 90, 0.2)';
+        preEyes.style.textShadow = '0 0 4px rgba(200, 164, 90, 0.4)';
+      }
+    }
+    requestAnimationFrame(runEyes);
+
+    // Compact form-eye blink loop
+    const compactFrames = [
+      `     .--------.     \n    /  (  ●  )  \\   \n    \\           /   \n     '--------'     `,
+      `     .--------.     \n    /  (●   )   \\   \n    \\           /   \n     '--------'     `,
+      `     .--------.     \n    /   (   ●)  \\   \n    \\           /   \n     '--------'     `,
+      `     .--------.     \n    /  ( ◉ ◉ )  \\   \n    \\           /   \n     '--------'     `,
+      `     .--------.     \n    /   - - -   \\   \n    \\           /   \n     '--------'     `,
+      `     .--------.     \n    =============   \n     '--------'     `
+    ];
+    let compFrame = 0;
+    const compactEl = document.getElementById('compactEyeFrame');
+    
+    setInterval(() => {
+      const r = Math.random();
+      if (r < 0.4) compFrame = 0;
+      else if (r < 0.6) compFrame = 1;
+      else if (r < 0.75) compFrame = 2;
+      else if (r < 0.85) compFrame = 3;
+      else if (r < 0.92) compFrame = 4;
+      else {
+        compFrame = 5;
+        setTimeout(() => { if (compactEl) compactEl.innerText = compactFrames[0] + '\n// OS_GATE_ONLINE //'; }, 100);
+      }
+      if (compactEl) {
+        compactEl.innerText = compactFrames[compFrame] + '\n// OS_GATE_ONLINE //';
+      }
+    }, 900);
+
+
+    // ─── VARIABLE FONT PROXIMITY WARPING ───
+    const proxTitle = document.getElementById('proxTitle');
+    const labelText = "LUNAROT OS // STANDALONE";
+    
+    // Create span for each character
+    labelText.split('').forEach(char => {
+      const span = document.createElement('span');
+      if (char === ' ') {
+        span.innerHTML = '&nbsp;';
+      } else {
+        span.innerText = char;
+      }
+      proxTitle.appendChild(span);
+    });
+
+    const letterSpans = proxTitle.querySelectorAll('span');
+    const letterFactors = Array.from({ length: letterSpans.length }, () => 0);
+    const mousePos = { x: -99999, y: -99999 };
+    
+    window.addEventListener('mousemove', (e) => {
+      const rect = proxTitle.getBoundingClientRect();
+      mousePos.x = e.clientX - rect.left;
+      mousePos.y = e.clientY - rect.top;
+    });
+
+    window.addEventListener('mouseleave', () => {
+      mousePos.x = -99999;
+      mousePos.y = -99999;
+    });
+
+    let lastProxUpdate = performance.now();
+    function runProximity(now) {
+      requestAnimationFrame(runProximity);
+      const dt = Math.min(0.1, (now - lastProxUpdate) / 1000);
+      lastProxUpdate = now;
+
+      const containerRect = proxTitle.getBoundingClientRect();
+      const a = 1 - Math.exp(-dt / 0.15); // Easing speed factor
+
+      letterSpans.forEach((span, i) => {
+        const rect = span.getBoundingClientRect();
+        const cx = rect.left + rect.width / 2 - containerRect.left;
+        const cy = rect.top + rect.height / 2 - containerRect.top;
+        const dx = mousePos.x - cx;
+        const dy = mousePos.y - cy;
+        const dist = Math.hypot(dx, dy);
+
+        const reach = 220; // proximity reach radius
+        const targetFactor = Math.min(Math.max(1 - dist / reach, 0), 1);
+        
+        let f = letterFactors[i] ?? 0;
+        f += (targetFactor - f) * a;
+        letterFactors[i] = f;
+
+        const weight = Math.round(300 + (900 - 300) * f);
+        span.style.fontVariationSettings = `'wght' ${weight}`;
+      });
+    }
+    requestAnimationFrame(runProximity);
+
+
+    // ─── STACKED DRAGGABLE SWIPABLE CARDS (VIEWSTACK) ───
+    const outerStack = document.getElementById('viewStackOuter');
+    const cardWrappers = Array.from(document.querySelectorAll('.view-card-wrapper'));
+    
+    let activeCardIndex = 0; // The index in the DOM stack
+    const swipeThreshold = 100; // px threshold for throw/swipe
+    const depthSpacing = 38; // 3D z-depth spacing
+    const tiltAngle = -3;
+    const xOffsetSpacing = 24;
+
+    function initViewStack() {
+      updateCardStyles(false);
+    }
+
+    function updateCardStyles(animated = true) {
+      cardWrappers.forEach((card, i) => {
+        const stackIndex = (i - activeCardIndex + cardWrappers.length) % cardWrappers.length;
+        const total = cardWrappers.length;
+
+        // Apply depth rendering settings
+        const scaleVal = 1 - stackIndex * 0.04;
+        const rotationVal = total > 1 ? (stackIndex / (total - 1)) * tiltAngle : 0;
+        const xVal = total > 1 ? (stackIndex / (total - 1)) * xOffsetSpacing : 0;
+        const yVal = -stackIndex * 12;
+        const zVal = -stackIndex * depthSpacing;
+        const opacityVal = 1 - stackIndex * 0.15;
+        const zIndexVal = total - stackIndex;
+
+        card.style.zIndex = zIndexVal;
+        card.style.opacity = opacityVal;
+        card.style.pointerEvents = stackIndex === 0 ? 'auto' : 'none';
+
+        if (animated) {
+          card.style.transition = 'transform 0.6s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1)';
+        } else {
+          card.style.transition = 'none';
+        }
+
+        // Apply 3D properties
+        card.style.transform = `translate3d(${xVal}px, ${yVal}px, ${zVal}px) rotate(${rotationVal}deg) scale(${scaleVal})`;
+      });
+    }
+
+    // Drag / Swipe Pointer Physics
+    let startX = 0;
+    let startY = 0;
+    let currentX = 0;
+    let currentY = 0;
+    let isDragging = false;
+    let dragCard = null;
+
+    outerStack.addEventListener('pointerdown', (e) => {
+      const topCardIndex = activeCardIndex;
+      const topCard = cardWrappers[topCardIndex];
+      
+      // Target must be inside the top card
+      if (!topCard.contains(e.target) || e.target.closest('.input-field') || e.target.closest('button') || e.target.closest('select')) return;
+      
+      isDragging = true;
+      dragCard = topCard;
+      dragCard.style.transition = 'none';
+      
+      startX = e.clientX;
+      startY = e.clientY;
+      dragCard.setPointerCapture(e.pointerId);
+    });
+
+    outerStack.addEventListener('pointermove', (e) => {
+      if (!isDragging || !dragCard) return;
+      
+      currentX = e.clientX - startX;
+      currentY = e.clientY - startY;
+
+      // Realtime drag offsets with slight rotation tilt
+      const rotation = currentX * 0.05;
+      dragCard.style.transform = `translate3d(${currentX}px, ${currentY}px, 0px) rotate(${rotation}deg) scale(1)`;
+    });
+
+    outerStack.addEventListener('pointerup', (e) => {
+      if (!isDragging || !dragCard) return;
+      isDragging = false;
+      dragCard.releasePointerCapture(e.pointerId);
+
+      const distance = Math.hypot(currentX, currentY);
+
+      if (distance > swipeThreshold) {
+        // SWIPE OFF
+        const angle = Math.atan2(currentY, currentX);
+        const throwX = Math.cos(angle) * (window.innerWidth + 200);
+        const throwY = Math.sin(angle) * (window.innerHeight + 200);
+
+        dragCard.style.transition = 'transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.4s cubic-bezier(0.16, 1, 0.3, 1)';
+        dragCard.style.transform = `translate3d(${throwX}px, ${throwY}px, -100px) rotate(${throwX * 0.05}deg) scale(0.9)`;
+        dragCard.style.opacity = '0';
+
+        const oldCard = dragCard;
+        
+        // Cycle active top card
+        activeCardIndex = (activeCardIndex + 1) % cardWrappers.length;
+        
+        setTimeout(() => {
+          updateCardStyles(true);
+        }, 50);
+
+      } else {
+        // RETURN TO CENTER
+        dragCard.style.transition = 'transform 0.5s cubic-bezier(0.16, 1, 0.3, 1)';
+        updateCardStyles(true);
+      }
+
+      dragCard = null;
+      currentX = 0;
+      currentY = 0;
+    });
+
+    initViewStack();
+
+
+    // ─── FLAME ETCHED TYPEWRITER PRINTER ───
+    function triggerTypewriter(element, text, chargedList = []) {
+      element.innerHTML = '';
+      const words = text.split(' ');
+      let rendered = '';
+      let session = Math.random();
+      element.setAttribute('data-session', session);
+
+      const delay = (ms) => new Promise(r => setTimeout(r, ms));
+
+      async function type() {
+        for (let w = 0; w < words.length; w++) {
+          if (element.getAttribute('data-session') !== String(session)) return;
+          const word = words[w];
+          if (!word) continue;
+
+          const isAsterisk = word.startsWith('*') && word.endsWith('*');
+          const cleanWord = word.replace(/\*/g, '');
+          const cleanLower = cleanWord.toLowerCase().replace(/[^a-z-]/g, '');
+          
+          const isCustom = chargedList.some(cw => cw.toLowerCase().replace(/[^a-z-]/g, '') === cleanLower);
+          const isHyphen = cleanWord.includes('-') && cleanWord.length > 5;
+          const charged = isAsterisk || isCustom || isHyphen;
+
+          if (charged) {
+            element.innerHTML = rendered + '<span class="etch-cursor">▌</span>';
+            await delay(130 + Math.random() * 90);
+            
+            const flickCount = 5 + Math.random() * 5;
+            for (let f = 0; f < flickCount; f++) {
+              if (element.getAttribute('data-session') !== String(session)) return;
+              const ghost = cleanWord.split('').map(c => c.match(/[a-zA-Z]/) ? randArabic() : c).join('');
+              element.innerHTML = rendered + `<span class="etch-ghost">${ghost}</span><span class="etch-cursor">▌</span>`;
+              await delay(25 + Math.random() * 20);
+            }
+            
+            if (element.getAttribute('data-session') !== String(session)) return;
+            element.innerHTML = rendered + `<span class="etch-ghost">${cleanWord}</span><span class="etch-cursor">▌</span>`;
+            await delay(60 + Math.random() * 40);
+
+            if (element.getAttribute('data-session') !== String(session)) return;
+            rendered += `<span class="etch-word">${cleanWord}</span> `;
+            element.innerHTML = rendered + '<span class="etch-cursor">▌</span>';
+            await delay(40 + Math.random() * 30);
+          } else {
+            if (element.getAttribute('data-session') !== String(session)) return;
+            rendered += cleanWord + ' ';
+            element.innerHTML = rendered + '<span class="etch-cursor">▌</span>';
+            
+            if (cleanWord.match(/[,;:—]/)) {
+              await delay(80 + Math.random() * 60);
+            } else if (cleanWord.match(/[.!?]$/)) {
+              element.innerHTML = rendered;
+              await delay(350 + Math.random() * 150);
+              if (element.getAttribute('data-session') !== String(session)) return;
+              element.innerHTML = rendered + '<span class="etch-cursor">▌</span>';
+              await delay(40);
+            } else {
+              await delay(12 + Math.random() * 8);
+            }
+          }
+        }
+        if (element.getAttribute('data-session') === String(session)) {
+          element.innerHTML = rendered.trim();
+        }
+      }
+      type();
+    }
+
+    function randArabic() {
+      const ARABIC = 'ابتثجحخدذرزسشصضطظعغفقكلمنهوي';
+      return ARABIC[Math.floor(Math.random() * ARABIC.length)];
+    }
+
+
+    // ─── CHAR SPAN HOVER SETUP ───
+    const hoverEl = document.getElementById('hoverTextShowcase');
+    const originalText = hoverEl.innerText;
+    hoverEl.innerHTML = '';
+    originalText.split('').forEach(char => {
+      const span = document.createElement('span');
+      span.className = 'char-span';
+      if (char === ' ') {
+        span.innerHTML = '&nbsp;';
+      } else {
+        span.innerText = char;
+      }
+      hoverEl.appendChild(span);
+    });
+
+
+    // ─── ATMOSPHERIC TRIGGERS (ASCII eyes controls) ───
+    document.getElementById('showcaseEyeCrazy').addEventListener('click', () => {
+      window.dispatchEvent(new CustomEvent('ascii-eyes-control-custom', { detail: { action: 'crazy', duration: 4000 } }));
+    });
+    document.getElementById('showcaseEyeTrack').addEventListener('click', () => {
+      window.dispatchEvent(new CustomEvent('ascii-eyes-control-custom', { detail: { action: 'track-element', targetId: 'showcaseEyeTrack', duration: 4000 } }));
+    });
+    document.getElementById('showcaseEyeReset').addEventListener('click', () => {
+      window.dispatchEvent(new CustomEvent('ascii-eyes-control-custom', { detail: { action: 'reset' } }));
+    });
+
+
+    // ─── ORACLE INTAKE BOOT & RECOIL LOGIC ───
+    const btnExecute = document.getElementById('btnExecuteLink');
+    const screenIntake = document.getElementById('intakeScreen');
+    const screenBoot = document.getElementById('bootScreen');
+    const screenMainGate = document.getElementById('mainGateScreen');
+    
+    const bootLogsContent = document.getElementById('bootLogsContent');
+    const bootProgressPct = document.getElementById('bootProgressPct');
+    const bootProgressAscii = document.getElementById('bootProgressAscii');
+
+    const BOOT_LOGS = [
+      '◆ [0xCC0110] BIND SECURE PORTS TO HOST 0.0.0.0... [OK]',
+      '✦ [0x8FA12B] SYNCHRONIZING METEORIC DRIFT TO SOLAR CORRIDORS... [OK]',
+      '✦ [0x098A2F] INTERPOLATING LUNAR CONVICTION MATRIX... [OK]',
+      '◆ [0xEE334A] INJECTING FAUSTIAN REGISTRY COOKIES UNSEALED... [OK]',
+      '◆ [0x12FF88] INITIATING DIRECT CHANNELS WITH CHANCELLERY OF THE VOID... [OK]',
+      '✦ [0xAA99E1] SECURE NATAL DESCENT HANDSHAKE COMPLETE // WARNING: REGISTRY READY',
+    ];
+
+    btnExecute.addEventListener('click', () => {
+      screenIntake.style.display = 'none';
+      screenBoot.style.display = 'flex';
+      
+      let progress = 0;
+      bootLogsContent.innerHTML = '';
+      
+      const interval = setInterval(() => {
+        progress += Math.floor(Math.random() * 8) + 6;
+        if (progress >= 100) {
+          progress = 100;
+          clearInterval(interval);
+          
+          setTimeout(() => {
+            screenBoot.style.display = 'none';
+            screenMainGate.style.display = 'flex';
+            
+            // Run main typewriter on success
+            triggerTypewriter(
+              document.getElementById('mainTypewriterContainer'),
+              'The *sacred* channels are locked. Solar fire meets the *poetic* coordinates of the void.',
+              ['sacred', 'poetic']
+            );
+          }, 500);
+        }
+        
+        bootProgressPct.innerText = `${progress}%`;
+        const blocks = Math.floor(progress / 4);
+        bootProgressAscii.innerText = `[${'█'.repeat(blocks)}${'░'.repeat(25 - blocks)}]`;
+        
+        const currentLogIdx = Math.min(Math.floor((progress / 100) * BOOT_LOGS.length), BOOT_LOGS.length - 1);
+        let logLines = '';
+        for (let i = 0; i <= currentLogIdx; i++) {
+          logLines += `<div>${BOOT_LOGS[i]}</div>`;
+        }
+        bootLogsContent.innerHTML = logLines;
+      }, 100);
+    });
+
+    document.getElementById('btnRecoil').addEventListener('click', () => {
+      screenMainGate.style.display = 'none';
+      screenIntake.style.display = 'flex';
+    });
+
+
+    // Typewriter playground showcase
+    const btnReplay = document.getElementById('btnReplayEtch');
+    const playgroundShowcase = document.getElementById('typewriterShowcase');
+    
+    function runShowcaseTypewriter() {
+      triggerTypewriter(
+        playgroundShowcase, 
+        'Charged *terms* ignite into Arabic glyphs, then fade to *glowing* words. Normal sentences typewrite regularly.',
+        ['terms', 'glowing']
+      );
+    }
+    btnReplay.addEventListener('click', runShowcaseTypewriter);
+    
+    // Auto start showcase
+    runShowcaseTypewriter();
+
+    // Toggle collapse on title click
+    let collapsed = false;
+    proxTitle.addEventListener('click', () => {
+      collapsed = !collapsed;
+      const viewContainer = document.getElementById('viewContainer');
+      viewContainer.style.opacity = collapsed ? '0' : '1';
+      viewContainer.style.pointerEvents = collapsed ? 'none' : 'auto';
+    });
+  </script>
+</body>
+</html>
