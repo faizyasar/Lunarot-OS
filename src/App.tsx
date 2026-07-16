@@ -1,112 +1,73 @@
-import { useState, useEffect } from 'react';
-import { NatalUser, Planet } from './types';
-import StarBackground from './components/StarBackground';
-import AsciiBackgroundEyes from './components/AsciiBackgroundEyes';
-import IntroScreen from './components/IntroScreen';
-import IntakeScreen from './components/IntakeScreen';
-import MainScreen from './components/MainScreen';
-import HeaderNav from './components/HeaderNav';
-import ShowcaseScreen from './components/ShowcaseScreen';
-import AboutScreen from './components/AboutScreen';
+import { useState } from 'react';
+import { StarsCanvas, AsciiEyes } from './components/Backgrounds';
+import { ASCIIWaves } from './components/ASCIIWaves';
+import { OracleGateCard } from './components/OracleView';
+import { 
+  AestheticTokensCard, 
+  AsciiControlCard, 
+  SacredInputFieldsCard, 
+  PoeticTypographyCard, 
+  IntegrationGuideCard 
+} from './components/ShowcaseView';
+import { ViewStack } from './components/ViewStack';
+import { VariableFontProximity } from './components/VariableFontProximity';
+import './index.css';
 
-const SHOWCASE_DEFAULT_PLANETS: Planet[] = [
-  { name: 'Sun', symbol: '☉', deg: 120, sign: 'Leo', color: '#c8a45a' },
-  { name: 'Moon', symbol: '☽', deg: 245, sign: 'Taurus', color: '#998358' },
-  { name: 'Rising', symbol: 'AC', deg: 45, sign: 'Aries', color: '#efede8' },
-  { name: 'Mars', symbol: '♂', deg: 180, sign: 'Scorpio', color: '#c8a45a' },
-  { name: 'Venus', symbol: '♀', deg: 90, sign: 'Taurus', color: '#ffffff' },
+const CARDS = [
+  <OracleGateCard key="oracle" />,
+  <AestheticTokensCard key="tokens" />,
+  <SacredInputFieldsCard key="inputs" />,
+  <PoeticTypographyCard key="poetic" />,
+  <AsciiControlCard key="ascii" />,
+  <IntegrationGuideCard key="guide" />,
 ];
 
-const SHOWCASE_DEFAULT_ACTIVE = new Set(['Sun', 'Moon', 'Rising']);
-
 export default function App() {
-  const [view, setView] = useState<'oracle' | 'showcase' | 'about'>('oracle');
-  const [screen, setScreen] = useState<'intro' | 'intake' | 'main'>('intro');
-  const [user, setUser] = useState<NatalUser | null>(null);
-
-  // States representing background planetary canvas targets
-  const [planets, setPlanets] = useState<Planet[]>([]);
-  const [activePlanets, setActivePlanets] = useState<Set<string>>(new Set());
-
-  // Dynamic coordinates when switching views
-  useEffect(() => {
-    if (view === 'showcase') {
-      setPlanets(SHOWCASE_DEFAULT_PLANETS);
-      setActivePlanets(SHOWCASE_DEFAULT_ACTIVE);
-    } else {
-      // Return to user data coordinates if they exist
-      if (user) {
-        // MainScreen will calculate and broadcast coordinates via onUpdatePlanets/ActivePlanets
-      } else {
-        setPlanets([]);
-        setActivePlanets(new Set());
-      }
-    }
-  }, [view, user]);
-
-  const handleDismissIntro = () => {
-    setScreen('intake');
-  };
-
-  const handleIntakeSubmit = (natalUser: NatalUser) => {
-    setUser(natalUser);
-    setScreen('main');
-  };
-
-  const handleReset = () => {
-    setUser(null);
-    setPlanets([]);
-    setActivePlanets(new Set());
-    setScreen('intake');
-  };
+  const [collapsed, setCollapsed] = useState(false);
 
   return (
-    <main className="relative w-screen h-screen max-h-screen text-[var(--parchment)] max-w-full overflow-hidden flex flex-col justify-between select-none bg-black">
+    <>
+      <StarsCanvas />
       
-      {/* Dynamic star twinkling and constellation background lines */}
-      <StarBackground planets={planets} activePlanets={activePlanets} />
-
-      {/* Barely visible blurred pair of ASCII eyes tracking mouse & blinking */}
-      <AsciiBackgroundEyes />
-
-      {/* Sleek top navigation control bar */}
-      <HeaderNav currentView={view} onViewChange={setView} />
-
-      {/* Frame boundary wrapper */}
-      <div className="relative z-10 w-full flex-1 flex flex-col items-center justify-center overflow-hidden">
-        
-        {view === 'oracle' ? (
-          <>
-            {/* State 1: Gothic intro gate */}
-            {screen === 'intro' && (
-              <IntroScreen onDismiss={handleDismissIntro} />
-            )}
-
-            {/* State 2: Personal birth intake details */}
-            {screen === 'intake' && (
-              <IntakeScreen onSubmit={handleIntakeSubmit} />
-            )}
-
-            {/* State 3: Tarot draw layout & confluence summaries */}
-            {screen === 'main' && user && (
-              <MainScreen
-                user={user}
-                onUpdatePlanets={setPlanets}
-                onUpdateActivePlanets={setActivePlanets}
-                onReset={handleReset}
-              />
-            )}
-          </>
-        ) : view === 'showcase' ? (
-          /* Style Guide Sandbox / Documentation Showcase Screen */
-          <ShowcaseScreen />
-        ) : (
-          /* About Page / Archive Dossier Screen */
-          <AboutScreen />
-        )}
-        
+      <ASCIIWaves />
+      
+      <div id="asciiContainer">
+        <AsciiEyes />
       </div>
-      
-    </main>
+
+      <div id="appWrapper">
+        <header>
+          <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
+            <span style={{ color: 'var(--gold)', fontWeight: 'bold' }}>◇</span>
+            <VariableFontProximity 
+              label="LUNAROT OS // STANDALONE"
+              fromWeight={300}
+              toWeight={900}
+              strength={45}
+              fontSize="9.5px"
+              color="#554444"
+              style={{ letterSpacing: '0.25em', zIndex: 100 }}
+              onClick={() => {
+                setCollapsed(prev => !prev);
+              }}
+            />
+          </div>
+          
+          <div style={{ display: 'flex', gap: 16, fontFamily: '"JetBrains Mono", monospace', fontSize: 9, letterSpacing: '0.2em', color: 'rgba(255, 255, 255, 0.4)' }}>
+          </div>
+          
+          <div style={{ width: 140 }}></div>
+        </header>
+
+        <div id="viewContainer" style={{ opacity: collapsed ? 0 : 1, pointerEvents: collapsed ? 'none' : 'auto', transition: 'opacity 0.6s ease' }}>
+          <ViewStack views={CARDS} cardWidth={460} cardHeight={600} />
+        </div>
+
+        <footer>
+          <span>SACRED COF DECAY COMPILER v5.18-C // standalone shell online</span>
+          <span>CHANCELLERY OF THE VOID</span>
+        </footer>
+      </div>
+    </>
   );
 }
