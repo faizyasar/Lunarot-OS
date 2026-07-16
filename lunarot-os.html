@@ -1057,10 +1057,46 @@
       c.restore();
     }
 
-    function renderStars() {
-      if (!canvas || !ctx) return;
+    let lastStarsUpdate = performance.now();
+    const starsFpsInterval = 1000 / 30; // Throttle to 30 FPS
+
+    let sigilsCanvas = null;
+    function getSigilsCanvas() {
+      if (sigilsCanvas) return sigilsCanvas;
+      const cellSize = 30;
+      sigilsCanvas = document.createElement('canvas');
+      sigilsCanvas.width = 180;
+      sigilsCanvas.height = 150;
+      const c = sigilsCanvas.getContext('2d');
+      if (!c) return sigilsCanvas;
+
+      c.strokeStyle = 'rgba(255, 255, 255, 0.02)';
+      c.lineWidth = 0.5;
+      for (let r = 0; r <= 5; r++) {
+        c.beginPath(); c.moveTo(0, r * cellSize); c.lineTo(180, r * cellSize); c.stroke();
+      }
+      for (let col = 0; col <= 6; col++) {
+        c.beginPath(); c.moveTo(col * cellSize, 0); c.lineTo(col * cellSize, 150); c.stroke();
+      }
+
+      for (let r = 0; r < 5; r++) {
+        for (let col = 0; col < 6; col++) {
+          const seedVal = (r * 13 + col * 37 + 7);
+          drawAlchemicalSigil(c, col * cellSize, r * cellSize, cellSize, seedVal);
+        }
+      }
+      return sigilsCanvas;
+    }
+
+    function renderStars(timestamp) {
+      requestAnimationFrame(renderStars);
+
+      const elapsed = timestamp - lastStarsUpdate;
+      if (elapsed < starsFpsInterval) return;
+      lastStarsUpdate = timestamp - (elapsed % starsFpsInterval);
+if (!canvas || !ctx) return;
       ctx.clearRect(0, 0, canvas.width, canvas.height);
-      time += 0.00045;
+      time += (elapsed / 1000) * 0.027;
 
       const cx = canvas.width / 2;
       const cy = canvas.height / 2;
@@ -1145,20 +1181,10 @@
       const cellSize = 30;
       const gStartX = canvas.width - 180 - 50;
       const gStartY = canvas.height - 150 - 110;
-      if (gStartY > 250 && gStartX > cx + 100) {
-        ctx.strokeStyle = 'rgba(255, 255, 255, 0.02)';
-        ctx.lineWidth = 0.5;
-        for (let r = 0; r <= 5; r++) {
-          ctx.beginPath(); ctx.moveTo(gStartX, gStartY + r * cellSize); ctx.lineTo(gStartX + 180, gStartY + r * cellSize); ctx.stroke();
-        }
-        for (let c = 0; c <= 6; c++) {
-          ctx.beginPath(); ctx.moveTo(gStartX + c * cellSize, gStartY); ctx.lineTo(gStartX + c * cellSize, gStartY + 150); ctx.stroke();
-        }
-        for (let r = 0; r < 5; r++) {
-          for (let c = 0; c < 6; c++) {
-            const seedVal = (r * 13 + c * 37 + 7);
-            drawAlchemicalSigil(ctx, gStartX + c * cellSize, gStartY + r * cellSize, cellSize, seedVal);
-          }
+      if (gStartY > 250 && gStartX > cx + 100)  {
+        const sCanvas = getSigilsCanvas();
+        if (sCanvas) {
+          ctx.drawImage(sCanvas, gStartX, gStartY);
         }
       }
 
@@ -1210,11 +1236,9 @@
           ctx.fillText(`${p.name.toUpperCase()} [${p.deg.toFixed(1)}°]`, fx, fy + 14);
         }
       });
-
-      requestAnimationFrame(renderStars);
     }
-    renderStars();
-
+    requestAnimationFrame(renderStars);
+
     // ─── ASCII BACKGROUND PUPIL-TRACKING EYES ───
     const preEyes = document.getElementById('asciiEyes');
     const mouse = { x: window.innerWidth / 2, y: window.innerHeight / 2, tx: window.innerWidth / 2, ty: window.innerHeight / 2 };
@@ -1268,8 +1292,16 @@
 
     let blinkTimer = Math.random() * 2000 + 3000;
 
+    let lastEyesUpdate = performance.now();
+    const eyesFpsInterval = 1000 / 30; // Throttle to 30 FPS
+
     function runEyes(timestamp) {
-      const now = performance.now();
+      requestAnimationFrame(runEyes);
+
+      const elapsed = timestamp - lastEyesUpdate;
+      if (elapsed < eyesFpsInterval) return;
+      lastEyesUpdate = timestamp - (elapsed % eyesFpsInterval);
+const now = performance.now();
       const isCrazy = now < stateObj.crazyUntil;
       
       let targetX = mouse.tx;
@@ -1287,11 +1319,15 @@
       }
 
       // Smooth pupillary easing
-      mouse.x += (targetX - mouse.x) * (stateObj.action === 'track-element' ? 0.15 : 0.08);
-      mouse.y += (targetY - mouse.y) * (stateObj.action === 'track-element' ? 0.15 : 0.08);
+            // Smooth pupillary easing (frame-rate independent scaling)
+      const speedScale = elapsed / 16.67;
+      const easeRate = stateObj.action === 'track-element' ? 0.15 : 0.08;
+      const scaledEase = 1 - Math.pow(1 - easeRate, speedScale);
+      mouse.x += (targetX - mouse.x) * scaledEase;
+      mouse.y += (targetY - mouse.y) * scaledEase;
 
       // Eyelid blinking loops
-      blink.timer += 16.67;
+      blink.timer += elapsed;
       if (isCrazy) {
         blink.progress = 0.35 + 0.65 * Math.sin(timestamp * 0.08) * (Math.random() > 0.5 ? 1 : 0.2);
         blink.state = 'open';
@@ -1299,14 +1335,14 @@
         if (blink.state === 'open' && blink.timer > blinkTimer) {
           blink.state = 'closing'; blink.timer = 0;
         } else if (blink.state === 'closing') {
-          blink.progress -= 0.18;
+          blink.progress -= 0.18 * speedScale;
           if (blink.progress <= 0) {
             blink.progress = 0; blink.state = 'closed'; blink.timer = 0;
           }
         } else if (blink.state === 'closed') {
           if (blink.timer > 100) { blink.state = 'opening'; blink.timer = 0; }
         } else if (blink.state === 'opening') {
-          blink.progress += 0.15;
+          blink.progress += 0.15 * speedScale;
           if (blink.progress >= 1) {
             blink.progress = 1; blink.state = 'open'; blink.timer = 0;
             blinkTimer = Math.random() * 4000 + 4000;
@@ -1407,11 +1443,9 @@
         preEyes.style.color = 'rgba(200, 164, 90, 0.2)';
         preEyes.style.textShadow = '0 0 4px rgba(200, 164, 90, 0.4)';
       }
-
-      requestAnimationFrame(runEyes);
     }
-    requestAnimationFrame(runEyes);
-
+    requestAnimationFrame(runEyes);
+
     // Compact terminal eye inside form intake (simple loops)
     const compactFrames = [
       `     .--------.     \n    /  (  ●  )  \\   \n    \\           /   \n     '--------'     `,
