@@ -52,8 +52,29 @@
       box-sizing: border-box;
       margin: 0;
       padding: 0;
+      scrollbar-width: thin;
+      scrollbar-color: rgba(200, 164, 90, 0.3) rgba(0, 0, 0, 0.2);
     }
-    
+
+    /* Custom Thin Scrollbar for Webkit */
+    ::-webkit-scrollbar {
+      width: 3px;
+      height: 3px;
+    }
+
+    ::-webkit-scrollbar-track {
+      background: rgba(0, 0, 0, 0.1);
+    }
+
+    ::-webkit-scrollbar-thumb {
+      background: rgba(200, 164, 90, 0.3);
+      border-radius: 3px;
+    }
+
+    ::-webkit-scrollbar-thumb:hover {
+      background: rgba(200, 164, 90, 0.5);
+    }
+
     html, body {
       height: 100vh;
       min-height: 100vh;
@@ -115,38 +136,100 @@
 
     /* ─── STRUCTURE LAYOUT ─── */
     #appWrapper {
-      position: fixed;
-      inset: 0;
+      position: relative;
+      z-index: 10;
+      width: 100vw;
+      height: 100vh;
+      max-height: 100vh;
       display: flex;
       flex-direction: column;
       justify-content: space-between;
-      padding: calc(30px * var(--c-scale)) calc(40px * var(--c-scale));
-      z-index: 10;
-      pointer-events: none;
-    }
-
-    #appWrapper * {
-      pointer-events: auto;
+      overflow: hidden;
     }
 
     header {
+      width: 100%;
+      position: relative;
+      z-index: 0;
+      padding: 12px 24px;
       display: flex;
+      flex-direction: row;
       justify-content: space-between;
       align-items: center;
-      border-bottom: 1px solid rgba(200, 164, 90, 0.15);
-      padding-bottom: calc(14px * var(--c-scale));
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+      background-color: transparent;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 8px;
+      letter-spacing: 0.2em;
+      color: rgba(255, 255, 255, 0.4);
+      text-transform: uppercase;
     }
 
-    footer {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      border-top: 1px solid rgba(200, 164, 90, 0.15);
-      padding-top: calc(14px * var(--c-scale));
+    /* Header Nav Button Styling */
+    .nav-btn {
+      background: none;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      color: rgba(255, 255, 255, 0.5);
+      padding: 4px 12px;
       font-family: 'JetBrains Mono', monospace;
-      font-size: calc(8px * var(--c-scale));
-      letter-spacing: 0.15em;
-      color: rgba(255, 255, 255, 0.4);
+      font-size: 8px;
+      font-weight: bold;
+      letter-spacing: 0.2em;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      outline: none;
+      border-radius: 1px;
+    }
+    .nav-btn.active-primary {
+      background-color: var(--cream);
+      border-color: var(--cream);
+      color: var(--void);
+      box-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
+    }
+    .nav-btn.active-secondary {
+      background-color: rgba(0, 0, 0, 0.6);
+      border-color: var(--gold);
+      color: var(--gold);
+      box-shadow: 0 0 10px rgba(200, 164, 90, 0.2);
+    }
+    .nav-btn:hover:not(.active-primary):not(.active-secondary) {
+      border-color: var(--parchment);
+      color: var(--cream);
+    }
+
+    #viewContainer {
+      position: relative;
+      z-index: 10;
+      width: 100%;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      overflow: visible;
+    }
+
+    #viewStackOuter {
+      position: relative;
+      width: calc(460px * var(--c-scale));
+      height: calc(600px * var(--c-scale));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transform-style: preserve-3d;
+    }
+
+    .view-card-wrapper {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      transform-style: preserve-3d;
+      transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+      cursor: grab;
+    }
+
+    .view-card-wrapper:active {
+      cursor: grabbing;
     }
 
     /* ─── CANVASES & BACKDROPS ─── */
@@ -172,6 +255,8 @@
       display: flex;
       align-items: center;
       justify-content: center;
+      overflow: hidden;
+      background: transparent;
     }
 
     #asciiEyes {
@@ -374,40 +459,6 @@
       width: 100%;
     }
 
-    /* ─── VIEW STACK SYSTEM ─── */
-    #viewContainer {
-      flex: 1;
-      width: 100%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      position: relative;
-      perspective: 1000px;
-    }
-
-    #viewStackOuter {
-      position: relative;
-      width: calc(460px * var(--c-scale));
-      height: calc(600px * var(--c-scale));
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      transform-style: preserve-3d;
-    }
-
-    .view-card-wrapper {
-      position: absolute;
-      width: 100%;
-      height: 100%;
-      transform-style: preserve-3d;
-      transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1);
-      cursor: grab;
-    }
-
-    .view-card-wrapper:active {
-      cursor: grabbing;
-    }
-
     /* ─── INTRO BOOT LOADER ─── */
     .boot-loader-box {
       width: 100%;
@@ -565,6 +616,24 @@
       flex-direction: column;
       justify-content: space-between;
     }
+
+    footer {
+      height: 40px;
+      border-top: 1px solid rgba(255, 255, 255, 0.08);
+      margin: 0 24px;
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      align-items: center;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 6.5px;
+      letter-spacing: 0.18em;
+      color: #554444;
+      text-transform: uppercase;
+      z-index: 0;
+      position: relative;
+      pointer-events: none;
+    }
   </style>
 </head>
 <body>
@@ -590,13 +659,13 @@
 
       <!-- Central View Selector Tabs -->
       <div style="display: flex; gap: 16px; align-items: center; justify-content: center;">
-        <button id="tabOracle" style="font-family: 'JetBrains Mono', monospace; font-size: calc(8px * var(--c-scale)); letter-spacing: 0.2em; padding: 4px 12px; background: #ffffff; color: #000000; border: 1px solid #ffffff; box-shadow: 0 0 10px rgba(255,255,255,0.3); cursor: pointer; font-weight: bold; text-transform: uppercase; transition: all 0.3s; outline: none; border-radius: 1px;">
+        <button id="tabOracle" class="nav-btn active-primary">
           ◆ SACRED ORACLE
         </button>
-        <button id="tabShowcase" style="font-family: 'JetBrains Mono', monospace; font-size: calc(8px * var(--c-scale)); letter-spacing: 0.2em; padding: 4px 12px; background: transparent; color: rgba(255, 255, 255, 0.4); border: 1px solid rgba(255, 255, 255, 0.15); cursor: pointer; font-weight: bold; text-transform: uppercase; transition: all 0.3s; outline: none; border-radius: 1px;">
+        <button id="tabShowcase" class="nav-btn">
           ◆ STYLE SHOWCASE
         </button>
-        <button id="tabIntegration" style="font-family: 'JetBrains Mono', monospace; font-size: calc(8px * var(--c-scale)); letter-spacing: 0.2em; padding: 4px 12px; background: transparent; color: rgba(255, 255, 255, 0.4); border: 1px solid rgba(255, 255, 255, 0.15); cursor: pointer; font-weight: bold; text-transform: uppercase; transition: all 0.3s; outline: none; border-radius: 1px;">
+        <button id="tabIntegration" class="nav-btn">
           ◆ INTEGRATION
         </button>
       </div>
@@ -1686,41 +1755,23 @@
     function updateTabHighlights(idx) {
       // Oracle
       if (idx === 0) {
-        tabOracle.style.background = '#ffffff';
-        tabOracle.style.color = '#000000';
-        tabOracle.style.borderColor = '#ffffff';
-        tabOracle.style.boxShadow = '0 0 10px rgba(255,255,255,0.3)';
+        tabOracle.className = 'nav-btn active-primary';
       } else {
-        tabOracle.style.background = 'transparent';
-        tabOracle.style.color = 'rgba(255, 255, 255, 0.4)';
-        tabOracle.style.borderColor = 'rgba(255, 255, 255, 0.15)';
-        tabOracle.style.boxShadow = 'none';
+        tabOracle.className = 'nav-btn';
       }
 
       // Showcase
       if (idx >= 1 && idx <= 4) {
-        tabShowcase.style.background = 'rgba(0, 0, 0, 0.6)';
-        tabShowcase.style.color = 'var(--gold)';
-        tabShowcase.style.borderColor = 'var(--gold)';
-        tabShowcase.style.boxShadow = '0 0 10px rgba(200,164,90,0.2)';
+        tabShowcase.className = 'nav-btn active-secondary';
       } else {
-        tabShowcase.style.background = 'transparent';
-        tabShowcase.style.color = 'rgba(255, 255, 255, 0.4)';
-        tabShowcase.style.borderColor = 'rgba(255, 255, 255, 0.15)';
-        tabShowcase.style.boxShadow = 'none';
+        tabShowcase.className = 'nav-btn';
       }
 
       // Integration
       if (idx === 5) {
-        tabIntegration.style.background = 'rgba(0, 0, 0, 0.6)';
-        tabIntegration.style.color = '#efede8';
-        tabIntegration.style.borderColor = '#efede8';
-        tabIntegration.style.boxShadow = '0 0 10px rgba(239,237,232,0.25)';
+        tabIntegration.className = 'nav-btn active-secondary';
       } else {
-        tabIntegration.style.background = 'transparent';
-        tabIntegration.style.color = 'rgba(255, 255, 255, 0.4)';
-        tabIntegration.style.borderColor = 'rgba(255, 255, 255, 0.15)';
-        tabIntegration.style.boxShadow = 'none';
+        tabIntegration.className = 'nav-btn';
       }
     }
 
