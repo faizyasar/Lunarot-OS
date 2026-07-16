@@ -1,4 +1,4 @@
-import React, { useState } from "react"
+import React, { useState, useEffect } from "react"
 import { motion, PanInfo } from "motion/react"
 
 const PERSPECTIVE = 1000 // px
@@ -14,6 +14,34 @@ export function ViewStack({ views, cardWidth = 900, cardHeight = 650 }: { views:
             originalIndex: i,
         }))
     )
+
+    useEffect(() => {
+        if (cards.length > 0) {
+            const topCard = cards[0];
+            window.dispatchEvent(
+                new CustomEvent("top-card-changed", {
+                    detail: { originalIndex: topCard.originalIndex },
+                })
+            );
+        }
+    }, [cards]);
+
+    useEffect(() => {
+        const handleCardChange = (e: any) => {
+            const cardId = e.detail?.cardId;
+            setCards((prevCards) => {
+                const idx = prevCards.findIndex(c => c.originalIndex === cardId);
+                if (idx !== -1 && idx !== 0) {
+                    const selected = prevCards[idx];
+                    const remaining = prevCards.filter((_, i) => i !== idx);
+                    return [selected, ...remaining];
+                }
+                return prevCards;
+            });
+        };
+        window.addEventListener("change-card", handleCardChange);
+        return () => window.removeEventListener("change-card", handleCardChange);
+    }, []);
 
     const [isPressed, setIsPressed] = useState(false)
     const [shouldReturnToCenter, setShouldReturnToCenter] = useState(false)

@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { StarsCanvas, AsciiEyes } from './components/Backgrounds';
 import { ASCIIWaves } from './components/ASCIIWaves';
 import { OracleGateCard } from './components/OracleView';
@@ -24,6 +24,15 @@ const CARDS = [
 
 export default function App() {
   const [collapsed, setCollapsed] = useState(false);
+  const [activeCardIdx, setActiveCardIdx] = useState(0);
+
+  useEffect(() => {
+    const handleTopCardChanged = (e: any) => {
+      setActiveCardIdx(e.detail?.originalIndex ?? 0);
+    };
+    window.addEventListener('top-card-changed', handleTopCardChanged);
+    return () => window.removeEventListener('top-card-changed', handleTopCardChanged);
+  }, []);
 
   return (
     <>
@@ -37,7 +46,7 @@ export default function App() {
 
       <div id="appWrapper">
         <header>
-          <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
+          <div style={{ display: 'flex', alignItems: 'center', gap: 8, width: '30%' }}>
             <span style={{ color: 'var(--gold)', fontWeight: 'bold' }}>◇</span>
             <VariableFontProximity 
               label="LUNAROT OS // STANDALONE"
@@ -53,10 +62,77 @@ export default function App() {
             />
           </div>
           
-          <div style={{ display: 'flex', gap: 16, fontFamily: '"JetBrains Mono", monospace', fontSize: 9, letterSpacing: '0.2em', color: 'rgba(255, 255, 255, 0.4)' }}>
+          <div style={{ display: 'flex', gap: 16, alignItems: 'center', justifyContent: 'center' }}>
+            <button
+              onClick={() => {
+                window.dispatchEvent(new CustomEvent('change-card', { detail: { cardId: 0 } }));
+              }}
+              style={{
+                fontFamily: '"JetBrains Mono", monospace',
+                fontSize: '8px',
+                letterSpacing: '0.2em',
+                padding: '4px 12px',
+                background: activeCardIdx === 0 ? '#ffffff' : 'transparent',
+                color: activeCardIdx === 0 ? '#000000' : 'rgba(255, 255, 255, 0.4)',
+                border: activeCardIdx === 0 ? '1px solid #ffffff' : '1px solid rgba(255, 255, 255, 0.15)',
+                boxShadow: activeCardIdx === 0 ? '0 0 10px rgba(255,255,255,0.3)' : 'none',
+                cursor: 'pointer',
+                fontWeight: 'bold',
+                textTransform: 'uppercase',
+                transition: 'all 0.3s'
+              }}
+            >
+              ◆ SACRED ORACLE
+            </button>
+
+            <button
+              onClick={() => {
+                window.dispatchEvent(new CustomEvent('change-card', { detail: { cardId: 1 } }));
+              }}
+              style={{
+                fontFamily: '"JetBrains Mono", monospace',
+                fontSize: '8px',
+                letterSpacing: '0.2em',
+                padding: '4px 12px',
+                background: (activeCardIdx >= 1 && activeCardIdx <= 4) ? 'rgba(0, 0, 0, 0.6)' : 'transparent',
+                color: (activeCardIdx >= 1 && activeCardIdx <= 4) ? 'var(--gold)' : 'rgba(255, 255, 255, 0.4)',
+                border: (activeCardIdx >= 1 && activeCardIdx <= 4) ? '1px solid var(--gold)' : '1px solid rgba(255, 255, 255, 0.15)',
+                boxShadow: (activeCardIdx >= 1 && activeCardIdx <= 4) ? '0 0 10px rgba(200,164,90,0.2)' : 'none',
+                cursor: 'pointer',
+                fontWeight: 'bold',
+                textTransform: 'uppercase',
+                transition: 'all 0.3s'
+              }}
+            >
+              ◆ STYLE SHOWCASE
+            </button>
+
+            <button
+              onClick={() => {
+                window.dispatchEvent(new CustomEvent('change-card', { detail: { cardId: 5 } }));
+              }}
+              style={{
+                fontFamily: '"JetBrains Mono", monospace',
+                fontSize: '8px',
+                letterSpacing: '0.2em',
+                padding: '4px 12px',
+                background: activeCardIdx === 5 ? 'rgba(0, 0, 0, 0.6)' : 'transparent',
+                color: activeCardIdx === 5 ? '#efede8' : 'rgba(255, 255, 255, 0.4)',
+                border: activeCardIdx === 5 ? '1px solid #efede8' : '1px solid rgba(255, 255, 255, 0.15)',
+                boxShadow: activeCardIdx === 5 ? '0 0 10px rgba(239,237,232,0.25)' : 'none',
+                cursor: 'pointer',
+                fontWeight: 'bold',
+                textTransform: 'uppercase',
+                transition: 'all 0.3s'
+              }}
+            >
+              ◆ INTEGRATION
+            </button>
           </div>
           
-          <div style={{ width: 140 }}></div>
+          <div style={{ width: '30%', display: 'flex', justifyContent: 'flex-end', fontFamily: '"JetBrains Mono", monospace', fontSize: '8px', letterSpacing: '0.2em', color: 'rgba(255, 255, 255, 0.35)' }}>
+            ASTRAL_SHELL_OK // SYS_ACTIVE
+          </div>
         </header>
 
         <div id="viewContainer" style={{ opacity: collapsed ? 0 : 1, pointerEvents: collapsed ? 'none' : 'auto', transition: 'opacity 0.6s ease' }}>

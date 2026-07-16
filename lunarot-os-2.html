@@ -583,11 +583,25 @@
   <!-- Foreground Interface Shell -->
   <div id="appWrapper">
     <header>
-      <div style="display: flex; align-items: center; gap: 8px;">
+      <div style="display: flex; align-items: center; gap: 8px; width: 30%;">
         <span style="color: var(--gold); font-weight: bold;">◇</span>
         <div id="proxTitle" class="font-mono"></div>
       </div>
-      <div style="font-family: 'JetBrains Mono', monospace; font-size: calc(8px * var(--c-scale)); letter-spacing: 0.2em; color: rgba(255, 255, 255, 0.35);">
+
+      <!-- Central View Selector Tabs -->
+      <div style="display: flex; gap: 16px; align-items: center; justify-content: center;">
+        <button id="tabOracle" style="font-family: 'JetBrains Mono', monospace; font-size: calc(8px * var(--c-scale)); letter-spacing: 0.2em; padding: 4px 12px; background: #ffffff; color: #000000; border: 1px solid #ffffff; box-shadow: 0 0 10px rgba(255,255,255,0.3); cursor: pointer; font-weight: bold; text-transform: uppercase; transition: all 0.3s; outline: none; border-radius: 1px;">
+          ◆ SACRED ORACLE
+        </button>
+        <button id="tabShowcase" style="font-family: 'JetBrains Mono', monospace; font-size: calc(8px * var(--c-scale)); letter-spacing: 0.2em; padding: 4px 12px; background: transparent; color: rgba(255, 255, 255, 0.4); border: 1px solid rgba(255, 255, 255, 0.15); cursor: pointer; font-weight: bold; text-transform: uppercase; transition: all 0.3s; outline: none; border-radius: 1px;">
+          ◆ STYLE SHOWCASE
+        </button>
+        <button id="tabIntegration" style="font-family: 'JetBrains Mono', monospace; font-size: calc(8px * var(--c-scale)); letter-spacing: 0.2em; padding: 4px 12px; background: transparent; color: rgba(255, 255, 255, 0.4); border: 1px solid rgba(255, 255, 255, 0.15); cursor: pointer; font-weight: bold; text-transform: uppercase; transition: all 0.3s; outline: none; border-radius: 1px;">
+          ◆ INTEGRATION
+        </button>
+      </div>
+
+      <div style="width: 30%; display: flex; justify-content: flex-end; font-family: 'JetBrains Mono', monospace; font-size: calc(8px * var(--c-scale)); letter-spacing: 0.2em; color: rgba(255, 255, 255, 0.35);">
         ASTRAL_SHELL_OK // SYS_ACTIVE
       </div>
     </header>
@@ -1585,6 +1599,10 @@
         // Apply 3D properties
         card.style.transform = `translate3d(${xVal}px, ${yVal}px, ${zVal}px) rotate(${rotationVal}deg) scale(${scaleVal})`;
       });
+
+      const topCard = cardWrappers[activeCardIndex];
+      const originalIndex = parseInt(topCard.getAttribute('data-index'));
+      updateTabHighlights(originalIndex);
     }
 
     // Drag / Swipe Pointer Physics
@@ -1658,6 +1676,65 @@
       currentX = 0;
       currentY = 0;
     });
+
+
+    // ─── TAB SELECTION LOGIC ───
+    const tabOracle = document.getElementById('tabOracle');
+    const tabShowcase = document.getElementById('tabShowcase');
+    const tabIntegration = document.getElementById('tabIntegration');
+
+    function updateTabHighlights(idx) {
+      // Oracle
+      if (idx === 0) {
+        tabOracle.style.background = '#ffffff';
+        tabOracle.style.color = '#000000';
+        tabOracle.style.borderColor = '#ffffff';
+        tabOracle.style.boxShadow = '0 0 10px rgba(255,255,255,0.3)';
+      } else {
+        tabOracle.style.background = 'transparent';
+        tabOracle.style.color = 'rgba(255, 255, 255, 0.4)';
+        tabOracle.style.borderColor = 'rgba(255, 255, 255, 0.15)';
+        tabOracle.style.boxShadow = 'none';
+      }
+
+      // Showcase
+      if (idx >= 1 && idx <= 4) {
+        tabShowcase.style.background = 'rgba(0, 0, 0, 0.6)';
+        tabShowcase.style.color = 'var(--gold)';
+        tabShowcase.style.borderColor = 'var(--gold)';
+        tabShowcase.style.boxShadow = '0 0 10px rgba(200,164,90,0.2)';
+      } else {
+        tabShowcase.style.background = 'transparent';
+        tabShowcase.style.color = 'rgba(255, 255, 255, 0.4)';
+        tabShowcase.style.borderColor = 'rgba(255, 255, 255, 0.15)';
+        tabShowcase.style.boxShadow = 'none';
+      }
+
+      // Integration
+      if (idx === 5) {
+        tabIntegration.style.background = 'rgba(0, 0, 0, 0.6)';
+        tabIntegration.style.color = '#efede8';
+        tabIntegration.style.borderColor = '#efede8';
+        tabIntegration.style.boxShadow = '0 0 10px rgba(239,237,232,0.25)';
+      } else {
+        tabIntegration.style.background = 'transparent';
+        tabIntegration.style.color = 'rgba(255, 255, 255, 0.4)';
+        tabIntegration.style.borderColor = 'rgba(255, 255, 255, 0.15)';
+        tabIntegration.style.boxShadow = 'none';
+      }
+    }
+
+    function selectCard(originalIndex) {
+      const targetIndex = cardWrappers.findIndex(c => parseInt(c.getAttribute('data-index')) === originalIndex);
+      if (targetIndex !== -1 && targetIndex !== activeCardIndex) {
+        activeCardIndex = targetIndex;
+        updateCardStyles(true);
+      }
+    }
+
+    tabOracle.addEventListener('click', () => selectCard(0));
+    tabShowcase.addEventListener('click', () => selectCard(1));
+    tabIntegration.addEventListener('click', () => selectCard(5));
 
     initViewStack();
 
