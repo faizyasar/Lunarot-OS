@@ -24,9 +24,9 @@ export function AestheticTokensCard() {
             <span style={{ color: 'rgba(255,255,255,0.3)' }}>#080808</span>
           </div>
           <div className="swatch-item">
-            <div className="swatch-box" style={{ backgroundColor: '#c8a45a' }}></div>
+            <div className="swatch-box" style={{ backgroundColor: '#ffffff' }}></div>
             <span style={{ color: 'var(--gold)' }}>gold</span>
-            <span style={{ color: 'rgba(255,255,255,0.3)' }}>#c8a45a</span>
+            <span style={{ color: 'rgba(255,255,255,0.3)' }}>#ffffff</span>
           </div>
           <div className="swatch-item">
             <div className="swatch-box" style={{ backgroundColor: '#efede8' }}></div>
@@ -195,9 +195,33 @@ export function PoeticTypographyCard() {
 }
 
 export function IntegrationGuideCard() {
+  const [copied, setCopied] = useState(false);
+  const codeText = `<div class="gothic-panel panel-gold">
+  <span class="panel-title-tag">SECURE_GATE</span>
+  <p>Content here...</p>
+  <span class="panel-footer-tag">V.1.0</span>
+</div>
+
+<button class="gothic-btn btn-primary">Execute Link</button>
+<button class="gothic-btn btn-secondary">Ritual Shield</button>`;
+
+  const handleCopy = () => {
+    navigator.clipboard.writeText(codeText);
+    setCopied(true);
+    setTimeout(() => setCopied(false), 2000);
+  };
+
   return (
     <div className="gothic-panel panel-gold" style={{ width: '100%', display: 'flex', flexDirection: 'column' }}>
-      <span className="panel-title-tag">INTEGRATION_GUIDE</span>
+      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+        <span className="panel-title-tag">INTEGRATION_GUIDE</span>
+        <button
+          onClick={handleCopy}
+          className="px-3 py-1 border border-zinc-700 bg-white/5 text-white hover:bg-white/10 text-[9px] font-mono tracking-widest uppercase cursor-pointer z-30 select-none"
+        >
+          {copied ? '✦ COPIED ✦' : '[ COPY CODE ]'}
+        </button>
+      </div>
       <span className="panel-footer-tag">CODE_COPY</span>
       
       <div style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
@@ -207,16 +231,9 @@ export function IntegrationGuideCard() {
         <div className="font-sans" style={{ fontSize: 10.5, lineHeight: 1.5, color: '#cfc9c0' }}>
           Copy this clean HTML template directly into your static code blocks to construct a baseline:
         </div>
-        <div className="code-block">
-{`<div class="gothic-panel panel-gold">
-  <span class="panel-title-tag">SECURE_GATE</span>
-  <p>Content here...</p>
-  <span class="panel-footer-tag">V.1.0</span>
-</div>
-
-<button class="gothic-btn btn-primary">Execute Link</button>
-<button class="gothic-btn btn-secondary">Ritual Shield</button>`}
-        </div>
+        <pre className="code-block select-text text-left" style={{ userSelect: 'text', whiteSpace: 'pre-wrap', overflowX: 'auto' }}>
+          <code>{codeText}</code>
+        </pre>
       </div>
     </div>
   )

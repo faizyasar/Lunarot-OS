@@ -97,13 +97,7 @@ export function ASCIIWaves(props: any) {
         const ctx = canvas.getContext("2d")
         if (!ctx) return
 
-        const dpr = Math.max(
-            1,
-            Math.min(
-                2,
-                typeof window !== "undefined" ? window.devicePixelRatio || 1 : 1
-            )
-        )
+        const dpr = typeof window !== "undefined" ? window.devicePixelRatio || 1 : 1
         const { w, h } = size
         if (w === 0 || h === 0) return
 

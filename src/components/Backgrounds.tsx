@@ -1,13 +1,13 @@
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 
 // --- StarsCanvas Module-Level State ---
 let time = 0;
 const pointer = { x: -2000, y: -2000, active: false };
 const planets = [
-  { name: 'Sun', symbol: '☉', deg: 120, color: '#c8a45a' },
-  { name: 'Moon', symbol: '☽', deg: 245, color: '#998358' },
+  { name: 'Sun', symbol: '☉', deg: 120, color: '#ffffff' },
+  { name: 'Moon', symbol: '☽', deg: 245, color: '#efede8' },
   { name: 'Rising', symbol: 'AC', deg: 45, color: '#efede8' },
-  { name: 'Mars', symbol: '♂', deg: 180, color: '#c8a45a' },
+  { name: 'Mars', symbol: '♂', deg: 180, color: '#ffffff' },
   { name: 'Venus', symbol: '♀', deg: 90, color: '#ffffff' }
 ];
 const activePlanets = new Set(['Sun', 'Moon', 'Rising']);
@@ -34,7 +34,7 @@ function drawAlchemicalSigil(c: CanvasRenderingContext2D, x: number, y: number, 
     c.stroke();
   }
 
-  c.strokeStyle = 'rgba(200, 164, 90, 0.15)';
+  c.strokeStyle = 'rgba(255, 255, 255, 0.15)';
   c.beginPath();
   switch (type) {
     case 0:
@@ -50,7 +50,7 @@ function drawAlchemicalSigil(c: CanvasRenderingContext2D, x: number, y: number, 
       c.stroke();
       c.beginPath();
       c.arc(0, 0, 1.5, 0, Math.PI * 2);
-      c.fillStyle = 'rgba(200, 164, 90, 0.2)';
+      c.fillStyle = 'rgba(255, 255, 255, 0.2)';
       c.fill();
       break;
     case 2:
@@ -129,9 +129,290 @@ function getSigilsCanvas() {
   return sigilsCanvas;
 }
 
-export function StarsCanvas() {
-  const canvasRef = useRef<HTMLCanvasElement>(null);
+interface StarsCanvasProps {
+  planets?: any[];
+  activePlanets?: Set<string>;
+}
 
+export function StarsCanvas({ planets: customPlanets, activePlanets: customActivePlanets }: StarsCanvasProps) {
+  const canvasRef = useRef<HTMLCanvasElement>(null);
+  const canvasGPURef = useRef<HTMLCanvasElement>(null);
+  const planetsRef = useRef(customPlanets);
+  const activePlanetsRef = useRef(customActivePlanets);
+  const [webGpuActive, setWebGpuActive] = useState(false);
+
+  useEffect(() => {
+    planetsRef.current = customPlanets;
+    activePlanetsRef.current = customActivePlanets;
+  }, [customPlanets, customActivePlanets]);
+
+  // WebGPU initialization & rendering loop
+  useEffect(() => {
+    if (!(navigator as any).gpu) return;
+    let active = true;
+    let device: any;
+    let context: any;
+    let pipeline: any;
+    let uniformBuffer: any;
+    let uniformBindGroup: any;
+    let animId: number;
+
+    const canvas = canvasGPURef.current;
+    if (!canvas) return;
+
+    async function initGPU() {
+      try {
+        const adapter = await (navigator as any).gpu.requestAdapter();
+        if (!adapter) return;
+        device = await adapter.requestDevice();
+        if (!active) return;
+
+        context = canvas.getContext('webgpu') as any;
+        const format = (navigator as any).gpu.getPreferredCanvasFormat();
+        context.configure({
+          device,
+          format,
+          alphaMode: 'premultiplied'
+        });
+
+        // WGSL Shader code
+        const shaderCode = `
+          struct VertexOutput {
+            @builtin(position) position: vec4<f32>,
+            @location(0) uv: vec2<f32>,
+          };
+
+          struct Uniforms {
+            time: f32,
+            width: f32,
+            height: f32,
+            mouseX: f32,
+            mouseY: f32,
+            mouseActive: f32,
+            pad1: f32,
+            pad2: f32,
+          };
+
+          @group(0) @binding(0) var<uniform> uniforms: Uniforms;
+
+          fn hash(p: vec2<f32>) -> f32 {
+            var p3 = fract(vec3<f32>(p.xyx) * 0.13);
+            p3 = p3 + dot(p3, p3.yzx + 3.33);
+            return fract((p3.x + p3.y) * p3.z);
+          }
+
+          fn noise(p: vec2<f32>) -> f32 {
+            let i = floor(p);
+            let f = fract(p);
+            let u = f * f * (3.0 - 2.0 * f);
+            return mix(mix(hash(i + vec2<f32>(0.0,0.0)), hash(i + vec2<f32>(1.0,0.0)), u.x),
+                       mix(hash(i + vec2<f32>(0.0,1.0)), hash(i + vec2<f32>(1.0,1.0)), u.x), u.y);
+          }
+
+          fn fbm(p: vec2<f32>) -> f32 {
+            var v = 0.0;
+            var a = 0.5;
+            var shift = vec2<f32>(100.0);
+            var p_mut = p;
+            for (var i = 0; i < 4; i = i + 1) {
+              v += a * noise(p_mut);
+              p_mut = p_mut * 2.0 + shift;
+              a *= 0.5;
+            }
+            return v;
+          }
+
+          @vertex
+          fn vs_main(@builtin(vertex_index) vertexIndex: u32) -> VertexOutput {
+            var out: VertexOutput;
+            let x = f32(i32(vertexIndex & 1u) * 2 - 1);
+            let y = f32(i32(vertexIndex & 2u) - 1);
+            out.position = vec4<f32>(x, y, 0.0, 1.0);
+            out.uv = vec2<f32>((x + 1.0) * 0.5, (1.0 - y) * 0.5);
+            return out;
+          }
+
+          @fragment
+          fn fs_main(in: VertexOutput) -> @location(0) vec4<f32> {
+            let cx = uniforms.width * 0.5;
+            let cy = uniforms.height * 0.5;
+            let center = vec2<f32>(cx, cy);
+
+            // Grid coordinates with mouse warp
+            var grid_coord = in.position.xy;
+            if (uniforms.mouseActive > 0.5) {
+              let mouse_pos = vec2<f32>(uniforms.mouseX, uniforms.mouseY);
+              let dist = distance(grid_coord, mouse_pos);
+              if (dist < 180.0) {
+                let force = (180.0 - dist) / 180.0;
+                let dir = normalize(grid_coord - mouse_pos);
+                // Warp space outwards
+                grid_coord += dir * force * 18.0;
+              }
+            }
+
+            let grid_size = 60.0;
+            let gx = fract(grid_coord.x / grid_size);
+            let gy = fract(grid_coord.y / grid_size);
+            var grid_val = 0.0;
+            if (gx < 0.015 || gy < 0.015) {
+              grid_val = 0.024; // grid lines intensity
+            }
+
+            // Faint concentric orbits
+            let dist_from_center = distance(in.position.xy, center);
+            var orbit_val = 0.0;
+            let orbits = array<f32, 5>(110.0, 190.0, 275.0, 360.0, 440.0);
+            for (var i = 0; i < 5; i = i + 1) {
+              let r = orbits[i];
+              let dist_to_orbit = abs(dist_from_center - r);
+              if (dist_to_orbit < 1.0) {
+                var draw_orbit = true;
+                if (i % 2 == 1) {
+                  let angle = atan2(in.position.y - cy, in.position.x - cx);
+                  let dash = fract(angle * 10.0 / 3.14159);
+                  if (dash > 0.3) {
+                    draw_orbit = false;
+                  }
+                }
+                if (draw_orbit) {
+                  orbit_val = max(orbit_val, (1.0 - dist_to_orbit) * 0.045);
+                }
+              }
+            }
+
+            // FBM Alchemical Nebula background
+            let uv = (in.position.xy - center) / min(uniforms.width, uniforms.height);
+            let noise_pos = uv * 2.8 + vec2<f32>(uniforms.time * 0.03, -uniforms.time * 0.018);
+            let smoke = fbm(noise_pos);
+            let gold_color = vec3<f32>(0.78, 0.64, 0.35); // #c8a45a gold
+            let nebula_color = gold_color * smoke * 0.07;
+
+            let final_color = vec3<f32>(grid_val + orbit_val) * vec3<f32>(0.5, 0.5, 0.5) + nebula_color;
+            return vec4<f32>(final_color, 1.0);
+          }
+        `;
+
+        const shaderModule = device.createShaderModule({ code: shaderCode });
+
+        // Create uniform buffer
+        uniformBuffer = device.createBuffer({
+          size: 32, // 8 floats * 4 bytes
+          usage: 64 | 8 // GPUBufferUsage.UNIFORM | GPUBufferUsage.COPY_DST
+        });
+
+        // Create bind group layout and bind group
+        const bindGroupLayout = device.createBindGroupLayout({
+          entries: [{
+            binding: 0,
+            visibility: 2, // GPUShaderStage.FRAGMENT
+            buffer: {}
+          }]
+        });
+
+        uniformBindGroup = device.createBindGroup({
+          layout: bindGroupLayout,
+          entries: [{
+            binding: 0,
+            resource: { buffer: uniformBuffer }
+          }]
+        });
+
+        pipeline = device.createRenderPipeline({
+          layout: device.createPipelineLayout({ bindGroupLayouts: [bindGroupLayout] }),
+          vertex: {
+            module: shaderModule,
+            entryPoint: 'vs_main'
+          },
+          fragment: {
+            module: shaderModule,
+            entryPoint: 'fs_main',
+            targets: [{ format }]
+          }
+        });
+
+        setWebGpuActive(true);
+
+        // Render loop
+        let dpr = window.devicePixelRatio || 1;
+        let lastTime = performance.now();
+        let accumTime = 0;
+
+        function resize() {
+          if (!canvas) return;
+          dpr = window.devicePixelRatio || 1;
+          const w = window.innerWidth;
+          const h = window.innerHeight;
+          canvas.width = w * dpr;
+          canvas.height = h * dpr;
+          canvas.style.width = `${w}px`;
+          canvas.style.height = `${h}px`;
+        }
+
+        window.addEventListener('resize', resize);
+        resize();
+
+        function render(now: number) {
+          if (!active) return;
+          animId = requestAnimationFrame(render);
+
+          const elapsed = (now - lastTime) / 1000;
+          lastTime = now;
+          accumTime += elapsed;
+
+          const w = window.innerWidth;
+          const h = window.innerHeight;
+          const dprVal = window.devicePixelRatio || 1;
+
+          // Fill uniforms: time, width, height, mouseX, mouseY, mouseActive, pad1, pad2
+          const uniformData = new Float32Array([
+            accumTime,
+            w * dprVal,
+            h * dprVal,
+            pointer.x * dprVal,
+            pointer.y * dprVal,
+            pointer.active ? 1.0 : 0.0,
+            0.0,
+            0.0
+          ]);
+
+          device.queue.writeBuffer(uniformBuffer, 0, uniformData.buffer);
+
+          const commandEncoder = device.createCommandEncoder();
+          const textureView = context.getCurrentTexture().createView();
+
+          const renderPass = commandEncoder.beginRenderPass({
+            colorAttachments: [{
+              view: textureView,
+              clearValue: { r: 0, g: 0, b: 0, a: 1 },
+              loadOp: 'clear',
+              storeOp: 'store'
+            }]
+          });
+
+          renderPass.setPipeline(pipeline);
+          renderPass.setBindGroup(0, uniformBindGroup);
+          renderPass.draw(3); // Render full-screen quad
+          renderPass.end();
+
+          device.queue.submit([commandEncoder.finish()]);
+        }
+
+        animId = requestAnimationFrame(render);
+      } catch (err) {
+        console.warn("Error setting up WebGPU context:", err);
+      }
+    }
+
+    initGPU();
+
+    return () => {
+      active = false;
+      cancelAnimationFrame(animId);
+    };
+  }, []);
+
+  // Standard 2D Canvas rendering loop (falls back or acts as text/label overlay)
   useEffect(() => {
     const canvas = canvasRef.current;
     if (!canvas) return;
@@ -139,11 +420,19 @@ export function StarsCanvas() {
     if (!ctx) return;
 
     let animId: number;
+    let dpr = window.devicePixelRatio || 1;
+    let cssWidth = window.innerWidth;
+    let cssHeight = window.innerHeight;
 
     function resizeCanvas() {
       if (canvas) {
-        canvas.width = window.innerWidth;
-        canvas.height = window.innerHeight;
+        dpr = window.devicePixelRatio || 1;
+        cssWidth = window.innerWidth;
+        cssHeight = window.innerHeight;
+        canvas.width = cssWidth * dpr;
+        canvas.height = cssHeight * dpr;
+        canvas.style.width = `${cssWidth}px`;
+        canvas.style.height = `${cssHeight}px`;
       }
     }
 
@@ -175,11 +464,12 @@ export function StarsCanvas() {
       lastUpdate = timestamp - (elapsed % fpsInterval);
 
       if (!canvas || !ctx) return;
-      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+      ctx.clearRect(0, 0, cssWidth, cssHeight);
       time += (elapsed / 1000) * 0.027; // Frame-rate independent drift update
 
-      const cx = canvas.width / 2;
-      const cy = canvas.height / 2;
+      const cx = cssWidth / 2;
+      const cy = cssHeight / 2;
       const px = pointer.x;
       const py = pointer.y;
       const hasPointer = pointer.active && px > 0 && py > 0;
@@ -200,56 +490,63 @@ export function StarsCanvas() {
         return { dx: 0, dy: 0 };
       };
 
-      // Background Grid
-      ctx.lineWidth = 0.5;
-      ctx.strokeStyle = 'rgba(255, 255, 255, 0.012)';
-      const gridSize = 60;
-      for (let x = 0; x < canvas.width; x += gridSize) {
-        ctx.beginPath(); ctx.moveTo(x, 0); ctx.lineTo(x, canvas.height); ctx.stroke();
-      }
-      for (let y = 0; y < canvas.height; y += gridSize) {
-        ctx.beginPath(); ctx.moveTo(0, y); ctx.lineTo(canvas.width, y); ctx.stroke();
+      // Background Grid - Draw only if WebGPU is not rendering it
+      if (!webGpuActive) {
+        ctx.lineWidth = 0.5;
+        ctx.strokeStyle = 'rgba(255, 255, 255, 0.012)';
+        const gridSize = 60;
+        for (let x = 0; x < cssWidth; x += gridSize) {
+          ctx.beginPath(); ctx.moveTo(x, 0); ctx.lineTo(x, cssHeight); ctx.stroke();
+        }
+        for (let y = 0; y < cssHeight; y += gridSize) {
+          ctx.beginPath(); ctx.moveTo(0, y); ctx.lineTo(cssWidth, y); ctx.stroke();
+        }
       }
 
-      // Orbits
+      // Orbits - Draw only if WebGPU is not active (WebGPU draws orbits too!)
       const orbits = [110, 190, 275, 360, 440];
-      orbits.forEach((r, idx) => {
-        ctx.beginPath();
-        if (idx % 2 === 1) ctx.setLineDash([3, 7]);
-        else ctx.setLineDash([]);
-        ctx.strokeStyle = 'rgba(215, 205, 190, 0.035)';
-        ctx.arc(cx, cy, r, 0, Math.PI * 2);
-        ctx.stroke();
-        ctx.setLineDash([]);
-      });
+      if (!webGpuActive) {
+        orbits.forEach((r, idx) => {
+          ctx.beginPath();
+          if (idx % 2 === 1) ctx.setLineDash([3, 7]);
+          else ctx.setLineDash([]);
+          ctx.strokeStyle = 'rgba(255, 255, 255, 0.035)';
+          ctx.arc(cx, cy, r, 0, Math.PI * 2);
+          ctx.stroke();
+          ctx.setLineDash([]);
+        });
+      }
 
       // Astrolabe pyramid projected cone (lower left maps)
       const gcx = 190;
-      const gcy = canvas.height - 180;
+      const gcy = cssHeight - 180;
       if (gcy > 300) {
         const gr = 70;
         const gWarp = applyInterference(gcx, gcy, 120, 6);
         const gx = gcx + gWarp.dx;
         const gy = gcy + gWarp.dy;
 
-        ctx.beginPath();
-        ctx.strokeStyle = 'rgba(255, 255, 255, 0.05)';
-        ctx.arc(gx, gy, gr, 0, Math.PI * 2);
-        ctx.stroke();
+        // Draw astrolabe graphics only if WebGPU didn't render it
+        if (!webGpuActive) {
+          ctx.beginPath();
+          ctx.strokeStyle = 'rgba(255, 255, 255, 0.05)';
+          ctx.arc(gx, gy, gr, 0, Math.PI * 2);
+          ctx.stroke();
 
-        ctx.beginPath();
-        ctx.ellipse(gx, gy, gr, gr * 0.45, 0, 0, Math.PI * 2);
-        ctx.ellipse(gx, gy, gr, gr * 0.18, 0, 0, Math.PI * 2);
-        ctx.ellipse(gx, gy, gr * 0.6, gr, 0, 0, Math.PI * 2);
-        ctx.ellipse(gx, gy, gr * 0.25, gr, 0, 0, Math.PI * 2);
-        ctx.strokeStyle = 'rgba(255, 255, 255, 0.02)';
-        ctx.stroke();
+          ctx.beginPath();
+          ctx.ellipse(gx, gy, gr, gr * 0.45, 0, 0, Math.PI * 2);
+          ctx.ellipse(gx, gy, gr, gr * 0.18, 0, 0, Math.PI * 2);
+          ctx.ellipse(gx, gy, gr * 0.6, gr, 0, 0, Math.PI * 2);
+          ctx.ellipse(gx, gy, gr * 0.25, gr, 0, 0, Math.PI * 2);
+          ctx.strokeStyle = 'rgba(255, 255, 255, 0.02)';
+          ctx.stroke();
 
-        ctx.beginPath();
-        ctx.moveTo(gx - gr - 15, gy); ctx.lineTo(gx + gr + 15, gy);
-        ctx.moveTo(gx, gy - gr - 15); ctx.lineTo(gx, gy + gr + 15);
-        ctx.strokeStyle = 'rgba(255, 255, 255, 0.035)';
-        ctx.stroke();
+          ctx.beginPath();
+          ctx.moveTo(gx - gr - 15, gy); ctx.lineTo(gx + gr + 15, gy);
+          ctx.moveTo(gx, gy - gr - 15); ctx.lineTo(gx, gy + gr + 15);
+          ctx.strokeStyle = 'rgba(255, 255, 255, 0.035)';
+          ctx.stroke();
+        }
 
         ctx.fillStyle = 'rgba(255, 255, 255, 0.15)';
         ctx.font = '6px "JetBrains Mono", monospace';
@@ -259,8 +556,8 @@ export function StarsCanvas() {
 
       // Sigils Matrix (lower right) - Draw pre-rendered canvas in single draw call
       const cellSize = 30;
-      const gStartX = canvas.width - 180 - 50;
-      const gStartY = canvas.height - 150 - 110;
+      const gStartX = cssWidth - 180 - 50;
+      const gStartY = cssHeight - 150 - 110;
       if (gStartY > 250 && gStartX > cx + 100) {
         const sCanvas = getSigilsCanvas();
         if (sCanvas) {
@@ -269,8 +566,11 @@ export function StarsCanvas() {
       }
 
       // Planetary coordinates mapping
-      planets.forEach((p, idx) => {
-        const isActive = activePlanets.has(p.name);
+      const currentPlanets = planetsRef.current || planets;
+      const currentActivePlanets = activePlanetsRef.current || activePlanets;
+
+      currentPlanets.forEach((p, idx) => {
+        const isActive = currentActivePlanets.has(p.name);
         const slowDrift = p.deg + time * 8;
         const rad = ((slowDrift - 90) * Math.PI) / 180;
         const currentRadius = orbits[idx % orbits.length] || 275;
@@ -312,7 +612,7 @@ export function StarsCanvas() {
           ctx.fillText(p.symbol, fx, fy - 15);
 
           ctx.font = '6px "JetBrains Mono", monospace';
-          ctx.fillStyle = 'rgba(215, 205, 190, 0.7)';
+          ctx.fillStyle = 'rgba(255, 255, 255, 0.7)';
           ctx.fillText(`${p.name.toUpperCase()} [${p.deg.toFixed(1)}°]`, fx, fy + 14);
         }
       });
@@ -325,7 +625,16 @@ export function StarsCanvas() {
       window.removeEventListener('pointerleave', onPointerLeave);
       cancelAnimationFrame(animId);
     };
-  }, []);
+  }, [webGpuActive]);
+
+  if (webGpuActive) {
+    return (
+      <div style={{ position: 'fixed', inset: 0, zIndex: 0, overflow: 'hidden', width: '100%', height: '100%', pointerEvents: 'none' }}>
+        <canvas ref={canvasGPURef} style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', display: 'block' }} />
+        <canvas id="starsCanvas" ref={canvasRef} style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', display: 'block', zIndex: 1 }} />
+      </div>
+    );
+  }
 
   return <canvas id="starsCanvas" ref={canvasRef} />;
 }
@@ -538,8 +847,8 @@ export function AsciiEyes() {
         preEyes.style.textShadow = '0 0 12px rgba(255, 255, 255, 0.9)';
       } else {
         preEyes.style.transform = 'none';
-        preEyes.style.color = 'rgba(200, 164, 90, 0.2)';
-        preEyes.style.textShadow = '0 0 4px rgba(200, 164, 90, 0.4)';
+        preEyes.style.color = 'rgba(255, 255, 255, 0.2)';
+        preEyes.style.textShadow = '0 0 4px rgba(255, 255, 255, 0.4)';
       }
     }
     animId = requestAnimationFrame(runEyes);
