@@ -1,4 +1,16 @@
 @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;800&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=JetBrains+Mono:wght@400;700&family=Playfair+Display:ital,wght@1,500;1,600&display=swap');
+
+/* Prevent black overlay flash on click / active touch */
+*, *::before, *::after, a, button, div, main, section {
+  -webkit-tap-highlight-color: transparent !important;
+  -webkit-touch-callout: none !important;
+}
+
+a:active, button:active, div:active {
+  background-color: transparent;
+}
+
+
 @import "tailwindcss";
 
 /* ─── DESIGN SYSTEM VARIABLES ─── */
@@ -1139,8 +1151,3 @@ footer {
   animation: blurIn 1.25s cubic-bezier(0.16, 1, 0.3, 1) forwards;
   opacity: 0;
 }
-
-
-
-
-

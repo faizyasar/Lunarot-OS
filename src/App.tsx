@@ -255,7 +255,7 @@ export default function App() {
             </header>
 
             {/* Core Workspaces dual-pane layout wrapper */}
-            <div className={`flex-1 flex flex-row min-h-0 relative z-20 transition-all duration-300 ${isRevealed ? 'opacity-0 pointer-events-none scale-95' : 'opacity-100'}`}>
+            <div className={`flex-1 flex flex-row min-h-0 relative z-20 transition-all duration-300 opacity-100`}>
               
               <aside 
                 className="absolute md:relative inset-y-0 left-0 z-40 border-r border-white/10 flex flex-col bg-black/95 md:bg-transparent select-none transition-all duration-200 ease-in-out overflow-hidden h-full"
@@ -392,12 +392,20 @@ export default function App() {
             )}
 
             {/* Consolidated status footer line */}
-            <footer className="h-8 border-t border-white/5 px-6 flex items-centre justify-between text-[6px] tracking-[0.2em] text-[#443333] select-none shrink-0 font-mono bg-transparent">
-              <span className="text-[var(--gold)] font-bold uppercase tracking-[0.2em]">lunarot OS build {typeof __BUILD_COMMIT_HASH__ !== "undefined" ? __BUILD_COMMIT_HASH__ : "39c2a5d"}</span>
-              <span className="hidden sm:inline text-[#ffffff]/60 uppercase tracking-[0.25em] transition-all duration-300">
+            <footer className="h-8 border-t border-white/10 px-4 sm:px-6 flex items-center justify-between text-[8px] sm:text-[9px] tracking-[0.2em] select-none shrink-0 font-mono bg-black/90 relative z-40">
+              <div className="flex items-center gap-2">
+                <span className="w-2 h-2 rounded-full bg-[var(--gold)] animate-pulse" />
+                <span className="text-[var(--gold)] font-extrabold uppercase tracking-[0.2em] drop-shadow-[0_0_8px_rgba(200,164,90,0.6)]">
+                  lunarot OS build {typeof __BUILD_COMMIT_HASH__ !== "undefined" ? __BUILD_COMMIT_HASH__ : "39c2a5d"}
+                </span>
+              </div>
+              <span className="hidden sm:inline text-white/70 uppercase tracking-[0.25em] transition-all duration-300">
                 {contextualText}
               </span>
-              <span>1998-2026</span>
+              <div className="flex items-center gap-4 text-white/50 text-[8px]">
+                <span>STATUS: ONLINE</span>
+                <span className="text-[var(--gold)] font-bold">FAIZYASAR.LIFE</span>
+              </div>
             </footer>
           </div>
         )}
