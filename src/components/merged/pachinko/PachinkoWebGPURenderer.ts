@@ -109,7 +109,7 @@ export class PachinkoWebGPURenderer {
     this.device.queue.writeBuffer(this.cameraBuffer, 0, projectionMatrix);
   }
 
-  // hex to rgb float array [r,g,b,a] — cached since pegs/planets/particles reuse the same few hex strings every frame
+  // hex to rgb float array [r,g,b,a]  -  cached since pegs/planets/particles reuse the same few hex strings every frame
   private colorCache = new Map<string, number[]>();
   hexToColor(hex: string, alpha = 1.0) {
     const cacheKey = hex + '|' + alpha;

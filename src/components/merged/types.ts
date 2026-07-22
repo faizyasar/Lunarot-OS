@@ -138,32 +138,32 @@ export const CARD_ADJ: Record<string, string[]> = {
 };
 
 export const TEMPLATES_LINE = [
-  'something {chart} and {card} —',
+  'something {chart} and {card}  - ',
   'the {sign} in you, {card}',
   'a {chart} thing {card} in the dark',
   '{card}, as only the {sign} knows how',
   'what is {chart} becomes {card}',
-  'the {sign} tongue — {chart}, {card}',
+  'the {sign} tongue  -  {chart}, {card}',
   '{chart} light through a {card} window',
   'born {chart}, arriving {card}',
-  'the {sign} moves {chart} here — {card}',
+  'the {sign} moves {chart} here  -  {card}',
   'neither {chart} nor {card}, both',
   'the {chart} part of you that is {card}',
   '{chart} like {sign}, {card} like water',
   'to be {chart} is to become {card}',
   'the {card} surface of a {chart} thing',
   '{chart} hands, {card} intentions',
-  'something {sign} — {chart} until {card}',
+  'something {sign}  -  {chart} until {card}',
   '{chart} where it started, {card} where it lands',
   'the {sign} way of being {card}',
   'not quite {chart}, not yet {card}',
-  '{card} — which is what {chart} looks like from the outside'
+  '{card}  -  which is what {chart} looks like from the outside'
 ];
 
 export const TEMPLATES_SYNTHESIS = [
-  'The {sun} carries something {sunAdj}. The {moon} holds something {moonAdj}. What the cards have drawn toward the surface — {cardAdj1}, then {cardAdj2} — is not new, only finally visible.',
+  'The {sun} carries something {sunAdj}. The {moon} holds something {moonAdj}. What the cards have drawn toward the surface  -  {cardAdj1}, then {cardAdj2}  -  is not new, only finally visible.',
   'Something {sunAdj} in the bones. Something {moonAdj} in the blood. The spread names the space between: {cardAdj1} pressing against {cardAdj2}, the self as its own unfinished argument.',
-  'The {sun} arrives {sunAdj}. The {moon} stays {moonAdj}. The three positions reveal what the chart already suspected — a {cardAdj1} life navigating a {cardAdj2} world, still translating.',
+  'The {sun} arrives {sunAdj}. The {moon} stays {moonAdj}. The three positions reveal what the chart already suspected  -  a {cardAdj1} life navigating a {cardAdj2} world, still translating.',
   'There is something {sunAdj} about the way it begins, and something {moonAdj} about the way it ends. The middle is what the cards name: {cardAdj1}, then {cardAdj2}, then the long silence after.'
 ];
 

@@ -240,6 +240,7 @@ An ongoing refusal to make work that does not first please the eye.
 `;
 
 function parseInline(text: string): React.ReactNode[] {
+  if (!text) return [];
   const parts: React.ReactNode[] = [];
   let currentText = text;
   let keyIdx = 0;
@@ -255,14 +256,12 @@ function parseInline(text: string): React.ReactNode[] {
     let firstMatch: { index: number, length: number, type: string, data: any } | null = null;
 
     if (linkMatch && linkMatch.index !== undefined) {
-      if (!firstMatch || linkMatch.index < firstMatch.index) {
-        firstMatch = {
-          index: linkMatch.index,
-          length: linkMatch[0].length,
-          type: 'link',
-          data: { label: linkMatch[1], url: linkMatch[2] }
-        };
-      }
+      firstMatch = {
+        index: linkMatch.index,
+        length: linkMatch[0].length,
+        type: 'link',
+        data: { label: linkMatch[1], url: linkMatch[2] }
+      };
     }
 
     if (boldMatch && boldMatch.index !== undefined) {
@@ -342,9 +341,9 @@ function parseInline(text: string): React.ReactNode[] {
           href={href}
           target="_blank"
           rel="noopener noreferrer"
-          className="text-[var(--gold)] hover:text-white underline underline-offset-2 transition-colours cursor-pointer font-semibold"
+          className="text-[var(--gold)] hover:text-white underline underline-offset-2 font-bold transition-colors cursor-pointer"
         >
-          {firstMatch.data.label}
+          {parseInline(firstMatch.data.label)}
         </a>
       );
     } else if (firstMatch.type === 'raw-url') {
@@ -354,15 +353,15 @@ function parseInline(text: string): React.ReactNode[] {
           href={firstMatch.data}
           target="_blank"
           rel="noopener noreferrer"
-          className="text-[var(--gold)] hover:text-white underline underline-offset-2 transition-colours cursor-pointer font-semibold break-all"
+          className="text-[var(--gold)] hover:text-white underline underline-offset-2 font-bold transition-colors cursor-pointer break-all"
         >
           {firstMatch.data}
         </a>
       );
     } else if (firstMatch.type === 'bold') {
-      parts.push(<strong key={keyIdx++} className="font-bold text-white">{firstMatch.data}</strong>);
+      parts.push(<strong key={keyIdx++} className="font-bold text-white">{parseInline(firstMatch.data)}</strong>);
     } else if (firstMatch.type === 'italic') {
-      parts.push(<em key={keyIdx++} className="italic text-[#efede8]">{firstMatch.data}</em>);
+      parts.push(<em key={keyIdx++} className="italic text-[#efede8]">{parseInline(firstMatch.data)}</em>);
     } else if (firstMatch.type === 'code') {
       parts.push(<code key={keyIdx++} className="bg-black/60 text-[var(--gold)] px-1.5 py-0.5 rounded border border-white/10 font-mono text-[9.5px]">{firstMatch.data}</code>);
     }
@@ -699,7 +698,7 @@ function crawlFolder(folder, resultsList) {
                 : 'border-transparent text-[#838aa0] hover:text-white'
             }`}
           >
-            📄 {tab === 'log' ? 'sites-log.md' : tab === 'map' ? 'link-web-map.md' : tab === 'dev' ? 'dev-history.md' : tab === 'deka' ? 'deka-archives.md' : 'social-conduit.md'}
+            📄 {tab === 'deka' ? '🖼️ DEKA GALLERY SHOWCASE' : tab === 'pinterest' ? '📌 PINTEREST BOARDS' : tab === 'log' ? '📄 SITES-LOG.MD' : tab === 'map' ? '🌐 LINK-WEB-MAP.MD' : tab === 'dev' ? '📜 DEV-HISTORY.MD' : '📡 SOCIAL-CONDUIT.MD'}
           </button>
         ))}
       </div>

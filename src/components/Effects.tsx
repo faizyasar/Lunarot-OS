@@ -70,7 +70,7 @@ export function Typewriter({
           rendered += cleanWord + ' ';
           element.innerHTML = rendered + '<span class="etch-cursor">▌</span>';
           
-          if (cleanWord.match(/[,;:—]/)) {
+          if (cleanWord.match(/[,;: - ]/)) {
             await delay(80 + Math.random() * 60);
           } else if (cleanWord.match(/[.!?]$/)) {
             element.innerHTML = rendered;

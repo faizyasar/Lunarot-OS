@@ -1482,7 +1482,7 @@
 
             if (isInside) {
               if (blink.progress < 0.12 && !isCrazy) {
-                line += '—';
+                line += ' - ';
               } else {
                 const pCenterX = eyeCenterX + pupilShiftX;
                 const pCenterY = CY + pupilShiftY;
@@ -1839,7 +1839,7 @@
             rendered += cleanWord + ' ';
             element.innerHTML = rendered + '<span class="etch-cursor">▌</span>';
             
-            if (cleanWord.match(/[,;:—]/)) {
+            if (cleanWord.match(/[,;: - ]/)) {
               await delay(80 + Math.random() * 60);
             } else if (cleanWord.match(/[.!?]$/)) {
               element.innerHTML = rendered;

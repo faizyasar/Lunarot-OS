@@ -798,7 +798,7 @@ export function AsciiEyes() {
 
             if (isInside) {
               if (blink.progress < 0.12 && !isCrazy) {
-                line += '—';
+                line += ' - ';
               } else {
                 const pCenterX = eyeCenterX + pupilShiftX;
                 const pCenterY = CY + pupilShiftY;

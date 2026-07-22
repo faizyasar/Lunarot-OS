@@ -70,7 +70,7 @@ async function etchParagraph(
       rendered += word + ' '; 
       el.innerHTML = rendered + '<span class="etch-cursor">▌</span>';
       
-      if (word.match(/[,;:—]/)) {
+      if (word.match(/[,;: - ]/)) {
         await msDelay(80 + Math.floor(Math.random() * 60));
       } else if (word.match(/[.!?]$/)) { 
         el.innerHTML = rendered; 

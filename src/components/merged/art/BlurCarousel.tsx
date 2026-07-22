@@ -387,7 +387,7 @@ export default function BlurCarousel(props: BlurCarouselProps) {
                 <div style={blurOverlay(-1)} />
                 <div style={blurOverlay(1)} />
 
-                {/* Arrows — left/right for horizontal, up/down for vertical */}
+                {/* Arrows  -  left/right for horizontal, up/down for vertical */}
                 <div
                     role="button"
                     aria-label="Previous slide"

@@ -79,7 +79,7 @@ export default function EtchedTypewriter({ text, chargedWords = [], className = 
           rendered += cleanWord + ' ';
           el.innerHTML = rendered + '<span class="text-[#ffffff] animate-[ecur_0.6s_ease-in-out_infinite_alternate] inline-block font-mono tracking-widest -mt-1 scale-y-110 ml-0.5">▌</span>';
           
-          if (cleanWord.match(/[,;:—]/)) {
+          if (cleanWord.match(/[,;: - ]/)) {
             await delay(120 + Math.random() * 60); // Slower
           } else if (cleanWord.match(/[.!?]$/)) {
             el.innerHTML = rendered;

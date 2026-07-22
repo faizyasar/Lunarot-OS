@@ -106,7 +106,7 @@ export default function AppArtShowcase({ onContextChange }: AppArtShowcaseProps)
       src: `https://lnrtdka.drr.ac/assets/images/${img.path}`,
       alt: img.name
     },
-    title: `${img.name}\n—\n${img.collection}`
+    title: `${img.name}\n - \n${img.collection}`
   }));
 
   // Emit contextual active slide text to OS status bar
