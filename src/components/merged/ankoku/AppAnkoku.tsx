@@ -177,7 +177,7 @@ A running record of what\'s been built, in what order it surfaced in conversatio
 
 ### Supporting Infrastructure
 *   **Personal web presence**:
-    *   Carrd: [faiz.uwu.ai](https://faiz.uwu.ai/)
+    *   Carrd: [faizyasar.life](https://faizyasar.life/)
     *   GitHub: [github.com/faizyasar](https://github.com/faizyasar)
     *   Behance: [behance.net/faizyasar](https://www.behance.net/faizyasar)
     *   Life Portal: [faizyasar.life](https://faizyasar.life/)
@@ -236,7 +236,7 @@ An ongoing refusal to make work that does not first please the eye.
 *   **Imprint Status:** Unda Construction [,,]
 *   **Supplier Base:** Guangzhou Sourcing Hub
 *   **Core Directive:** Eye-pleasing graphic supremacy
-*   **Drive Index Repository:** [deka.supply/password](https://deka.supply/password)
+*   **Drive Index Repository:** [faizyasar.life/password](https://faizyasar.life/password)
 `;
 
 function parseInline(text: string): React.ReactNode[] {

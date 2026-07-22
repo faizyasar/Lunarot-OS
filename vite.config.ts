@@ -1,23 +1,17 @@
-import tailwindcss from '@tailwindcss/vite';
+import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react';
-import path from 'path';
-import {defineConfig} from 'vite';
-import {viteSingleFile} from 'vite-plugin-singlefile';
+import { execSync } from 'child_process';
 
-export default defineConfig(() => {
-  return {
-    plugins: [react(), tailwindcss(), viteSingleFile()],
-    resolve: {
-      alias: {
-        '@': path.resolve(__dirname, '.'),
-      },
-    },
-    server: {
-      // HMR is disabled in AI Studio via DISABLE_HMR env var.
-      // Do not modifyâfile watching is disabled to prevent flickering during agent edits.
-      hmr: process.env.DISABLE_HMR !== 'true',
-      // Disable file watching when DISABLE_HMR is true to save CPU during agent edits.
-      watch: process.env.DISABLE_HMR === 'true' ? null : {},
-    },
-  };
+let commitHash = 'DEV';
+try {
+  commitHash = execSync('git rev-parse --short HEAD').toString().trim();
+} catch (e) {
+  // fallback
+}
+
+export default defineConfig({
+  plugins: [react()],
+  define: {
+    __BUILD_COMMIT_HASH__: JSON.stringify(commitHash),
+  },
 });
