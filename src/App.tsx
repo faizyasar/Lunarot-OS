@@ -33,7 +33,7 @@ function SystemShowcase() {
 // System configuration editor
 function EditVesselConfig({ user, onReSeed }: { user: NatalUser; onReSeed: () => void }) {
   return (
-    <div className="w-full h-full flex flex-col items-center justify-center p-4 sm:p-8 text-center font-mono relative">
+    <div className="w-full h-full flex flex-col items-centre justify-centre p-4 sm:p-8 text-centre font-mono relative">
       <div className="max-w-md w-full bg-black/60 border border-[#ffffff]/30 p-6 rounded-none relative shadow-2xl">
         <div className="absolute inset-1 border border-dashed border-[#ffffff]/15 pointer-events-none" />
         <h3 className="font-cinzel text-sm text-[#ffffff] tracking-widest uppercase mb-4">edit-vessel-handshake.conf</h3>
@@ -224,17 +224,17 @@ export default function App() {
         {booted && (
           <div className="flex-1 flex flex-col min-h-0 relative z-30">
             {/* Header Telemetry line */}
-            <header className="w-full h-11 border-b border-white/10 px-4 flex items-center justify-between shrink-0 font-mono text-[9px] tracking-[0.2em] bg-transparent z-30 select-none">
-              <div className="flex items-center gap-3">
+            <header className="w-full h-11 border-b border-white/10 px-4 flex items-centre justify-between shrink-0 font-mono text-[9px] tracking-[0.2em] bg-transparent z-30 select-none">
+              <div className="flex items-centre gap-3">
                 <button 
                   onClick={() => setSidebarOpen(prev => !prev)}
-                  className="px-2 py-1 border border-white/10 hover:bg-[#ffffff]/10 hover:border-[#ffffff]/30 transition-colors uppercase font-bold tracking-[0.2em] cursor-pointer text-[#cfc9c0]"
+                  className="px-2 py-1 border border-white/10 hover:bg-[#ffffff]/10 hover:border-[#ffffff]/30 transition-colours uppercase font-bold tracking-[0.2em] cursor-pointer text-[#cfc9c0]"
                 >
                   ☰ EXPLORER
                 </button>
                 <button 
                   onClick={() => setIsRevealed(prev => !prev)}
-                  className="text-[#ffffff] font-bold hidden sm:inline hover:text-white transition-colors cursor-pointer select-none px-2 py-1 border border-transparent hover:border-[#ffffff]/30 hover:bg-[#ffffff]/5 uppercase tracking-[0.2em]"
+                  className="text-[#ffffff] font-bold hidden sm:inline hover:text-white transition-colours cursor-pointer select-none px-2 py-1 border border-transparent hover:border-[#ffffff]/30 hover:bg-[#ffffff]/5 uppercase tracking-[0.2em]"
                 >
                   LUNAROT OS v6.1
                 </button>
@@ -248,7 +248,7 @@ export default function App() {
 
               <button 
                 onClick={handleReSeed}
-                className="px-2 py-1.5 border border-white/40 bg-white/10 text-white hover:bg-white/20 hover:text-white transition-colors uppercase font-bold tracking-[0.2em] cursor-pointer"
+                className="px-2 py-1.5 border border-white/40 bg-white/10 text-white hover:bg-white/20 hover:text-white transition-colours uppercase font-bold tracking-[0.2em] cursor-pointer"
               >
                 ⟳ RE-SEED
               </button>
@@ -266,7 +266,7 @@ export default function App() {
                 }}
               >
                 <div className="w-64 h-full flex flex-col shrink-0">
-                  <div className="p-3 border-b border-white/10 bg-transparent flex items-center justify-between">
+                  <div className="p-3 border-b border-white/10 bg-transparent flex items-centre justify-between">
                     <span className="font-mono text-[8.5px] text-[#888888] tracking-widest uppercase">Occult Directories</span>
                     <span className="text-[7.5px] text-[#666666] tracking-[0.2em]">DESK_STABLE</span>
                   </div>
@@ -278,7 +278,7 @@ export default function App() {
                         <div key={folder.key} className="space-y-1">
                           <button
                             onClick={() => toggleFolder(folder.key)}
-                            className="flex items-center w-full text-left font-bold text-[#ffffff] hover:text-white transition-colors py-1 cursor-pointer"
+                            className="flex items-centre w-full text-left font-bold text-[#ffffff] hover:text-white transition-colours py-1 cursor-pointer"
                           >
                             <span className="mr-2 text-[8px]">{isOpen ? '▼' : '▶'}</span>
                             {folder.name}
@@ -292,7 +292,7 @@ export default function App() {
                                   <button
                                     key={file.path}
                                     onClick={() => selectFile(file.path)}
-                                    className={`flex items-center w-full text-left py-1.5 px-2 transition-all duration-200 border-l-2 cursor-pointer ${
+                                    className={`flex items-centre w-full text-left py-1.5 px-2 transition-all duration-200 border-l-2 cursor-pointer ${
                                       isSelected 
                                         ? 'bg-white/5 text-white border-[#ffffff] font-bold shadow-[inset_3px_0_0_rgba(255,255,255,0.2)]' 
                                         : 'text-[#838aa0] border-transparent hover:text-white hover:bg-white/5 pl-3'
@@ -315,7 +315,7 @@ export default function App() {
               {/* Right Pane - Content switchboard viewport */}
               <main className="flex-1 min-w-0 min-h-0 flex flex-col bg-transparent relative overflow-hidden">
                 {/* Embedded window header */}
-                <div className="h-6 border-b border-white/5 px-4 flex items-center justify-between shrink-0 font-mono text-[7px] text-[#443333] tracking-[0.2em] bg-transparent select-none">
+                <div className="h-6 border-b border-white/5 px-4 flex items-centre justify-between shrink-0 font-mono text-[7px] text-[#443333] tracking-[0.2em] bg-transparent select-none">
                   <span>file: {activeFile.toLowerCase()}</span>
                   <span>integrity: stable</span>
                 </div>
@@ -392,7 +392,7 @@ export default function App() {
             )}
 
             {/* Consolidated status footer line */}
-            <footer className="h-8 border-t border-white/5 px-6 flex items-center justify-between text-[6px] tracking-[0.2em] text-[#443333] select-none shrink-0 font-mono bg-transparent">
+            <footer className="h-8 border-t border-white/5 px-6 flex items-centre justify-between text-[6px] tracking-[0.2em] text-[#443333] select-none shrink-0 font-mono bg-transparent">
               <span className="text-[var(--gold)] font-bold uppercase tracking-[0.2em]">lunarot OS build {typeof __BUILD_COMMIT_HASH__ !== "undefined" ? __BUILD_COMMIT_HASH__ : "39c2a5d"}</span>
               <span className="hidden sm:inline text-[#ffffff]/60 uppercase tracking-[0.25em] transition-all duration-300">
                 {contextualText}

@@ -18,21 +18,21 @@ Running record of Japanese personal websites (個人サイト) from the late 199
 
 ## 暗黒工房 (Ankoku Koubou)
 * **URL:** http://www.ankokukoubou.com/
-* **Status:** ✅ Alive — last logged update 2018/5/9
+* **Status:** ✅ Alive  -  last logged update 2018/5/9
 * **Founded:** 1998
 * **Author:** maki
-* **What it is:** The anchor site. A horror-themed Japanese web resource hub — original material (wallpapers, images, fonts), horror games, a tarot divination page, ghost-photo collections, a "scary stories" section. Runs an original Japanese horror font called 「悪夢」("Akumu" / Nightmare). Copyright line reads "all right reserved 1998-2007 maki" but the site itself postdates that, still updating into 2018.
+* **What it is:** The anchor site. A horror-themed Japanese web resource hub  -  original material (wallpapers, images, fonts), horror games, a tarot divination page, ghost-photo collections, a "scary stories" section. Runs an original Japanese horror font called 「悪夢」("Akumu" / Nightmare). Copyright line reads "all right reserved 1998-2007 maki" but the site itself postdates that, still updating into 2018.
 * **Notable:** Has a curating link page (/etc/link/link.htm) that is the gateway to most of this list.
 
 ---
 
 ## Ghost Tail
 * **URL:** http://www.ghosttail.com/
-* **Status:** ✅ Alive — last logged content update 2015
+* **Status:** ✅ Alive  -  last logged content update 2015
 * **Author:** zen
 * **What it is:** Horror material and ghost-story site ("z" branding). Sections for material, horror reading ("JuJu"), horror games, links, usage rules, and an original goods shop. Had a LINE sticker shop tie-in by 2015.
-* **Notable:** Has an extensive, categorized link page (occult, fortune-telling, sound effects, web design/CSS tutorials, JS/CGI tutorials) — mapping the entire early tech scene.
-* **Sub-site:** art.ghosttail.com ("OUT OF THE BOX") — high-res horror photo wallpapers.
+* **Notable:** Has an extensive, categorized link page (occult, fortune-telling, sound effects, web design/CSS tutorials, JS/CGI tutorials)  -  mapping the entire early tech scene.
+* **Sub-site:** art.ghosttail.com ("OUT OF THE BOX")  -  high-res horror photo wallpapers.
 
 ---
 
@@ -52,23 +52,23 @@ Running record of Japanese personal websites (個人サイト) from the late 199
 * **Author:** REITO
 * **Founded:** May 2000 (under the name 透明な血 / "Transparent Blood")
 * **History:**
-  - 2000/05/25 — started as "透明な血" (Transparent Blood)
-  - 2001/05/22 — closed temporarily due to hospitalization
-  - 2001/08/14 — reopened, renamed "Nervenfaser"
-  - 2002/01/10 — renamed again to final form, "9612."
-* **What it is:** Free downloadable web material site (images for web design use) — self-described as limited to black/white/gray/red, "dark, maybe empty-systematic" in tone.
-* **Notable:** Featured in a 2003 print magazine, "ホームページ激裏大全" (Underground Homepage Compendium). Read aloud as "Kreuz" (German for "cross") — visible in folder names.
-* **Open thread:** A site at https://kngktk.stars.ne.jp/ has been suggested as REITO's current/another site — blocked by robots.txt from automated access, unverified.
+  - 2000/05/25  -  started as "透明な血" (Transparent Blood)
+  - 2001/05/22  -  closed temporarily due to hospitalization
+  - 2001/08/14  -  reopened, renamed "Nervenfaser"
+  - 2002/01/10  -  renamed again to final form, "9612."
+* **What it is:** Free downloadable web material site (images for web design use)  -  self-described as limited to black/white/gray/red, "dark, maybe empty-systematic" in tone.
+* **Notable:** Featured in a 2003 print magazine, "ホームページ激裏大全" (Underground Homepage Compendium). Read aloud as "Kreuz" (German for "cross")  -  visible in folder names.
+* **Open thread:** A site at https://kngktk.stars.ne.jp/ has been suggested as REITO's current/another site  -  blocked by robots.txt from automated access, unverified.
 
 ---
 
 ## TO CHECK NEXT
-* 闇恭 (barakyo.com) — dark material site
-* Caverns Of Blood (cavernsofblood.com) — English-language sister site, sound/MIDI/horror fonts
-* Blue Moon (blue-moon.sblo.jp) — heavy-metal-themed material site with custom BGM
-* SILVER EMBLEM (silveremblem.sakura.ne.jp) — design credited to "ERIS"
-* HANGED MAN (fumio.sugoihp.com) — wide range of material under one author
-* K.LUV DEPTH GENESIS (kluv-depth.com/hyper/) — described by curator as "weird but good"
+* 闇恭 (barakyo.com)  -  dark material site
+* Caverns Of Blood (cavernsofblood.com)  -  English-language sister site, sound/MIDI/horror fonts
+* Blue Moon (blue-moon.sblo.jp)  -  heavy-metal-themed material site with custom BGM
+* SILVER EMBLEM (silveremblem.sakura.ne.jp)  -  design credited to "ERIS"
+* HANGED MAN (fumio.sugoihp.com)  -  wide range of material under one author
+* K.LUV DEPTH GENESIS (kluv-depth.com/hyper/)  -  described by curator as "weird but good"
 `;
 
 const LINK_WEB_MAP = `# Link Web Map
@@ -85,7 +85,7 @@ How these sites actually found each other. This is the peer-to-peer social struc
             *   ├─ **[madtaro.net](https://madtaro.x0.com/)** (1998 → redirected to [madtaro.x0.com](https://madtaro.x0.com/))
             *   ├─ **[ghosttail.com](http://www.ghosttail.com/)** (zen)
             *   ├─ **[gigas.press.ne.jp](https://web.archive.org/web/20041014022830/http://gigas.press.ne.jp/)** (怨み念法)
-            *   ├─ **[neckdoll.jp](https://neckdoll.zombie.jp/)** (人形堂 — active mirror)
+            *   ├─ **[neckdoll.jp](https://neckdoll.zombie.jp/)** (人形堂  -  active mirror)
             *   ├─ **[geocities.jp/evil666ring/](https://web.archive.org/web/20040608221532/http://www.geocities.jp:80/evil666ring/)** (THE EVIL DESIGN)
             *   ├─ **[yzero.com](https://web.archive.org/web/20041010072559/http://www.yzero.com/)** (0-zero-)
             *   └─ **[geocities.jp/cyberangelo666/](https://web.archive.org/web/20041014163412/http://www.geocities.jp/cyberangelo666/)** (cyber angelo)
@@ -113,67 +113,67 @@ A forensic trace of the Lunarot Conflux OS engine compilation, extracted directl
 
 ## ✦ Git Repository Commits Trace
 
-*   **2026-07-16** — \`[lunarot-os:5419300]\` Update compiled lunarot-os.html bundle
-*   **2026-07-16** — \`[lunarot-os:6f15070]\` Standardize header nav tabs to use index.css .nav-btn classes
-*   **2026-07-16** — \`[lunarot-os:ef68893]\` Restore header nav selectors (tabs) and sync active card stack highlights
-*   **2026-07-16** — \`[lunarot-os:c329e32]\` Add standalone lunarot-os-2.html copy-paste template
-*   **2026-07-16** — \`[lunarot-os:0bfa55a]\` Optimize backgrounds rendering inside lunarot-os.html
-*   **2026-07-16** — \`[lunarot-os:b75566a]\` Update main README and submodules refs
-*   **2026-07-16** — \`[lunarot-os:fc43333]\` Update submodule references to optimized versions
-*   **2026-07-16** — \`[lunarot-os:6b4d650]\` Sync Lunarot OS with standalone shell updates
-*   **2026-07-16** — \`[Lunarot-Directory:b916d0a]\` Update README with humanised details
-*   **2026-07-16** — \`[Lunarot-Directory:f34f636]\` Optimize background rendering and add OS components
-*   **2026-07-16** — \`[Lunarot-Pachinko:4952232]\` Update README with humanised details
-*   **2026-07-16** — \`[Lunarot-Pachinko:48ab910]\` Optimize background rendering and add OS components
-*   **2026-07-16** — \`[Lunarot-Tarot:cd0cb99]\` Update README with humanised details
-*   **2026-07-16** — \`[Lunarot-Tarot:ef84c65]\` Optimize background rendering and add OS components
-*   **2026-06-26** — \`[Lunarot-Directory:bf9b7d0]\` docs: update metadata and README for alchemical style
-*   **2026-06-25** — \`[Lunarot-Directory:4df590f]\` feat: scaffold Lunarot Tarot application
-*   **2026-06-25** — \`[Lunarot-Directory:6f5e4fb]\` Initial commit
-*   **2026-06-24** — \`[Lunarot-Ankoku:062bb3f]\` Update README.md structure formatting
-*   **2026-06-24** — \`[Lunarot-Ankoku:3386a82]\` Edit README for improved readability and expression
-*   **2026-06-24** — \`[Lunarot-Ankoku:1baf135]\` initial research log
-*   **2026-06-24** — \`[Lunarot-Pachinko:1d84b6c]\` Using the same aesthetic as Lunarot Tarot Engine
-*   **2026-06-24** — \`[Lunarot-Pachinko:6f4ea31]\` Initial commit
-*   **2026-06-24** — \`[Lunarot-Tarot-old:d4c82f7]\` Add deprecation notice and point users to Lunarot-Tarot-Engine-1.0
-*   **2026-06-23** — \`[Lunarot-Tarot-old:7c1080c]\` Merge pull request #1 from faizyasar/copilot/make-repo-crawlable
-*   **2026-06-23** — \`[Lunarot-Tarot-old:44eda96]\` Enhance sitemap metadata
-*   **2026-06-23** — \`[Lunarot-Tarot-old:f55c7ba]\` Add crawlability metadata, robots, and sitemap
-*   **2026-06-20** — \`[Lunarot-Tarot:afc11be]\` chore: generate package-lock.json for project dependencies
-*   **2026-06-19** — \`[Lunarot-Tarot:89e7f18]\` Update README.md
-*   **2026-06-17** — \`[Lunarot-Tarot:3797bef]\` feat: add unsettling ASCII eye tracking system
-*   **2026-06-17** — \`[Lunarot-Tarot:e09060f]\` style: refine layout and visual aesthetic
-*   **2026-06-17** — \`[Lunarot-Tarot:17b59fc]\` feat: initialize Sacred Draw application
-*   **2026-06-17** — \`[Lunarot-Tarot:728ca75]\` Initial commit
-*   **2026-06-16** — \`[Lunarot-Tarot-old:15dac69]\` Update index.html
-*   **2026-06-16** — \`[Lunarot-Tarot-old:a8c5117]\` Update index.html
-*   **2026-06-16** — \`[Lunarot-Tarot-old:455cac9]\` Update index.html
-*   **2026-06-16** — \`[Lunarot-Tarot-old:41ca5c2]\` Update index.html
+*   **2026-07-16**  -  \`[lunarot-os:5419300]\` Update compiled lunarot-os.html bundle
+*   **2026-07-16**  -  \`[lunarot-os:6f15070]\` Standardize header nav tabs to use index.css .nav-btn classes
+*   **2026-07-16**  -  \`[lunarot-os:ef68893]\` Restore header nav selectors (tabs) and sync active card stack highlights
+*   **2026-07-16**  -  \`[lunarot-os:c329e32]\` Add standalone lunarot-os-2.html copy-paste template
+*   **2026-07-16**  -  \`[lunarot-os:0bfa55a]\` Optimise backgrounds rendering inside lunarot-os.html
+*   **2026-07-16**  -  \`[lunarot-os:b75566a]\` Update main README and submodules refs
+*   **2026-07-16**  -  \`[lunarot-os:fc43333]\` Update submodule references to optimised versions
+*   **2026-07-16**  -  \`[lunarot-os:6b4d650]\` Sync Lunarot OS with standalone shell updates
+*   **2026-07-16**  -  \`[Lunarot-Directory:b916d0a]\` Update README with humanised details
+*   **2026-07-16**  -  \`[Lunarot-Directory:f34f636]\` Optimise background rendering and add OS components
+*   **2026-07-16**  -  \`[Lunarot-Pachinko:4952232]\` Update README with humanised details
+*   **2026-07-16**  -  \`[Lunarot-Pachinko:48ab910]\` Optimise background rendering and add OS components
+*   **2026-07-16**  -  \`[Lunarot-Tarot:cd0cb99]\` Update README with humanised details
+*   **2026-07-16**  -  \`[Lunarot-Tarot:ef84c65]\` Optimise background rendering and add OS components
+*   **2026-06-26**  -  \`[Lunarot-Directory:bf9b7d0]\` docs: update metadata and README for alchemical style
+*   **2026-06-25**  -  \`[Lunarot-Directory:4df590f]\` feat: scaffold Lunarot Tarot application
+*   **2026-06-25**  -  \`[Lunarot-Directory:6f5e4fb]\` Initial commit
+*   **2026-06-24**  -  \`[Lunarot-Ankoku:062bb3f]\` Update README.md structure formatting
+*   **2026-06-24**  -  \`[Lunarot-Ankoku:3386a82]\` Edit README for improved readability and expression
+*   **2026-06-24**  -  \`[Lunarot-Ankoku:1baf135]\` initial research log
+*   **2026-06-24**  -  \`[Lunarot-Pachinko:1d84b6c]\` Using the same aesthetic as Lunarot Tarot Engine
+*   **2026-06-24**  -  \`[Lunarot-Pachinko:6f4ea31]\` Initial commit
+*   **2026-06-24**  -  \`[Lunarot-Tarot-old:d4c82f7]\` Add deprecation notice and point users to Lunarot-Tarot-Engine-1.0
+*   **2026-06-23**  -  \`[Lunarot-Tarot-old:7c1080c]\` Merge pull request #1 from faizyasar/copilot/make-repo-crawlable
+*   **2026-06-23**  -  \`[Lunarot-Tarot-old:44eda96]\` Enhance sitemap metadata
+*   **2026-06-23**  -  \`[Lunarot-Tarot-old:f55c7ba]\` Add crawlability metadata, robots, and sitemap
+*   **2026-06-20**  -  \`[Lunarot-Tarot:afc11be]\` chore: generate package-lock.json for project dependencies
+*   **2026-06-19**  -  \`[Lunarot-Tarot:89e7f18]\` Update README.md
+*   **2026-06-17**  -  \`[Lunarot-Tarot:3797bef]\` feat: add unsettling ASCII eye tracking system
+*   **2026-06-17**  -  \`[Lunarot-Tarot:e09060f]\` style: refine layout and visual aesthetic
+*   **2026-06-17**  -  \`[Lunarot-Tarot:17b59fc]\` feat: initialize Sacred Draw application
+*   **2026-06-17**  -  \`[Lunarot-Tarot:728ca75]\` Initial commit
+*   **2026-06-16**  -  \`[Lunarot-Tarot-old:15dac69]\` Update index.html
+*   **2026-06-16**  -  \`[Lunarot-Tarot-old:a8c5117]\` Update index.html
+*   **2026-06-16**  -  \`[Lunarot-Tarot-old:455cac9]\` Update index.html
+*   **2026-06-16**  -  \`[Lunarot-Tarot-old:41ca5c2]\` Update index.html
 
 ---
 
-## ✦ Vibecoding Development Log — DEKA / Lunarot Ecosystem
+## ✦ Vibecoding Development Log  -  DEKA / Lunarot Ecosystem
 
 A running record of what\'s been built, in what order it surfaced in conversation.
 
 ### Origin
-*   **DEKA founded ~2019** — a graphic design practice built on suprematist composition (shape, colour, line/text) and aesthetics-for-aesthetics\'-sake. No conceptual backstory required; sources range ancient to modern, high to low; style deliberately unfixed.
-*   **DEKA Supply Co** — Co-founded streetwear label (Guangzhou supplier, Shopify) as the commercial arm — same year, ongoing.
-*   **Ko-fi Think-tank/Commission** — A commission concept (community threads, mood boards, custom design requests) exists at idea stage — not yet built.
+*   **DEKA founded ~2019**  -  a graphic design practice built on suprematist composition (shape, colour, line/text) and aesthetics-for-aesthetics\'-sake. No conceptual backstory required; sources range ancient to modern, high to low; style deliberately unfixed.
+*   **DEKA Supply Co**  -  Co-founded streetwear label (Guangzhou supplier, Shopify) as the commercial arm  -  same year, ongoing.
+*   **Ko-fi Think-tank/Commission**  -  A commission concept (community threads, mood boards, custom design requests) exists at idea stage  -  not yet built.
 
-### The Split — Lunarot DEKA
-*   **Lunarot DEKA** emerges as the darker, gothic/occult branch of the DEKA practice — the shadow twin to the aesthetics-first parent brand.
+### The Split  -  Lunarot DEKA
+*   **Lunarot DEKA** emerges as the darker, gothic/occult branch of the DEKA practice  -  the shadow twin to the aesthetics-first parent brand.
 
 ### Build History
-*   **Tarot engine, first pass** — pachinko-style mechanic, built on the Gemini API with Vite/TypeScript. A prototype that gambled on chance as its core interaction.
-*   **Tarot engine, current** — rebuilt clean in Vite/TypeScript, no pachinko mechanic. Deployed live at [lunarotdekatarot.vercel.app](https://lunarotdekatarot.vercel.app/) via Vercel/GitHub. Repo: [faizyasar/Lunarot-Tarot-Engine-1.0](https://github.com/faizyasar/Lunarot-Tarot-Engine-1.0).
-*   **Generative stamp field tool (lunarot-stamps-v2.html)** — mobile-first, touch-native, twelve symbol sets. A ritual-marking tool disguised as a UI toy.
-*   **Golden spiral composition generator (lunarot-phi-v2.html)** — \u03c6-driven compositional generator, tying the suprematist DNA of DEKA back into generative logic.
-*   **Lunarot Ankoku archive** — in progress. Preserving late-1990s–2000s Japanese personal-site horror culture (個人サイト). Repo: [lunarot-ankoku](https://github.com/faizyasar/lunarot-ankoku). An act of digging up what the web has already buried once.
-*   **Unifying UI** — not yet built. Intended to bind the tarot engine, generative tools, and the Ankoku archive into one coherent shell. Currently the one open door in the house.
+*   **Tarot engine, first pass**  -  pachinko-style mechanic, built on the Gemini API with Vite/TypeScript. A prototype that gambled on chance as its core interaction.
+*   **Tarot engine, current**  -  rebuilt clean in Vite/TypeScript, no pachinko mechanic. Deployed live at [lunarotdekatarot.vercel.app](https://lunarotdekatarot.vercel.app/) via Vercel/GitHub. Repo: [faizyasar/Lunarot-Tarot-Engine-1.0](https://github.com/faizyasar/Lunarot-Tarot-Engine-1.0).
+*   **Generative stamp field tool (lunarot-stamps-v2.html)**  -  mobile-first, touch-native, twelve symbol sets. A ritual-marking tool disguised as a UI toy.
+*   **Golden spiral composition generator (lunarot-phi-v2.html)**  -  \u03c6-driven compositional generator, tying the suprematist DNA of DEKA back into generative logic.
+*   **Lunarot Ankoku archive**  -  in progress. Preserving late-1990s - 2000s Japanese personal-site horror culture (個人サイト). Repo: [lunarot-ankoku](https://github.com/faizyasar/lunarot-ankoku). An act of digging up what the web has already buried once.
+*   **Unifying UI**  -  not yet built. Intended to bind the tarot engine, generative tools, and the Ankoku archive into one coherent shell. Currently the one open door in the house.
 *   **Work In Progress (API uploads)**:
-    *   *Lunarot Baseball* — work in progress.
-    *   *Unified Graphics Maker* — work in progress.
+    *   *Lunarot Baseball*  -  work in progress.
+    *   *Unified Graphics Maker*  -  work in progress.
 
 ### Supporting Infrastructure
 *   **Personal web presence**:
@@ -236,7 +236,7 @@ An ongoing refusal to make work that does not first please the eye.
 *   **Imprint Status:** Unda Construction [,,]
 *   **Supplier Base:** Guangzhou Sourcing Hub
 *   **Core Directive:** Eye-pleasing graphic supremacy
-*   **Drive Index Repository:** [faizyasar.life/password](https://faizyasar.life/password)
+*   **Visual Asset Repository:** [faizyasar.life/password](https://faizyasar.life/password)
 `;
 
 function parseInline(text: string): React.ReactNode[] {
@@ -312,93 +312,62 @@ function parseInline(text: string): React.ReactNode[] {
       }
     }
 
-    if (domainMatch && domainMatch.index !== undefined) {
-      let rawDomain = domainMatch[1];
-      const cleanDomain = rawDomain.replace(/[.,;:)]+$/, '');
-      const matchLength = domainMatch[0].length - (rawDomain.length - cleanDomain.length);
-      
-      let isSubMatch = false;
-      if (rawUrlMatch && rawUrlMatch.index !== undefined) {
-        if (domainMatch.index >= rawUrlMatch.index && domainMatch.index < rawUrlMatch.index + rawUrlMatch[0].length) {
-          isSubMatch = true;
-        }
-      }
-      if (linkMatch && linkMatch.index !== undefined) {
-        if (domainMatch.index >= linkMatch.index && domainMatch.index < linkMatch.index + linkMatch[0].length) {
-          isSubMatch = true;
-        }
-      }
-
-      if (!isSubMatch) {
-        if (!firstMatch || domainMatch.index < firstMatch.index) {
-          firstMatch = {
-            index: domainMatch.index,
-            length: matchLength,
-            type: 'domain',
-            data: cleanDomain
-          };
-        }
+    if (domainMatch && domainMatch.index !== undefined && !firstMatch) {
+      let domain = domainMatch[1];
+      if (!domain.startsWith('http://') && !domain.startsWith('https://')) {
+        const fullUrl = 'https://' + domain;
+        firstMatch = {
+          index: domainMatch.index,
+          length: domainMatch[0].length,
+          type: 'link',
+          data: { label: domain, url: fullUrl }
+        };
       }
     }
 
     if (!firstMatch) {
-      parts.push(<span key={keyIdx++}>{currentText}</span>);
+      parts.push(currentText);
       break;
     }
 
     if (firstMatch.index > 0) {
-      parts.push(<span key={keyIdx++}>{currentText.substring(0, firstMatch.index)}</span>);
+      parts.push(currentText.slice(0, firstMatch.index));
     }
 
     if (firstMatch.type === 'link') {
-      const { label, url } = firstMatch.data;
+      const href = firstMatch.data.url.startsWith('http') ? firstMatch.data.url : 'https://' + firstMatch.data.url;
       parts.push(
-        <a 
-          key={keyIdx++} 
-          href={url} 
-          target="_blank" 
-          rel="noopener noreferrer" 
-          className="text-white hover:text-zinc-400 underline font-mono tracking-wide"
+        <a
+          key={keyIdx++}
+          href={href}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="text-[var(--gold)] hover:text-white underline underline-offset-2 transition-colours cursor-pointer font-semibold"
         >
-          {label}
+          {firstMatch.data.label}
         </a>
       );
     } else if (firstMatch.type === 'raw-url') {
-      const url = firstMatch.data;
       parts.push(
-        <a 
-          key={keyIdx++} 
-          href={url} 
-          target="_blank" 
-          rel="noopener noreferrer" 
-          className="text-white hover:text-zinc-400 underline font-mono tracking-wide"
+        <a
+          key={keyIdx++}
+          href={firstMatch.data}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="text-[var(--gold)] hover:text-white underline underline-offset-2 transition-colours cursor-pointer font-semibold break-all"
         >
-          {url}
-        </a>
-      );
-    } else if (firstMatch.type === 'domain') {
-      const domain = firstMatch.data;
-      const url = `https://${domain}`;
-      parts.push(
-        <a 
-          key={keyIdx++} 
-          href={url} 
-          target="_blank" 
-          rel="noopener noreferrer" 
-          className="text-white hover:text-zinc-400 underline font-mono tracking-wide"
-        >
-          {domain}
+          {firstMatch.data}
         </a>
       );
     } else if (firstMatch.type === 'bold') {
-      parts.push(<strong key={keyIdx++} className="font-bold text-[#efede8]">{firstMatch.data}</strong>);
+      parts.push(<strong key={keyIdx++} className="font-bold text-white">{firstMatch.data}</strong>);
     } else if (firstMatch.type === 'italic') {
-      parts.push(<em key={keyIdx++} className="italic text-[#cfc9c0]/90">{firstMatch.data}</em>);
+      parts.push(<em key={keyIdx++} className="italic text-[#efede8]">{firstMatch.data}</em>);
     } else if (firstMatch.type === 'code') {
-      parts.push(<code key={keyIdx++} className="bg-white/20 text-red-300 font-mono px-1 rounded text-[10px]">{firstMatch.data}</code>);
+      parts.push(<code key={keyIdx++} className="bg-black/60 text-[var(--gold)] px-1.5 py-0.5 rounded border border-white/10 font-mono text-[9.5px]">{firstMatch.data}</code>);
     }
 
-    currentText = currentText.substring(firstMatch.index + firstMatch.length);
+    currentText = currentText.slice(firstMatch.index + firstMatch.length);
   }
 
   return parts;
@@ -779,7 +748,7 @@ function crawlFolder(folder, resultsList) {
                     </button>
                   </form>
 
-                  <div className="flex justify-between items-center mb-2">
+                  <div className="flex justify-between items-centre mb-2">
                     <h4 className="text-[10px] text-white uppercase tracking-widest font-bold">Google Apps Script Code:</h4>
                     <button
                       onClick={(e) => {
@@ -801,15 +770,15 @@ function crawlFolder(folder, resultsList) {
                 <div className="flex flex-col gap-4 font-mono">
                   
                   {/* File Explorer Header controls */}
-                  <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-3 border-b border-white/25 pb-3">
-                    <div className="flex items-center gap-2 text-[10px]">
+                  <div className="flex flex-col sm:flex-row justify-between items-start sm:items-centre gap-3 border-b border-white/25 pb-3">
+                    <div className="flex items-centre gap-2 text-[10px]">
                       <span className="text-[#838aa0]">ACTIVE_VESSEL :</span>
                       <span className="text-white font-bold">10LAgjxx... (Deka Archive)</span>
                     </div>
                     
-                    <div className="flex flex-wrap items-center gap-3">
+                    <div className="flex flex-wrap items-centre gap-3">
                       {/* Filter by subfolder */}
-                      <div className="flex items-center gap-1.5 text-[10px]">
+                      <div className="flex items-centre gap-1.5 text-[10px]">
                         <span className="text-[#838aa0]">FILTER_FOLDER :</span>
                         <select
                           value={selectedFolderFilter}
@@ -838,7 +807,7 @@ function crawlFolder(folder, resultsList) {
 
                   {/* Loading/Error Telemetries */}
                   {loading && (
-                    <div className="flex items-center justify-center py-12">
+                    <div className="flex items-centre justify-centre py-12">
                       <span className="text-xs text-white animate-pulse tracking-widest uppercase">
                         ✦ LINKING DRIVE COGNITION TREE...
                       </span>
@@ -918,8 +887,8 @@ function crawlFolder(folder, resultsList) {
                                 className="w-full h-full object-cover filter saturate-[65%] group-hover/item:saturate-100 transition-all duration-500"
                               />
                             ) : (
-                              <div className="flex-1 flex flex-col items-center justify-center p-3 text-center gap-2">
-                                <span className="text-2xl text-red-950 group-hover/item:text-white transition-colors duration-300">📄</span>
+                              <div className="flex-1 flex flex-col items-centre justify-centre p-3 text-centre gap-2">
+                                <span className="text-2xl text-red-950 group-hover/item:text-white transition-colours duration-300">📄</span>
                                 <span className="text-[9px] text-[#cfc9c0]/80 tracking-wider truncate w-full">{file.name}</span>
                               </div>
                             )}
@@ -938,7 +907,7 @@ function crawlFolder(folder, resultsList) {
                   )}
 
                   {!loading && !error && files.length === 0 && (
-                    <div className="text-center py-12 border border-dashed border-white/20">
+                    <div className="text-centre py-12 border border-dashed border-white/20">
                       <span className="text-[10px] text-[#838aa0] uppercase tracking-widest">
                         No previewable assets found in this folder.
                       </span>
@@ -993,7 +962,7 @@ function crawlFolder(folder, resultsList) {
 
           {/* Top selector bar (visible on mobile) */}
           <div 
-            className="md:hidden p-4 bg-black border-b border-white/40 flex justify-between items-center z-50 shrink-0"
+            className="md:hidden p-4 bg-black border-b border-white/40 flex justify-between items-centre z-50 shrink-0"
             onClick={(e) => e.stopPropagation()}
           >
             <span className="font-mono text-[9px] text-[#838aa0] tracking-wider">FILTER_FOLDER :</span>
@@ -1017,16 +986,16 @@ function crawlFolder(folder, resultsList) {
           </div>
 
           {/* Main content: Active Image viewport */}
-          <div className="flex-1 flex flex-col items-center justify-center p-4 relative z-10 select-none">
+          <div className="flex-1 flex flex-col items-centre justify-centre p-4 relative z-10 select-none">
             
             <div 
-              className={`relative max-w-full max-h-[80vh] flex items-center justify-center transition-all duration-300 ease-out ${
+              className={`relative max-w-full max-h-[80vh] flex items-centre justify-centre transition-all duration-300 ease-out ${
                 lightboxVisible ? 'scale-100 opacity-100' : 'scale-95 opacity-0'
               }`}
               onClick={(e) => e.stopPropagation()} // prevent closing on clicking image itself
             >
               {/* Image viewport with dynamic transparency grid inspection backgrounds */}
-              <div className="max-w-full max-h-[80vh] flex items-center justify-center">
+              <div className="max-w-full max-h-[80vh] flex items-centre justify-centre">
                 <img 
                   src={lightboxImg} 
                   alt="Drive Archive High-Res Preview" 
@@ -1035,13 +1004,13 @@ function crawlFolder(folder, resultsList) {
               </div>
 
               {/* Float indicators */}
-              <div className="absolute bottom-6 left-1/2 -translate-x-1/2 bg-black/75 px-4 py-2 border border-white/40 font-mono text-[9px] text-[#cfc9c0] text-center tracking-wider max-w-[90%] truncate">
+              <div className="absolute bottom-6 left-1/2 -translate-x-1/2 bg-black/75 px-4 py-2 border border-white/40 font-mono text-[9px] text-[#cfc9c0] text-centre tracking-wider max-w-[90%] truncate">
                 {files.find(f => f.id === activeLightboxFileId)?.name || 'Previewing Image'}
               </div>
             </div>
 
             {/* Next/Prev buttons (repositioned inwards to avoid CRT bezel cutoff) */}
-            <div className="absolute inset-y-0 left-0 right-0 flex items-center justify-between pointer-events-none px-12 md:px-24">
+            <div className="absolute inset-y-0 left-0 right-0 flex items-centre justify-between pointer-events-none px-12 md:px-24">
               <button
                 onClick={(e) => {
                   e.stopPropagation();
