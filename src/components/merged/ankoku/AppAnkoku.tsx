@@ -747,7 +747,7 @@ function crawlFolder(folder, resultsList) {
                     </button>
                   </form>
 
-                  <div className="flex justify-between items-centre mb-2">
+                  <div className="flex justify-between items-center mb-2">
                     <h4 className="text-[10px] text-white uppercase tracking-widest font-bold">Google Apps Script Code:</h4>
                     <button
                       onClick={(e) => {
@@ -769,15 +769,15 @@ function crawlFolder(folder, resultsList) {
                 <div className="flex flex-col gap-4 font-mono">
                   
                   {/* File Explorer Header controls */}
-                  <div className="flex flex-col sm:flex-row justify-between items-start sm:items-centre gap-3 border-b border-white/25 pb-3">
-                    <div className="flex items-centre gap-2 text-[10px]">
+                  <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-3 border-b border-white/25 pb-3">
+                    <div className="flex items-center gap-2 text-[10px]">
                       <span className="text-[#838aa0]">ACTIVE_VESSEL :</span>
                       <span className="text-white font-bold">10LAgjxx... (Deka Archive)</span>
                     </div>
                     
-                    <div className="flex flex-wrap items-centre gap-3">
+                    <div className="flex flex-wrap items-center gap-3">
                       {/* Filter by subfolder */}
-                      <div className="flex items-centre gap-1.5 text-[10px]">
+                      <div className="flex items-center gap-1.5 text-[10px]">
                         <span className="text-[#838aa0]">FILTER_FOLDER :</span>
                         <select
                           value={selectedFolderFilter}
@@ -806,7 +806,7 @@ function crawlFolder(folder, resultsList) {
 
                   {/* Loading/Error Telemetries */}
                   {loading && (
-                    <div className="flex items-centre justify-centre py-12">
+                    <div className="flex items-center justify-center py-12">
                       <span className="text-xs text-white animate-pulse tracking-widest uppercase">
                         ✦ LINKING DRIVE COGNITION TREE...
                       </span>
@@ -886,8 +886,8 @@ function crawlFolder(folder, resultsList) {
                                 className="w-full h-full object-cover filter saturate-[65%] group-hover/item:saturate-100 transition-all duration-500"
                               />
                             ) : (
-                              <div className="flex-1 flex flex-col items-centre justify-centre p-3 text-centre gap-2">
-                                <span className="text-2xl text-red-950 group-hover/item:text-white transition-colours duration-300">📄</span>
+                              <div className="flex-1 flex flex-col items-center justify-center p-3 text-center gap-2">
+                                <span className="text-2xl text-red-950 group-hover/item:text-white transition-colors duration-300">📄</span>
                                 <span className="text-[9px] text-[#cfc9c0]/80 tracking-wider truncate w-full">{file.name}</span>
                               </div>
                             )}
@@ -906,7 +906,7 @@ function crawlFolder(folder, resultsList) {
                   )}
 
                   {!loading && !error && files.length === 0 && (
-                    <div className="text-centre py-12 border border-dashed border-white/20">
+                    <div className="text-center py-12 border border-dashed border-white/20">
                       <span className="text-[10px] text-[#838aa0] uppercase tracking-widest">
                         No previewable assets found in this folder.
                       </span>
@@ -961,7 +961,7 @@ function crawlFolder(folder, resultsList) {
 
           {/* Top selector bar (visible on mobile) */}
           <div 
-            className="md:hidden p-4 bg-black border-b border-white/40 flex justify-between items-centre z-50 shrink-0"
+            className="md:hidden p-4 bg-black border-b border-white/40 flex justify-between items-center z-50 shrink-0"
             onClick={(e) => e.stopPropagation()}
           >
             <span className="font-mono text-[9px] text-[#838aa0] tracking-wider">FILTER_FOLDER :</span>
@@ -985,16 +985,16 @@ function crawlFolder(folder, resultsList) {
           </div>
 
           {/* Main content: Active Image viewport */}
-          <div className="flex-1 flex flex-col items-centre justify-centre p-4 relative z-10 select-none">
+          <div className="flex-1 flex flex-col items-center justify-center p-4 relative z-10 select-none">
             
             <div 
-              className={`relative max-w-full max-h-[80vh] flex items-centre justify-centre transition-all duration-300 ease-out ${
+              className={`relative max-w-full max-h-[80vh] flex items-center justify-center transition-all duration-300 ease-out ${
                 lightboxVisible ? 'scale-100 opacity-100' : 'scale-95 opacity-0'
               }`}
               onClick={(e) => e.stopPropagation()} // prevent closing on clicking image itself
             >
               {/* Image viewport with dynamic transparency grid inspection backgrounds */}
-              <div className="max-w-full max-h-[80vh] flex items-centre justify-centre">
+              <div className="max-w-full max-h-[80vh] flex items-center justify-center">
                 <img 
                   src={lightboxImg} 
                   alt="Drive Archive High-Res Preview" 
@@ -1003,13 +1003,13 @@ function crawlFolder(folder, resultsList) {
               </div>
 
               {/* Float indicators */}
-              <div className="absolute bottom-6 left-1/2 -translate-x-1/2 bg-black/75 px-4 py-2 border border-white/40 font-mono text-[9px] text-[#cfc9c0] text-centre tracking-wider max-w-[90%] truncate">
+              <div className="absolute bottom-6 left-1/2 -translate-x-1/2 bg-black/75 px-4 py-2 border border-white/40 font-mono text-[9px] text-[#cfc9c0] text-center tracking-wider max-w-[90%] truncate">
                 {files.find(f => f.id === activeLightboxFileId)?.name || 'Previewing Image'}
               </div>
             </div>
 
             {/* Next/Prev buttons (repositioned inwards to avoid CRT bezel cutoff) */}
-            <div className="absolute inset-y-0 left-0 right-0 flex items-centre justify-between pointer-events-none px-12 md:px-24">
+            <div className="absolute inset-y-0 left-0 right-0 flex items-center justify-between pointer-events-none px-12 md:px-24">
               <button
                 onClick={(e) => {
                   e.stopPropagation();
