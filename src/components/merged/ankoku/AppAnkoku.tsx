@@ -509,7 +509,7 @@ const getWorkingImageUrl = (url: string, id: string) => {
   return url;
 };
 
-export default function AppAnkoku({ defaultTab = 'log' }: { defaultTab?: TabType }) {
+export default function AppAnkoku({ defaultTab = 'deka' }: { defaultTab?: TabType }) {
   const [activeTab, setActiveTab] = useState<TabType>(defaultTab);
   const [lightboxImg, setLightboxImg] = useState<string | null>(null);
   const [lightboxVisible, setLightboxVisible] = useState(false);

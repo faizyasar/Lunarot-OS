@@ -1,3 +1,4 @@
+declare const __BUILD_COMMIT_HASH__: string;
 export interface Card {
   name: string;
   num: string;

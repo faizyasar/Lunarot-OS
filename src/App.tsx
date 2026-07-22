@@ -380,22 +380,7 @@ export default function App() {
                     <EditVesselConfig user={natalUser} onReSeed={handleReSeed} />
                   )}
                 </div>
-              
-      {/* Sleek Bottom OS Build Telemetry Footer */}
-      <footer className="relative z-40 w-full py-1 px-4 sm:px-6 flex justify-between items-center bg-black/85 border-t border-white/10 font-mono text-[7.5px] md:text-[8.5px] tracking-[0.15em] text-white/40 select-none">
-        <div className="flex items-center gap-2">
-          <span className="w-1.5 h-1.5 rounded-full bg-[var(--gold)] animate-pulse" />
-          <span className="text-[var(--gold)] font-bold uppercase tracking-[0.2em]">
-            lunarot OS build {typeof __BUILD_COMMIT_HASH__ !== 'undefined' ? __BUILD_COMMIT_HASH__ : 'live'}
-          </span>
-        </div>
-        <div className="flex items-center gap-4 text-white/40">
-          <span>STATUS: ONLINE</span>
-          <span className="text-[var(--gold)]/80">FAIZYASAR.LIFE</span>
-        </div>
-      </footer>
-    </main>
-
+              </main>
 
             </div>
 
@@ -408,7 +393,7 @@ export default function App() {
 
             {/* Consolidated status footer line */}
             <footer className="h-8 border-t border-white/5 px-6 flex items-center justify-between text-[6px] tracking-[0.2em] text-[#443333] select-none shrink-0 font-mono bg-transparent">
-              <span>lunarot os v6.1-alchemical</span>
+              <span className="text-[var(--gold)] font-bold uppercase tracking-[0.2em]">lunarot OS build {typeof __BUILD_COMMIT_HASH__ !== "undefined" ? __BUILD_COMMIT_HASH__ : "39c2a5d"}</span>
               <span className="hidden sm:inline text-[#ffffff]/60 uppercase tracking-[0.25em] transition-all duration-300">
                 {contextualText}
               </span>

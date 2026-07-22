@@ -1,0 +1,106 @@
+{
+  "publishes": {
+    "indigo-coral-75pf": {
+      "siteUrl": "https://indigo-coral-75pf.here.now/",
+      "claimToken": "0b05d26ba43e5a090ae5164bf1d11c2e47b45a4402d4943fa4d2ef7055db709e",
+      "claimUrl": "https://here.now/claim?slug=indigo-coral-75pf&token=0b05d26ba43e5a090ae5164bf1d11c2e47b45a4402d4943fa4d2ef7055db709e",
+      "expiresAt": "2026-07-22T02:35:09.428Z"
+    },
+    "steady-denim-b4rb": {
+      "siteUrl": "https://steady-denim-b4rb.here.now/",
+      "claimToken": "f9fa3e34bbf67e5620ea3987bf22354021aceac416b422e32aae56ee67bf744f",
+      "claimUrl": "https://here.now/claim?slug=steady-denim-b4rb&token=f9fa3e34bbf67e5620ea3987bf22354021aceac416b422e32aae56ee67bf744f",
+      "expiresAt": "2026-07-22T02:45:14.629Z"
+    },
+    "azure-grace-ggef": {
+      "siteUrl": "https://azure-grace-ggef.here.now/",
+      "claimToken": "03b345b7ecbc79b7b3a07dbbb3094f92b684bd1d0662ceb860e7b7d82d0648e0",
+      "claimUrl": "https://here.now/claim?slug=azure-grace-ggef&token=03b345b7ecbc79b7b3a07dbbb3094f92b684bd1d0662ceb860e7b7d82d0648e0",
+      "expiresAt": "2026-07-22T02:50:39.267Z"
+    },
+    "bright-lagoon-rnt6": {
+      "siteUrl": "https://bright-lagoon-rnt6.here.now/",
+      "claimToken": "047542445fa07934cd1d97f25ed353a4379fbcfe4f23d7e1b779756cffa50794",
+      "claimUrl": "https://here.now/claim?slug=bright-lagoon-rnt6&token=047542445fa07934cd1d97f25ed353a4379fbcfe4f23d7e1b779756cffa50794",
+      "expiresAt": "2026-07-22T03:01:07.722Z"
+    },
+    "lucid-riddle-nmv2": {
+      "siteUrl": "https://lucid-riddle-nmv2.here.now/"
+    },
+    "jazzy-knoll-xt6c": {
+      "siteUrl": "https://jazzy-knoll-xt6c.here.now/"
+    },
+    "lemon-lotus-ea2k": {
+      "siteUrl": "https://lemon-lotus-ea2k.here.now/",
+      "claimToken": "7ceb92b1bd61b0d8d174132f8171d4c26556e319278328a993473fd68fbc20b2",
+      "claimUrl": "https://here.now/claim?slug=lemon-lotus-ea2k&token=7ceb92b1bd61b0d8d174132f8171d4c26556e319278328a993473fd68fbc20b2",
+      "expiresAt": "2026-07-22T08:53:50.630Z"
+    },
+    "floral-frost-syw9": {
+      "siteUrl": "https://floral-frost-syw9.here.now/",
+      "claimToken": "f03223f085779fc86db09fcb1cb321b3a5bebe23dc22d6667cccaf16e5d8df3c",
+      "claimUrl": "https://here.now/claim?slug=floral-frost-syw9&token=f03223f085779fc86db09fcb1cb321b3a5bebe23dc22d6667cccaf16e5d8df3c",
+      "expiresAt": "2026-07-22T10:31:05.060Z"
+    },
+    "topaz-sorbet-ce28": {
+      "siteUrl": "https://topaz-sorbet-ce28.here.now/",
+      "claimToken": "4291a597ea267e6b9b47e9b0ac080d079971c503b69734a05fa028a22c18aa96",
+      "claimUrl": "https://here.now/claim?slug=topaz-sorbet-ce28&token=4291a597ea267e6b9b47e9b0ac080d079971c503b69734a05fa028a22c18aa96",
+      "expiresAt": "2026-07-22T10:34:05.707Z"
+    },
+    "happy-atlas-p7y8": {
+      "siteUrl": "https://happy-atlas-p7y8.here.now/",
+      "claimToken": "e614ac00b41388dc1660190a6e6d3bc39a03c06d9df635430a0f86e2c94187c3",
+      "claimUrl": "https://here.now/claim?slug=happy-atlas-p7y8&token=e614ac00b41388dc1660190a6e6d3bc39a03c06d9df635430a0f86e2c94187c3",
+      "expiresAt": "2026-07-22T10:37:39.150Z"
+    },
+    "sonic-bamboo-ywtk": {
+      "siteUrl": "https://sonic-bamboo-ywtk.here.now/",
+      "claimToken": "90fe78f443da1e606ac3730204fa153d691831dca03cc74d1cf009e0b740e10e",
+      "claimUrl": "https://here.now/claim?slug=sonic-bamboo-ywtk&token=90fe78f443da1e606ac3730204fa153d691831dca03cc74d1cf009e0b740e10e",
+      "expiresAt": "2026-07-22T10:41:48.768Z"
+    },
+    "hearty-fennel-7mzr": {
+      "siteUrl": "https://hearty-fennel-7mzr.here.now/",
+      "claimToken": "9af701671cc09bfb989e1af4ee9aa4128d5fabbc7b11bb3b50a6bb1c804512be",
+      "claimUrl": "https://here.now/claim?slug=hearty-fennel-7mzr&token=9af701671cc09bfb989e1af4ee9aa4128d5fabbc7b11bb3b50a6bb1c804512be",
+      "expiresAt": "2026-07-22T10:49:06.464Z"
+    },
+    "coral-soul-zjen": {
+      "siteUrl": "https://coral-soul-zjen.here.now/",
+      "claimToken": "dd8b239838361a57574e3e452008c9eecd9a2dcb507fe6f4424f75bebe0ede6c",
+      "claimUrl": "https://here.now/claim?slug=coral-soul-zjen&token=dd8b239838361a57574e3e452008c9eecd9a2dcb507fe6f4424f75bebe0ede6c",
+      "expiresAt": "2026-07-22T10:52:55.422Z"
+    },
+    "open-atlas-4tr3": {
+      "siteUrl": "https://open-atlas-4tr3.here.now/",
+      "claimToken": "b640b99f6e10bcb2870fbaa0dcf6b79fb5f67dcd27a8d91ded8d4924dc66a74d",
+      "claimUrl": "https://here.now/claim?slug=open-atlas-4tr3&token=b640b99f6e10bcb2870fbaa0dcf6b79fb5f67dcd27a8d91ded8d4924dc66a74d",
+      "expiresAt": "2026-07-22T11:32:02.528Z"
+    },
+    "quartz-sierra-yn2k": {
+      "siteUrl": "https://quartz-sierra-yn2k.here.now/",
+      "claimToken": "b3c3da52fc97cc17b88c1549caadd2ff68ab3a9081e266fb72fd6f159c0843ad",
+      "claimUrl": "https://here.now/claim?slug=quartz-sierra-yn2k&token=b3c3da52fc97cc17b88c1549caadd2ff68ab3a9081e266fb72fd6f159c0843ad",
+      "expiresAt": "2026-07-22T11:50:17.000Z"
+    },
+    "autumn-sleet-drmx": {
+      "siteUrl": "https://autumn-sleet-drmx.here.now/",
+      "claimToken": "786918d27987c54776c11bd883361a767d43271c86b72a7184a00d8dd098d79f",
+      "claimUrl": "https://here.now/claim?slug=autumn-sleet-drmx&token=786918d27987c54776c11bd883361a767d43271c86b72a7184a00d8dd098d79f",
+      "expiresAt": "2026-07-22T12:02:35.608Z"
+    },
+    "vowful-garnet-bx2r": {
+      "siteUrl": "https://vowful-garnet-bx2r.here.now/",
+      "claimToken": "fd47f349cb24b3eedd7f0491becf0c47b961e11f870bfd13c67f1d257385dfbf",
+      "claimUrl": "https://here.now/claim?slug=vowful-garnet-bx2r&token=fd47f349cb24b3eedd7f0491becf0c47b961e11f870bfd13c67f1d257385dfbf",
+      "expiresAt": "2026-07-22T15:50:40.253Z"
+    },
+    "dreamy-brook-g52r": {
+      "siteUrl": "https://dreamy-brook-g52r.here.now/",
+      "claimToken": "b72daf55095a7351589bc438697b5296e36bd7e2426abca06421ca401ba54972",
+      "claimUrl": "https://here.now/claim?slug=dreamy-brook-g52r&token=b72daf55095a7351589bc438697b5296e36bd7e2426abca06421ca401ba54972",
+      "expiresAt": "2026-07-22T15:59:26.432Z"
+    }
+  }
+}
