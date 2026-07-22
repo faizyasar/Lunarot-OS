@@ -18,13 +18,15 @@ export class PachinkoWebGPURenderer {
   
   async init(canvas: HTMLCanvasElement) {
     if (!navigator.gpu) {
-      throw new Error("WebGPU not supported on this browser.");
+      console.warn("WebGPU not supported on this browser. Falling back gracefully.");
+      return;
     }
     const adapter = await navigator.gpu.requestAdapter({
       powerPreference: 'high-performance'
     });
     if (!adapter) {
-      throw new Error("No appropriate GPUAdapter found.");
+      console.warn("No appropriate GPUAdapter found.");
+      return;
     }
     this.device = await adapter.requestDevice();
     this.context = canvas.getContext("webgpu") as GPUCanvasContext;

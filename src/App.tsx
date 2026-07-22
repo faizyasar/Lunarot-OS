@@ -107,9 +107,20 @@ const FOLDERS = [
   }
 ];
 
+const DEFAULT_NATAL_USER: NatalUser = {
+  name: 'FAIZ YASAR',
+  jd: 2451402.0,
+  sun: 'LEO',
+  sunIdx: 4,
+  moon: 'CAPRICORN',
+  moonIdx: 9,
+  rising: 'AQUARIUS',
+  risingIdx: 10
+};
+
 export default function App() {
-  const [booted, setBooted] = useState(false);
-  const [natalUser, setNatalUser] = useState<NatalUser | null>(null);
+  const [booted, setBooted] = useState(true);
+  const [natalUser, setNatalUser] = useState<NatalUser | null>(DEFAULT_NATAL_USER);
   const [activeFile, setActiveFile] = useState('/apps/sacred-draw.bin');
   const [openFolders, setOpenFolders] = useState<Set<string>>(new Set(['apps', 'research', 'db', 'art', 'sys']));
   const [sidebarOpen, setSidebarOpen] = useState(true);
