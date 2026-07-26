@@ -2,9 +2,8 @@
   "version": 2,
   "buildCommand": null,
   "outputDirectory": ".",
+  "cleanUrls": true,
   "rewrites": [
-    { "source": "/", "destination": "/osLATEST.html" },
-    { "source": "/pachinko", "destination": "/pachinkoLATEST.html" },
-    { "source": "/pachinko.html", "destination": "/pachinkoLATEST.html" }
+    { "source": "/pachinko", "destination": "/pachinkoLATEST.html" }
   ]
 }
