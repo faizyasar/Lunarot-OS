@@ -3,6 +3,6 @@
   "buildCommand": null,
   "outputDirectory": "public",
   "rewrites": [
-    { "source": "/(.*)", "destination": "/index.html" }
+    { "source": "/(.*)", "destination": "/lunarot-os.html" }
   ]
 }
