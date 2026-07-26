@@ -1,6 +1,20 @@
 # Lunarot OS
 
+**One main. One Pachinko. No shadows.**
+
 UI of the Lunarot Ecosystem // Standalone Shell
+
+---
+
+## Canonical builds
+
+| Artifact | Role |
+|----------|------|
+| **src/** + Vite | Living main Lunarot OS (React/TS, what Vercel deploys) |
+| **Sacred Pachinko (standalone)** | Main Pachinko — the single attached export |
+| **Lunarot-OS-right-shift** | Main OS single-file build (attached) |
+
+All prior duplicate HTML standalones (Lunarot-OS-Standalone, trimmed, Sacred Pachinko 1/3, lunarot-os-2/3, public copies, nested copies) have been **banished**.
 
 ---
 
@@ -19,40 +33,23 @@ Custom alchemical colours defined in `src/index.css`:
 - **Cormorant Garamond** (`font-garamond`): Prose style, optimised for body sentences and poetic descriptions.
 - **JetBrains Mono** (`font-mono`): Retrogaming telemetry fonts for console codes, specs, and status grids.
 
-### 3. Absolute Scaling Because I hate scrolling because scrolling is ugly and stupid (`--c-scale`)
-To GUARANTEE that pages fit perfectly inside custom frames (like Carrd or custom viewports) without double scrollbars, the style sheet locks the dimensions of outer containers and automatically updates a scale factor (`--c-scale`) using CSS media queries:
-```css
-:root { --c-scale: 0.95; }
-@media (max-width: 1023px) { :root { --c-scale: 0.72; } }
-@media (max-height: 750px) { :root { --c-scale: 0.70; } }
-```
+### 3. Absolute Scaling (`--c-scale`)
+Pages fit perfectly inside custom frames without double scrollbars.
 
 ---
 
-## ✦ Standalone UI Components
+## Standalone UI Components
 
-All components are written in React and TypeScript under `src/components/`:
+All under `src/components/`:
 
-### 1. `Backgrounds`
-Houses `StarsCanvas` (optimised Concentric Spoke radial coordinates matrix rendering at 30 FPS with pre-rendered sigils canvas) and `AsciiEyes` (30 FPS throttled ASCII eyes that blink and track pupil movement dynamically).
-
-### 2. `ASCIIWaves`
-A hypnotic backdrop of procedurally undulating math-driven ASCII waves representing energy streams from the void.
-
-### 3. `OracleView`
-The transitional gate for NATAL OS connection handshake procedures.
-
-### 4. `ShowcaseView`
-The aesthetic token specification guide and style dashboard cards.
-
-### 5. `SmokyText`
-An automated letter-by-letter typographic dispersion effect mimicking drifting smoke.
-
-### 6. `VariableFontProximity`
-Font weight warping proximity tracking where letters stretch and breathe based on mouse cursor distance.
-
-### 7. `ViewStack`
-A 3D-perspective stacked cards layout allowing cards to be dragged, tilted, and swiped off one by one.
+1. `Backgrounds` — StarsCanvas + AsciiEyes
+2. `ASCIIWaves`
+3. `OracleView`
+4. `ShowcaseView`
+5. `SmokyText`
+6. `VariableFontProximity`
+7. `ViewStack`
+8. Merged: Tarot, Pachinko, Ankoku, Directory, Art Showcase
 
 ---
 
