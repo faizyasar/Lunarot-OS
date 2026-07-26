@@ -4,6 +4,7 @@
   "outputDirectory": ".",
   "cleanUrls": true,
   "rewrites": [
+    { "source": "/sacred-pachinko", "destination": "/pachinkoLATEST.html" },
     { "source": "/pachinko", "destination": "/pachinkoLATEST.html" }
   ]
 }
