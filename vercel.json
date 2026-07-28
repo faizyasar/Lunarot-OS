@@ -3,7 +3,7 @@
   "rewrites": [
     {
       "source": "/sacred-pachinko",
-      "destination": "/pachinko.html"
+      "destination": "/sacred-pachinko.html"
     },
     {
       "source": "/pachinko",

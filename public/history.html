@@ -3,216 +3,103 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Lunarot OS ✦ Telemetry & Ecosystem History</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700&family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+  <title>Lunarot OS - Ecosystem History & GitHub Telemetry</title>
   <style>
-    :root {
-      --void: #000000;
-      --ash: #080808;
-      --gold: #c8a45a;
-      --gold-glow: rgba(200, 164, 90, 0.25);
-      --parchment: #efede8;
-      --dim-parchment: #8a8884;
-    }
-    * { box-sizing: border-box; margin: 0; padding: 0; }
     body {
-      background-color: var(--void);
-      color: var(--parchment);
-      font-family: 'Cormorant Garamond', serif;
-      min-height: 100vh;
-      padding: 2rem 1rem;
-      display: flex;
-      justify-content: center;
-      align-items: flex-start;
+      background: #000;
+      color: #cfc9c0;
+      font-family: ui-monospace, 'SF Mono', Menlo, Consolas, monospace;
+      padding: 32px 24px;
       line-height: 1.6;
+      max-width: 850px;
+      margin: 0 auto;
     }
-    .container {
-      max-width: 900px;
-      width: 100%;
-      background: var(--ash);
-      border: 1px solid rgba(200, 164, 90, 0.3);
-      box-shadow: 0 0 40px var(--gold-glow);
-      border-radius: 8px;
-      padding: 2.5rem;
-      position: relative;
-    }
-    header {
-      text-align: center;
-      margin-bottom: 2.5rem;
-      border-bottom: 1px solid rgba(200, 164, 90, 0.2);
-      padding-bottom: 1.5rem;
-    }
-    h1 {
-      font-family: 'Cinzel', serif;
-      color: var(--gold);
-      font-size: 2.2rem;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      margin-bottom: 0.5rem;
-    }
-    .subtitle {
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 0.85rem;
-      color: var(--dim-parchment);
-      letter-spacing: 0.15em;
-    }
-    .nav-links {
-      display: flex;
-      justify-content: center;
-      gap: 1.5rem;
-      margin-top: 1rem;
-    }
-    .nav-links a {
-      color: var(--gold);
-      text-decoration: none;
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 0.85rem;
-      border: 1px solid rgba(200, 164, 90, 0.4);
-      padding: 0.4rem 1rem;
-      border-radius: 4px;
-      transition: all 0.2s ease;
-    }
-    .nav-links a:hover {
-      background: var(--gold);
-      color: var(--void);
-      box-shadow: 0 0 15px var(--gold-glow);
-    }
-    .timeline {
-      display: flex;
-      flex-direction: column;
-      gap: 2rem;
-      margin-top: 1rem;
-    }
-    .card {
-      background: rgba(0, 0, 0, 0.6);
-      border: 1px solid rgba(200, 164, 90, 0.2);
-      border-left: 4px solid var(--gold);
-      border-radius: 4px;
-      padding: 1.5rem;
-    }
-    .card-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-bottom: 0.8rem;
-    }
-    .tag {
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 0.8rem;
-      background: rgba(200, 164, 90, 0.15);
-      color: var(--gold);
-      padding: 0.2rem 0.6rem;
-      border-radius: 3px;
-      border: 1px solid rgba(200, 164, 90, 0.3);
-    }
-    .date {
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 0.8rem;
-      color: var(--dim-parchment);
-    }
-    .card-title {
-      font-family: 'Cinzel', serif;
-      font-size: 1.3rem;
-      color: var(--parchment);
-      margin-bottom: 0.6rem;
-    }
-    ul { list-style-type: none; }
-    li {
-      position: relative;
-      padding-left: 1.2rem;
-      margin-bottom: 0.4rem;
-      font-size: 1.05rem;
-    }
-    li::before {
-      content: '✦';
-      position: absolute;
-      left: 0;
-      color: var(--gold);
-      font-size: 0.8rem;
-      top: 0.1rem;
-    }
-    .badge-deleted {
-      color: #ff6b6b;
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 0.75rem;
-      border: 1px solid rgba(255, 107, 107, 0.4);
-      padding: 0.1rem 0.4rem;
-      border-radius: 2px;
-      margin-left: 0.5rem;
-    }
-    footer {
-      text-align: center;
-      margin-top: 3rem;
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 0.8rem;
-      color: var(--dim-parchment);
-      border-top: 1px solid rgba(200, 164, 90, 0.2);
-      padding-top: 1.5rem;
-    }
+    h1 { color: #ffffff; font-size: 22px; letter-spacing: 0.1em; border-bottom: 1px solid rgba(255,255,255,0.2); padding-bottom: 12px; }
+    h2 { color: #ffffff; font-size: 18px; margin-top: 28px; border-bottom: 1px dashed rgba(255,255,255,0.15); padding-bottom: 4px; }
+    h3 { color: #838aa0; font-size: 13px; margin-top: 18px; letter-spacing: 0.15em; }
+    ul { list-style-type: square; padding-left: 20px; }
+    li { margin-bottom: 6px; font-size: 13px; }
+    pre { background: rgba(255,255,255,0.05); padding: 12px; border: 1px solid rgba(255,255,255,0.1); color: #4ade80; overflow-x: auto; }
+    blockquote { border-left: 2px solid #ef4444; padding-left: 12px; color: #cfc9c0; background: rgba(255,255,255,0.02); padding-top: 4px; padding-bottom: 4px; }
   </style>
 </head>
 <body>
-  <div class="container">
-    <header>
-      <h1>Lunarot OS Telemetry Log</h1>
-      <p class="subtitle">SYSTEM EVOLUTION // DELETI0N RECORD // BUILD CHRONICLE</p>
-      <div class="nav-links">
-        <a href="/">← Return to Lunarot OS</a>
-        <a href="/pachinko">Enter Sacred Pachinko</a>
-      </div>
-    </header>
+  <h1>✦ Lunarot OS - Ecosystem History & GitHub Telemetry</h1>
+  <div id="content">
+<h2>GITHUB CONTRIBUTION TELEMETRY</h2>
+<h2>149 CONTRIBUTIONS IN 2026</h2>
+<blockquote>**Active Nodes**: Apr, May, Jun, Jul 2026 | **Resonance**: 99.4% High Rotation</blockquote>
+<blockquote>**Epoch Selectors**: [ 2026 (ACTIVE) ] · [ 2025 ] · [ 2024 ]</blockquote>
+<h3>✦ 2026 HEATMAP MATRIX</h3>
+<h2>2026</h2>
+<h3>Day: 29/07</h3>
+<ul>
+  <li>[lunarot-os:4006ef0] feat: add music conduit tab, boy harsher lastfm stats, letterboxd and pi.fyi links</li>
+  <li>[lunarot-os:9b6d2de] fix: place music.index and deka-archive.index under database, fix bottom bar faizyasar.life link</li>
+<h3>Day: 28/07</h3>
+<ul>
+  <li>[lunarot-os:0930e5c] feat: group logs in D/M/Y format, restore sacred pachinko routes and database folders</li>
+<h3>Day: 26/07</h3>
+<ul>
+  <li>[lunarot-os:0.9.0] Static serve routing for osLATEST.html and pachinkoLATEST.html</li>
+<h3>Day: 24/07</h3>
+<ul>
+  <li>[lunarot-os:0.5.0] Integrated Sacred Pachinko 3 standalone build and single-file HTML bundler configuration</li>
+<h3>Day: 16/07</h3>
+<ul>
+  <li>[lunarot-os:5419300] Update compiled lunarot-os.html bundle</li>
+  <li>[lunarot-os:6f15070] Standardize header nav tabs to use index.css .nav-btn classes</li>
+  <li>[lunarot-os:ef68893] Restore header nav selectors (tabs) and sync active card stack highlights</li>
+  <li>[lunarot-os:c329e32] Add standalone lunarot-os-2.html copy-paste template</li>
+  <li>[lunarot-os:0bfa55a] Optimise backgrounds rendering inside lunarot-os.html</li>
+  <li>[lunarot-os:b75566a] Update main README and submodules refs</li>
+  <li>[lunarot-os:fc43333] Update submodule references to optimised versions</li>
+  <li>[lunarot-os:6b4d650] Sync Lunarot OS with standalone shell updates</li>
+  <li>[Lunarot-Directory:b916d0a] Update README with humanised details</li>
+  <li>[Lunarot-Directory:f34f636] Optimise background rendering and add OS components</li>
+  <li>[Lunarot-Pachinko:4952232] Update README with humanised details</li>
+  <li>[Lunarot-Pachinko:48ab910] Optimise background rendering and add OS components</li>
+  <li>[Lunarot-Tarot:cd0cb99] Update README with humanised details</li>
+  <li>[Lunarot-Tarot:ef84c65] Optimise background rendering and add OS components</li>
+<h3>Day: 26/06</h3>
+<ul>
+  <li>[Lunarot-Directory:bf9b7d0] docs: update metadata and README for alchemical style</li>
+<h3>Day: 25/06</h3>
+<ul>
+  <li>[Lunarot-Directory:4df590f] feat: scaffold Lunarot Tarot application</li>
+  <li>[Lunarot-Directory:6f5e4fb] Initial commit</li>
+<h3>Day: 24/06</h3>
+<ul>
+  <li>[Lunarot-Ankoku:062bb3f] Update README.md structure formatting</li>
+  <li>[Lunarot-Ankoku:3386a82] Edit README for improved readability and expression</li>
+  <li>[Lunarot-Ankoku:1baf135] initial research log</li>
+  <li>[Lunarot-Pachinko:1d84b6c] Using the same aesthetic as Lunarot Tarot Engine</li>
+  <li>[Lunarot-Pachinko:6f4ea31] Initial commit</li>
+  <li>[Lunarot-Tarot-old:d4c82f7] Add deprecation notice and point users to Lunarot-Tarot-Engine-1.0</li>
+<h3>Day: 23/06</h3>
+<ul>
+  <li>[Lunarot-Tarot-old:7c1080c] Merge pull request #1 from faizyasar/copilot/make-repo-crawlable</li>
+  <li>[Lunarot-Tarot-old:44eda96] Enhance sitemap metadata</li>
+  <li>[Lunarot-Tarot-old:f55c7ba] Add crawlability metadata, robots, and sitemap</li>
+<h3>Day: 20/06</h3>
+<ul>
+  <li>[Lunarot-Tarot:afc11be] chore: generate package-lock.json for project dependencies</li>
+<h3>Day: 19/06</h3>
+<ul>
+  <li>[Lunarot-Tarot:89e7f18] Update README.md</li>
+<h3>Day: 17/06</h3>
+<ul>
+  <li>[Lunarot-Tarot:3797bef] feat: add unsettling ASCII eye tracking system</li>
+  <li>[Lunarot-Tarot:e09060f] style: refine layout and visual aesthetic</li>
+  <li>[Lunarot-Tarot:17b59fc] feat: initialize Sacred Draw application</li>
+  <li>[Lunarot-Tarot:728ca75] Initial commit</li>
+<h3>Day: 16/06</h3>
+<ul>
+  <li>[Lunarot-Tarot-old:15dac69] Update index.html</li>
+  <li>[Lunarot-Tarot-old:a8c5117] Update index.html</li>
+  <li>[Lunarot-Tarot-old:455cac9] Update index.html</li>
+  <li>[Lunarot-Tarot-old:41ca5c2] Update index.html</li>
 
-    <div class="timeline">
-      <!-- OS54 Release -->
-      <div class="card">
-        <div class="card-header">
-          <span class="tag">BUILD v1.0.0-OS54</span>
-          <span class="date">29/07/2026</span>
-        </div>
-        <h2 class="card-title">Canonical OS54 Direct Integration & Clean Pipeline</h2>
-        <ul>
-          <li><strong>Root Promotion</strong>: Promoted <code>Lunarot-OS54.html</code> directly as main <code>index.html</code>.</li>
-          <li><strong>Pachinko Integration</strong>: Retained <code>pachinkoLATEST.html</code> accessible live at <code>/pachinko</code>.</li>
-          <li><strong>Native Vite Build</strong>: Configured lightweight <code>package.json</code> & <code>vite.config.ts</code> with <code>vite-plugin-singlefile</code> for instant 4.9s Vercel compilation.</li>
-          <li><strong>Live Website History</strong>: Created <code>/history</code> (<code>history.html</code>) telemetry log for full transparency.</li>
-        </ul>
-      </div>
-
-      <!-- The Great Deletion -->
-      <div class="card">
-        <div class="card-header">
-          <span class="tag">SYSTEM CLEANUP</span>
-          <span class="date">28/07/2026</span>
-        </div>
-        <h2 class="card-title">The Great Deletion & Purge</h2>
-        <ul>
-          <li><strong>Banished Standalone Duplicates</strong> <span class="badge-deleted">DELETED</span>: Removed <code>lunarot-os.html</code>, <code>lunarot-os-2.html</code>, <code>lunarot-os-3.html</code>, <code>Lunarot-OS-Standalone.html</code>, <code>Lunarot-OS-trimmed.html</code>, and <code>Sacred Pachinko (standalone) 1-3</code>.</li>
-          <li><strong>Unlinked Submodules</strong> <span class="badge-deleted">DELETED</span>: De-indexed <code>projects/</code> (<code>Lunarot-Ankoku</code>, <code>Lunarot-Pachinko</code>, <code>Lunarot-Tarot</code>, <code>Lunarot-Directory</code>) and <code>.gitmodules</code>.</li>
-          <li><strong>Purged Legacy Source</strong> <span class="badge-deleted">DELETED</span>: Removed legacy <code>src/</code> React components, <code>dumbsets/</code> images, and <code>dist/</code> artifacts.</li>
-          <li><strong>Eliminated Redirection Layer</strong> <span class="badge-deleted">DELETED</span>: Deleted intermediate <code>osLATEST.html</code> and <code>sacred-pachinko.html</code> files.</li>
-        </ul>
-      </div>
-
-      <!-- Modular React Era -->
-      <div class="card">
-        <div class="card-header">
-          <span class="tag">EARLY ARCHITECTURE</span>
-          <span class="date">20/06/2026 - 26/07/2026</span>
-        </div>
-        <h2 class="card-title">Modular React/TS & Standalone Export Phase</h2>
-        <ul>
-          <li>Built initial modular Vite/React UI featuring <code>OracleView</code>, <code>ShowcaseView</code>, <code>ASCIIWaves</code>, <code>SmokyText</code>, and <code>ViewStack</code>.</li>
-          <li>Developed WebGPU Sacred Pachinko particle simulation and custom shaders.</li>
-          <li>Established core alchemical design system (Void <code>#000000</code>, Gold <code>#c8a45a</code>, Parchment <code>#efede8</code>).</li>
-        </ul>
-      </div>
-    </div>
-
-    <footer>
-      LUNAROT ECOSYSTEM // ARCHITECTURE VERIFIED // 2026
-    </footer>
   </div>
 </body>
 </html>
