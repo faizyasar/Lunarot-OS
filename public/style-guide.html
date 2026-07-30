@@ -49,6 +49,77 @@
       }
     }
 
+  
+    // Real-time CRT Distortion & Scanline Workbench Controller
+    function updateCRT() {
+      const scanlinesVal = document.getElementById('sliderScanlines').value;
+      const flickerVal = document.getElementById('sliderFlicker').value;
+      const distortionVal = document.getElementById('sliderDistortion').value;
+      const aberrationVal = document.getElementById('sliderAberration').value;
+      const vignetteVal = document.getElementById('sliderVignette').value;
+
+      // Update Labels
+      document.getElementById('valScanlines').innerText = scanlinesVal + '%';
+      document.getElementById('valFlicker').innerText = flickerVal + '%';
+      document.getElementById('valDistortion').innerText = distortionVal + '%';
+      document.getElementById('valAberration').innerText = aberrationVal + 'px';
+      document.getElementById('valVignette').innerText = vignetteVal + '%';
+
+      // 1. Scanlines Opacity & Raster
+      const scanlinesEl = document.getElementById('crtScanlines');
+      if (scanlinesEl) {
+        scanlinesEl.style.opacity = scanlinesVal / 100;
+        const size = Math.max(2, Math.floor(scanlinesVal / 20));
+        scanlinesEl.style.background = `linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, ${scanlinesVal / 100}) 50%) 0 0 / 100% ${size}px`;
+      }
+
+      // 2. Screen Flicker Speed
+      const glassEl = document.getElementById('crtGlass');
+      if (glassEl) {
+        if (flickerVal > 0) {
+          const speed = (0.5 - (flickerVal / 250)).toFixed(2);
+          glassEl.style.animation = `${speed}s infinite alternate crt-flicker-preview`;
+        } else {
+          glassEl.style.animation = 'none';
+        }
+      }
+
+      // 3. Screen Distortion (Perspective & Scale)
+      const monitorEl = document.querySelector('.crt-monitor-specimen');
+      if (monitorEl) {
+        const perspective = 2000 - (distortionVal * 15);
+        const rotateX = (distortionVal / 50).toFixed(1);
+        const scale = (1 - (distortionVal / 500)).toFixed(3);
+        monitorEl.style.transform = `perspective(${perspective}px) rotateX(${rotateX}deg) scale(${scale})`;
+        monitorEl.style.borderRadius = `${12 + Math.floor(distortionVal / 5)}px`;
+      }
+
+      // 4. Chromatic Aberration (RGB Shift)
+      const textEl = document.querySelector('#crtGlass h3');
+      if (textEl) {
+        if (aberrationVal > 0) {
+          textEl.style.textShadow = `-${aberrationVal}px 0 rgba(255,0,0,0.8), ${aberrationVal}px 0 rgba(0,255,255,0.8)`;
+        } else {
+          textEl.style.textShadow = 'none';
+        }
+      }
+
+      // 5. Vignette Darkness
+      const vignetteEl = document.getElementById('crtVignette');
+      if (vignetteEl) {
+        vignetteEl.style.background = `radial-gradient(circle, rgba(0,0,0,0) ${100 - vignetteVal}%, rgba(0,0,0,${vignetteVal / 100}))`;
+      }
+    }
+
+    function resetCRT() {
+      document.getElementById('sliderScanlines').value = 50;
+      document.getElementById('sliderFlicker').value = 50;
+      document.getElementById('sliderDistortion').value = 25;
+      document.getElementById('sliderAberration').value = 0;
+      document.getElementById('sliderVignette').value = 85;
+      updateCRT();
+    }
+
   </script>
   <script>
     tailwind.config = {
@@ -107,6 +178,77 @@
         el.style.animation = 'none';
         btn.innerText = '[ TOGGLE FLICKER: OFF ]';
       }
+    }
+
+  
+    // Real-time CRT Distortion & Scanline Workbench Controller
+    function updateCRT() {
+      const scanlinesVal = document.getElementById('sliderScanlines').value;
+      const flickerVal = document.getElementById('sliderFlicker').value;
+      const distortionVal = document.getElementById('sliderDistortion').value;
+      const aberrationVal = document.getElementById('sliderAberration').value;
+      const vignetteVal = document.getElementById('sliderVignette').value;
+
+      // Update Labels
+      document.getElementById('valScanlines').innerText = scanlinesVal + '%';
+      document.getElementById('valFlicker').innerText = flickerVal + '%';
+      document.getElementById('valDistortion').innerText = distortionVal + '%';
+      document.getElementById('valAberration').innerText = aberrationVal + 'px';
+      document.getElementById('valVignette').innerText = vignetteVal + '%';
+
+      // 1. Scanlines Opacity & Raster
+      const scanlinesEl = document.getElementById('crtScanlines');
+      if (scanlinesEl) {
+        scanlinesEl.style.opacity = scanlinesVal / 100;
+        const size = Math.max(2, Math.floor(scanlinesVal / 20));
+        scanlinesEl.style.background = `linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, ${scanlinesVal / 100}) 50%) 0 0 / 100% ${size}px`;
+      }
+
+      // 2. Screen Flicker Speed
+      const glassEl = document.getElementById('crtGlass');
+      if (glassEl) {
+        if (flickerVal > 0) {
+          const speed = (0.5 - (flickerVal / 250)).toFixed(2);
+          glassEl.style.animation = `${speed}s infinite alternate crt-flicker-preview`;
+        } else {
+          glassEl.style.animation = 'none';
+        }
+      }
+
+      // 3. Screen Distortion (Perspective & Scale)
+      const monitorEl = document.querySelector('.crt-monitor-specimen');
+      if (monitorEl) {
+        const perspective = 2000 - (distortionVal * 15);
+        const rotateX = (distortionVal / 50).toFixed(1);
+        const scale = (1 - (distortionVal / 500)).toFixed(3);
+        monitorEl.style.transform = `perspective(${perspective}px) rotateX(${rotateX}deg) scale(${scale})`;
+        monitorEl.style.borderRadius = `${12 + Math.floor(distortionVal / 5)}px`;
+      }
+
+      // 4. Chromatic Aberration (RGB Shift)
+      const textEl = document.querySelector('#crtGlass h3');
+      if (textEl) {
+        if (aberrationVal > 0) {
+          textEl.style.textShadow = `-${aberrationVal}px 0 rgba(255,0,0,0.8), ${aberrationVal}px 0 rgba(0,255,255,0.8)`;
+        } else {
+          textEl.style.textShadow = 'none';
+        }
+      }
+
+      // 5. Vignette Darkness
+      const vignetteEl = document.getElementById('crtVignette');
+      if (vignetteEl) {
+        vignetteEl.style.background = `radial-gradient(circle, rgba(0,0,0,0) ${100 - vignetteVal}%, rgba(0,0,0,${vignetteVal / 100}))`;
+      }
+    }
+
+    function resetCRT() {
+      document.getElementById('sliderScanlines').value = 50;
+      document.getElementById('sliderFlicker').value = 50;
+      document.getElementById('sliderDistortion').value = 25;
+      document.getElementById('sliderAberration').value = 0;
+      document.getElementById('sliderVignette').value = 85;
+      updateCRT();
     }
 
   </script>
@@ -391,6 +533,40 @@
       z-index: 25;
       pointer-events: none;
       background: radial-gradient(circle, rgba(0,0,0,0) 60%, rgba(0,0,0,0.85));
+    }
+
+  
+    /* CRT DISTORTION & SCANLINE WORKBENCH */
+    .crt-distortion-wrapper {
+      transition: transform 0.2s ease, filter 0.2s ease;
+    }
+
+    .chromatic-aberration {
+      text-shadow: -2px 0 rgba(255,0,0,0.7), 2px 0 rgba(0,255,255,0.7);
+    }
+
+    /* Custom Range Sliders */
+    input[type=range] {
+      -webkit-appearance: none;
+      width: 100%;
+      background: rgba(255,255,255,0.1);
+      height: 4px;
+      border-radius: 2px;
+      outline: none;
+    }
+    input[type=range]::-webkit-slider-thumb {
+      -webkit-appearance: none;
+      width: 14px;
+      height: 14px;
+      border-radius: 50%;
+      background: #ffffff;
+      border: 1px solid rgba(0,0,0,0.8);
+      box-shadow: 0 0 8px rgba(255,255,255,0.8);
+      cursor: pointer;
+      transition: transform 0.15s ease;
+    }
+    input[type=range]::-webkit-slider-thumb:hover {
+      transform: scale(1.25);
     }
 
   </style>
@@ -936,33 +1112,62 @@ TELEMETRY RESONANCE: 99.8% // STATUS: NOMINAL</pre>
           </div>
         </div>
 
-        <!-- CRT FX Control Switches -->
+        <!-- CRT FX Interactive Distortion Workbench Sliders -->
         <div class="gothic-panel panel-white space-y-5">
-          <span class="panel-title-tag">CRT_FX_CONTROLS</span>
+          <span class="panel-title-tag">CRT_DISTORTION_WORKBENCH</span>
 
-          <div class="space-y-4 text-xs">
+          <div class="space-y-4 text-xs font-mono">
+
+            <!-- 1. Scanline Heaviness -->
             <div class="space-y-1">
-              <span class="text-white font-bold block">// SCANLINES (3PX RASTER)</span>
-              <button onclick="toggleScanlines()" id="btnScanlines" class="gothic-btn-white w-full py-2 text-[9px]">[ TOGGLE SCANLINES: ON ]</button>
+              <div class="flex justify-between items-center text-[10px]">
+                <span class="text-white font-bold uppercase">// SCANLINE HEAVINESS</span>
+                <span id="valScanlines" class="text-white font-bold">50%</span>
+              </div>
+              <input type="range" id="sliderScanlines" min="0" max="100" value="50" oninput="updateCRT()">
             </div>
 
+            <!-- 2. Screen Flicker Intensity -->
             <div class="space-y-1">
-              <span class="text-white font-bold block">// PERIMETER VIGNETTE</span>
-              <button onclick="toggleVignette()" id="btnVignette" class="gothic-btn-white w-full py-2 text-[9px]">[ TOGGLE VIGNETTE: ON ]</button>
+              <div class="flex justify-between items-center text-[10px]">
+                <span class="text-white font-bold uppercase">// FLICKER INTENSITY</span>
+                <span id="valFlicker" class="text-white font-bold">50%</span>
+              </div>
+              <input type="range" id="sliderFlicker" min="0" max="100" value="50" oninput="updateCRT()">
             </div>
 
+            <!-- 3. Screen Distortion (Curvature Bulge) -->
             <div class="space-y-1">
-              <span class="text-white font-bold block">// SCREEN FLICKER ANIMATION</span>
-              <button onclick="toggleFlicker()" id="btnFlicker" class="gothic-btn-white w-full py-2 text-[9px]">[ TOGGLE FLICKER: ON ]</button>
+              <div class="flex justify-between items-center text-[10px]">
+                <span class="text-white font-bold uppercase">// BARREL DISTORTION (CURVATURE)</span>
+                <span id="valDistortion" class="text-white font-bold">25%</span>
+              </div>
+              <input type="range" id="sliderDistortion" min="0" max="100" value="25" oninput="updateCRT()">
             </div>
+
+            <!-- 4. RGB Chromatic Aberration -->
+            <div class="space-y-1">
+              <div class="flex justify-between items-center text-[10px]">
+                <span class="text-white font-bold uppercase">// RGB CHROMATIC ABERRATION</span>
+                <span id="valAberration" class="text-white font-bold">0px</span>
+              </div>
+              <input type="range" id="sliderAberration" min="0" max="10" value="0" oninput="updateCRT()">
+            </div>
+
+            <!-- 5. Perimeter Vignette Darkness -->
+            <div class="space-y-1">
+              <div class="flex justify-between items-center text-[10px]">
+                <span class="text-white font-bold uppercase">// PERIMETER VIGNETTE DARKNESS</span>
+                <span id="valVignette" class="text-white font-bold">85%</span>
+              </div>
+              <input type="range" id="sliderVignette" min="0" max="100" value="85" oninput="updateCRT()">
+            </div>
+
+            <!-- Reset Button -->
+            <button onclick="resetCRT()" class="gothic-btn-white w-full py-2 text-[9px] mt-2">[ RESET CRT DISTORTION DEFAULTS ]</button>
           </div>
 
-          <div class="pt-3 border-t border-white/10 text-[10px] text-zinc-400 space-y-1">
-            <p><strong class="text-white">Video Asset:</strong> Embedded Base64 WebM cosmic stream.</p>
-            <p><strong class="text-white">Scanline Blend:</strong> Linear gradient 50% opacity mask.</p>
-          </div>
-
-          <span class="panel-footer-tag">FX_CONTROLLER</span>
+          <span class="panel-footer-tag">FX_SLIDERS</span>
         </div>
 
       </div>
@@ -1052,6 +1257,77 @@ TELEMETRY RESONANCE: 99.8% // STATUS: NOMINAL</pre>
         el.style.animation = 'none';
         btn.innerText = '[ TOGGLE FLICKER: OFF ]';
       }
+    }
+
+  
+    // Real-time CRT Distortion & Scanline Workbench Controller
+    function updateCRT() {
+      const scanlinesVal = document.getElementById('sliderScanlines').value;
+      const flickerVal = document.getElementById('sliderFlicker').value;
+      const distortionVal = document.getElementById('sliderDistortion').value;
+      const aberrationVal = document.getElementById('sliderAberration').value;
+      const vignetteVal = document.getElementById('sliderVignette').value;
+
+      // Update Labels
+      document.getElementById('valScanlines').innerText = scanlinesVal + '%';
+      document.getElementById('valFlicker').innerText = flickerVal + '%';
+      document.getElementById('valDistortion').innerText = distortionVal + '%';
+      document.getElementById('valAberration').innerText = aberrationVal + 'px';
+      document.getElementById('valVignette').innerText = vignetteVal + '%';
+
+      // 1. Scanlines Opacity & Raster
+      const scanlinesEl = document.getElementById('crtScanlines');
+      if (scanlinesEl) {
+        scanlinesEl.style.opacity = scanlinesVal / 100;
+        const size = Math.max(2, Math.floor(scanlinesVal / 20));
+        scanlinesEl.style.background = `linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, ${scanlinesVal / 100}) 50%) 0 0 / 100% ${size}px`;
+      }
+
+      // 2. Screen Flicker Speed
+      const glassEl = document.getElementById('crtGlass');
+      if (glassEl) {
+        if (flickerVal > 0) {
+          const speed = (0.5 - (flickerVal / 250)).toFixed(2);
+          glassEl.style.animation = `${speed}s infinite alternate crt-flicker-preview`;
+        } else {
+          glassEl.style.animation = 'none';
+        }
+      }
+
+      // 3. Screen Distortion (Perspective & Scale)
+      const monitorEl = document.querySelector('.crt-monitor-specimen');
+      if (monitorEl) {
+        const perspective = 2000 - (distortionVal * 15);
+        const rotateX = (distortionVal / 50).toFixed(1);
+        const scale = (1 - (distortionVal / 500)).toFixed(3);
+        monitorEl.style.transform = `perspective(${perspective}px) rotateX(${rotateX}deg) scale(${scale})`;
+        monitorEl.style.borderRadius = `${12 + Math.floor(distortionVal / 5)}px`;
+      }
+
+      // 4. Chromatic Aberration (RGB Shift)
+      const textEl = document.querySelector('#crtGlass h3');
+      if (textEl) {
+        if (aberrationVal > 0) {
+          textEl.style.textShadow = `-${aberrationVal}px 0 rgba(255,0,0,0.8), ${aberrationVal}px 0 rgba(0,255,255,0.8)`;
+        } else {
+          textEl.style.textShadow = 'none';
+        }
+      }
+
+      // 5. Vignette Darkness
+      const vignetteEl = document.getElementById('crtVignette');
+      if (vignetteEl) {
+        vignetteEl.style.background = `radial-gradient(circle, rgba(0,0,0,0) ${100 - vignetteVal}%, rgba(0,0,0,${vignetteVal / 100}))`;
+      }
+    }
+
+    function resetCRT() {
+      document.getElementById('sliderScanlines').value = 50;
+      document.getElementById('sliderFlicker').value = 50;
+      document.getElementById('sliderDistortion').value = 25;
+      document.getElementById('sliderAberration').value = 0;
+      document.getElementById('sliderVignette').value = 85;
+      updateCRT();
     }
 
   </script>
