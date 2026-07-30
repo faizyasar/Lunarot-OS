@@ -1,4 +1,10 @@
-<!DOCTYPE html>
+import os
+
+root_dir = r"c:\Users\faizy\Documents\Lunarot Engine\Lunarot-Tarot-Engine-1.0"
+target_file = os.path.join(root_dir, "style-guide.html")
+public_file = os.path.join(root_dir, "public", "style-guide.html")
+
+html_content = r"""<!DOCTYPE html>
 <html lang="en" class="dark">
 <head>
   <meta charset="UTF-8">
@@ -643,3 +649,12 @@ TELEMETRY RESONANCE: 99.8% // STATUS: NOMINAL</pre>
   </script>
 </body>
 </html>
+"""
+
+with open(target_file, "w", encoding="utf-8") as f:
+    f.write(html_content)
+
+with open(public_file, "w", encoding="utf-8") as f:
+    f.write(html_content)
+
+print(f"[SUCCESS] Updated standalone Style Guide (NO GOLD / MONOCHROME LATEST) at {target_file} and {public_file}")
