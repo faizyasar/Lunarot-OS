@@ -2,6 +2,14 @@
   "cleanUrls": true,
   "rewrites": [
     {
+      "source": "/tarot-standalone",
+      "destination": "/tarot-standalone.html"
+    },
+    {
+      "source": "/tarot",
+      "destination": "/tarot-standalone.html"
+    },
+    {
       "source": "/sacred-pachinko",
       "destination": "/sacred-pachinko.html"
     },
