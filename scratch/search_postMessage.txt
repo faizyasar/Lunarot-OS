@@ -1,0 +1,9 @@
+Found:     for (const cw of relays) {
+          try { cw.postMessage({ __bundler_page: uuid, __bundler_text
+Found: eof text === 'string') {
+          try { e.source.postMessage({ __bundler_page: uuid, __bundler_text
+Found: gRelays[uuid] = [e.source];
+        window.parent.postMessage({ __bundler_need: uuid }, OWN_TARGET);
+Found: or (const uuid of needed) {
+        window.parent.postMessage({ __bundler_need: uuid }, OWN_TARGET);
+Found: e=be.port2;be.port1.onmessage=ge,fe=function(){we.postMessage(null)}}else fe=function(){J(ge,0)};fun

@@ -1,0 +1,87 @@
+/* Lunarot OS — index unpack screen.
+   tarot.index and music.index are iframes; until they paint, the panel is just
+   empty black. This drops the OS boot-bar over any app iframe and lifts it on
+   load, so opening an index reads as mounting a disk rather than a dead frame. */
+(function () {
+  var MIN_MS = 620;
+  var LABELS = { 'tarot': 'TAROT.INDEX', 'jewel': 'MUSIC.INDEX', 'music': 'MUSIC.INDEX' };
+
+  function styles() {
+    if (document.getElementById('__lnrt_unpack_css')) return;
+    var st = document.createElement('style');
+    st.id = '__lnrt_unpack_css';
+    st.textContent =
+      '@keyframes __lnrt_march{from{left:-58px}to{left:268px}}' +
+      '@keyframes __lnrt_fade{from{opacity:1}to{opacity:0}}';
+    document.head.appendChild(st);
+  }
+
+  function labelFor(src) {
+    var k = (src || '').toLowerCase();
+    for (var key in LABELS) if (k.indexOf(key) > -1) return LABELS[key];
+    return 'INDEX';
+  }
+
+  function mount(frame) {
+    var host = frame.parentElement;
+    if (!host) return;
+    styles();
+    if (getComputedStyle(host).position === 'static') host.style.position = 'relative';
+
+    var o = document.createElement('div');
+    o.setAttribute('data-lnrt-unpack', '');
+    o.style.cssText = 'position:absolute;inset:0;z-index:60;background:#000;display:flex;' +
+      'flex-direction:column;align-items:center;justify-content:center;gap:14px;pointer-events:none';
+
+    var bar = document.createElement('div');
+    bar.style.cssText = 'position:relative;width:268px;height:18px;background:#000;' +
+      'border:1px solid #2e2e2d;overflow:hidden;' +
+      'box-shadow:0 0 6px rgba(140,136,104,0.45),0 0 1px rgba(200,196,160,0.6)';
+    var fill = document.createElement('div');
+    fill.style.cssText = 'position:absolute;top:2px;bottom:2px;left:0;width:58px;' +
+      'background:linear-gradient(180deg,#7f7f7f 0 6%,#eaebe6 6% 26%,#cecfc5 26% 34%,' +
+      '#787870 34% 44%,#616b2f 44% 74%,#393d25 74% 88%,#292c1d 88% 100%);' +
+      '-webkit-mask-image:repeating-linear-gradient(90deg,#000 0 5px,transparent 5px 9px);' +
+      'mask-image:repeating-linear-gradient(90deg,#000 0 5px,transparent 5px 9px);' +
+      'animation:__lnrt_march 3.6s steps(18,end) infinite';
+    bar.appendChild(fill);
+
+    var txt = document.createElement('div');
+    txt.style.cssText = 'font:400 9px/1.6 "JetBrains Mono",ui-monospace,monospace;' +
+      'letter-spacing:0.3em;text-transform:uppercase;color:rgba(239,237,232,0.45)';
+    txt.textContent = 'UNPACKING ' + labelFor(frame.getAttribute('src') || frame.src);
+
+    o.appendChild(bar);
+    o.appendChild(txt);
+    host.appendChild(o);
+
+    var t0 = Date.now(), done = false;
+    function lift() {
+      if (done) return;
+      done = true;
+      var wait = Math.max(0, MIN_MS - (Date.now() - t0));
+      setTimeout(function () {
+        o.style.animation = '__lnrt_fade 220ms ease forwards';
+        setTimeout(function () { if (o.parentNode) o.parentNode.removeChild(o); }, 240);
+      }, wait);
+    }
+    if (frame.contentDocument && frame.contentDocument.readyState === 'complete') lift();
+    frame.addEventListener('load', lift);
+    setTimeout(lift, 8000);   // never strand the panel
+  }
+
+  function scan() {
+    document.querySelectorAll('#root iframe').forEach(function (f) {
+      if (f.hasAttribute('data-lnrt-unpacked')) return;
+      f.setAttribute('data-lnrt-unpacked', '');
+      mount(f);
+    });
+  }
+
+  function start() {
+    new MutationObserver(scan).observe(document.body, { childList: true, subtree: true });
+    scan();
+  }
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', start);
+  else start();
+})();

@@ -1,0 +1,53 @@
+ground:rgba(0,0,0,0.8); padding:10px; border:1px solid #444; color: #fff; pointer-events: auto; display: flex; flex-direction: column; gap: 4px;">
+     <div id="telemetry-text">target: ..., radius: ...</div>
+     
+     <div style="display:flex; align-items:center; gap: 8px; font-size:10px;">
+        <span>ZOOM:</span>
+        <input type="range" id="zoom-slider" min="5" max="400" step="1" oninput="cam.radius = parseFloat(this.value);" style="flex-grow:1;">
+     </div>
+
+     <div style="display:flex; gap: 4px; font-size:10px;">
+        <button onclick="cam.target.x -= 1">-</button> TX <button onclick="cam.target.x += 1">+</button>
+        <button onclick="cam.target.y -= 1">-</button> TY <button onclick="cam.target.y += 1">+</button>
+        <button onclick="cam.target.z -= 1">-</button> TZ <button onclick="cam.target.z += 1">+</button>
+     </div>
+     <div style="display:flex; gap: 4px; font-size:10px;">
+        <button onclick="cam.radius -= 1">-</button> RAD <button onclick="cam.radius += 1">+</button>
+        <button onclick="cam.alpha -= 0.1">-</button> ALP <button onclick="cam.alpha += 0.1">+</button>
+        <button onclick="cam.beta -= 0.1">-</button> BET <button onclick="cam.beta += 0.1">+</button>
+     </div>
+     <button class="copy-coords-btn" onclick="copyCameraCoords()" style="margin-top:8px; padding:5px 10px; background:#fff; color:#000; font-family:'Cinzel', serif; font-weight:bold; font-size:10px; cursor:pointer; border:none; letter-spacing:1px; width:100%;">COPY DATA</button>
+  </div>
+
+<!-- Active Focus Info HUD -->
+  <div class="focus-hud" id="focus-hud">
+    <div class="focus-label" id="hud-status">● TARGET LOCKED</div>
+    <div class="focus-title" id="hud-title">Full Skeleton</div>
+    <div class="focus-sub" id="hud-sub">Anatomical System • 217 Bones</div>
+  </div>
+
+
+
+  <!-- Quick Focus Preset Camera Bar (ReactBits Line Sidebar) -->
+  <div class="quick-focus-bar" id="line-sidebar">
+    <div class="focus-btn-container" onclick="focusPreset('full')">
+      <span class="focus-marker"></span>
+      <button class="focus-btn" id="btn-preset-full">Full Tree</button>
+    </div>
+    <div class="focus-btn-container" onclick="focusPreset('keter')">
+      <span class="focus-marker"></span>
+      <button class="focus-btn" id="btn-preset-keter">Keter (Crown)</button>
+    </div>
+    <div class="focus-btn-container" onclick="focusPreset('chokhmah')">
+      <span class="focus-marker"></span>
+      <button class="focus-btn" id="btn-preset-chokhmah">Chokhmah (Wisdom)</button>
+    </div>
+    <div class="focus-btn-container" onclick="focusPreset('binah')">
+      <span class="focus-marker"></span>
+      <button class="focus-btn" id="btn-preset-binah">Binah (Understanding)</button>
+    </div>
+    <div class="focus-btn-container" onclick="focusPreset('daat')">
+      <span class="focus-marker"></span>
+      <button class="focus-btn" id="btn-preset-daat">Da'at (Knowledge)</button>
+    </div>
+    <div class="focus-btn-container" onclick="focusPreset('c

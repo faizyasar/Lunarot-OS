@@ -1,0 +1,270 @@
+{
+  "plugins": [
+    "react",
+    "import"
+  ],
+  "rules": {
+    "react/forbid-elements": [
+      "warn",
+      {
+        "forbid": []
+      }
+    ],
+    "no-restricted-imports": [
+      "warn",
+      {
+        "patterns": [
+          {
+            "group": [
+              "components/cards/**",
+              "components/core/**",
+              "components/effects/**",
+              "components/forms/**",
+              "components/navigation/**",
+              "ui_kits/lunarot-baseball/**",
+              "ui_kits/sacred-draw/**",
+              "ui_kits/sefirot-codex/**",
+              "ui_kits/sigil-generator/**"
+            ],
+            "message": "Import design-system components from 'index.js', not component internals."
+          }
+        ]
+      }
+    ],
+    "no-restricted-syntax": [
+      "warn",
+      {
+        "selector": "Literal[value=/#[0-9a-fA-F]{3,8}\\b/]",
+        "message": "Raw hex color — use a design-system color token via var()."
+      },
+      {
+        "selector": "Literal[value=/\\b\\d+px\\b/]",
+        "message": "Raw px value — use a design-system spacing token via var()."
+      },
+      {
+        "selector": "Literal[value=/font-family\\s*:\\s*(?!['\\\"]?(?:Onryou|IPAexMincho|Cinzel|Cormorant Garamond|JetBrains Mono))/i]",
+        "message": "Font not provided by the design system. Available: Onryou, IPAexMincho, Cinzel, Cormorant Garamond, JetBrains Mono."
+      },
+      {
+        "selector": "JSXOpeningElement[name.name='Button'] > JSXAttribute > JSXIdentifier[name!=/^(?:variant|full|disabled|glyph|children|onClick|style|key|ref|className|style|children)$/]",
+        "message": "<Button> doesn't accept that prop. Declared props: variant, full, disabled, glyph, children, onClick, style."
+      },
+      {
+        "selector": "JSXOpeningElement[name.name='Button'] > JSXAttribute[name.name='variant'] > Literal[value!=/^(?:primary|secondary|ghost)$/]",
+        "message": "<Button> variant must be one of 'primary' | 'secondary' | 'ghost'."
+      },
+      {
+        "selector": "JSXOpeningElement[name.name='HoverText'] > JSXAttribute > JSXIdentifier[name!=/^(?:text|style|key|ref|className|style|children)$/]",
+        "message": "<HoverText> doesn't accept that prop. Declared props: text, style."
+      },
+      {
+        "selector": "JSXOpeningElement[name.name='InputOption'] > JSXAttribute > JSXIdentifier[name!=/^(?:value|label|key|ref|className|style|children)$/]",
+        "message": "<InputOption> doesn't accept that prop. Declared props: value, label."
+      },
+      {
+        "selector": "JSXOpeningElement[name.name='NavButton'] > JSXAttribute > JSXIdentifier[name!=/^(?:active|children|onClick|key|ref|className|style|children)$/]",
+        "message": "<NavButton> doesn't accept that prop. Declared props: active, children, onClick."
+      },
+      {
+        "selector": "JSXOpeningElement[name.name='NavButton'] > JSXAttribute[name.name='active'] > Literal[value!=/^(?:primary|secondary)$/]",
+        "message": "<NavButton> active must be one of 'primary' | 'secondary'."
+      },
+      {
+        "selector": "JSXOpeningElement[name.name='Panel'] > JSXAttribute > JSXIdentifier[name!=/^(?:variant|tag|footerTag|children|style|key|ref|className|style|children)$/]",
+        "message": "<Panel> doesn't accept that prop. Declared props: variant, tag, footerTag, children, style."
+      },
+      {
+        "selector": "JSXOpeningElement[name.name='Panel'] > JSXAttribute[name.name='variant'] > Literal[value!=/^(?:gold|white)$/]",
+        "message": "<Panel> variant must be one of 'gold' | 'white'."
+      },
+      {
+        "selector": "JSXOpeningElement[name.name='TarotCardData'] > JSXAttribute > JSXIdentifier[name!=/^(?:name|num|glyph|key|ref|className|style|children)$/]",
+        "message": "<TarotCardData> doesn't accept that prop. Declared props: name, num, glyph."
+      },
+      {
+        "selector": "JSXOpeningElement[name.name='Typewriter'] > JSXAttribute > JSXIdentifier[name!=/^(?:text|chargedList|style|key|ref|className|style|children)$/]",
+        "message": "<Typewriter> doesn't accept that prop. Declared props: text, chargedList, style."
+      }
+    ]
+  },
+  "overrides": [
+    {
+      "files": [
+        "**/index.js"
+      ],
+      "rules": {
+        "no-restricted-imports": "off"
+      }
+    }
+  ],
+  "x-omelette": {
+    "components": {
+      "Button": {
+        "replaces": []
+      },
+      "HoverText": {
+        "replaces": []
+      },
+      "InputOption": {
+        "replaces": []
+      },
+      "NavButton": {
+        "replaces": []
+      },
+      "Panel": {
+        "replaces": []
+      },
+      "TarotCardData": {
+        "replaces": []
+      },
+      "Typewriter": {
+        "replaces": []
+      }
+    },
+    "tokens": [
+      "--ash",
+      "--bg-page",
+      "--bg-panel",
+      "--blur-panel",
+      "--bone",
+      "--border-default",
+      "--border-strong",
+      "--dur-base",
+      "--dur-curtain",
+      "--dur-fast",
+      "--dur-quick",
+      "--dur-slow",
+      "--dur-snap",
+      "--ease-out",
+      "--ease-snap",
+      "--ease-theatrical",
+      "--font-body",
+      "--font-display",
+      "--font-occult",
+      "--font-system",
+      "--glow-surface",
+      "--glow-surface-strong",
+      "--ink",
+      "--ink-40",
+      "--ink-60",
+      "--ink-80",
+      "--radius-card",
+      "--radius-none",
+      "--space-1",
+      "--space-2",
+      "--space-3",
+      "--space-4",
+      "--space-6",
+      "--space-8",
+      "--surface",
+      "--surface-08",
+      "--surface-15",
+      "--surface-25",
+      "--surface-40",
+      "--surface-60",
+      "--surface-80",
+      "--text-2xl",
+      "--text-base",
+      "--text-body",
+      "--text-faint",
+      "--text-lg",
+      "--text-muted",
+      "--text-primary",
+      "--text-sm",
+      "--text-xl",
+      "--text-xs",
+      "--tracking-normal",
+      "--tracking-wide",
+      "--tracking-wider",
+      "--tracking-widest",
+      "--zodiac-aquarius",
+      "--zodiac-aries",
+      "--zodiac-cancer",
+      "--zodiac-capricorn",
+      "--zodiac-gemini",
+      "--zodiac-leo",
+      "--zodiac-libra",
+      "--zodiac-pisces",
+      "--zodiac-sagittarius",
+      "--zodiac-scorpio",
+      "--zodiac-taurus",
+      "--zodiac-virgo"
+    ],
+    "tokenKinds": {
+      "--ink": "color",
+      "--ash": "color",
+      "--bone": "color",
+      "--surface": "color",
+      "--surface-08": "color",
+      "--surface-15": "color",
+      "--surface-25": "color",
+      "--surface-40": "color",
+      "--surface-60": "color",
+      "--surface-80": "color",
+      "--ink-40": "color",
+      "--ink-60": "color",
+      "--ink-80": "color",
+      "--bg-page": "color",
+      "--bg-panel": "color",
+      "--text-primary": "font",
+      "--text-body": "font",
+      "--text-muted": "font",
+      "--text-faint": "font",
+      "--border-default": "color",
+      "--border-strong": "color",
+      "--zodiac-aries": "color",
+      "--zodiac-taurus": "color",
+      "--zodiac-gemini": "color",
+      "--zodiac-cancer": "color",
+      "--zodiac-leo": "color",
+      "--zodiac-virgo": "color",
+      "--zodiac-libra": "color",
+      "--zodiac-scorpio": "color",
+      "--zodiac-sagittarius": "color",
+      "--zodiac-capricorn": "color",
+      "--zodiac-aquarius": "color",
+      "--zodiac-pisces": "color",
+      "--font-display": "font",
+      "--font-body": "font",
+      "--font-system": "font",
+      "--font-occult": "font",
+      "--text-xs": "font",
+      "--text-sm": "font",
+      "--text-base": "font",
+      "--text-lg": "font",
+      "--text-xl": "font",
+      "--text-2xl": "font",
+      "--tracking-normal": "font",
+      "--tracking-wide": "font",
+      "--tracking-wider": "font",
+      "--tracking-widest": "font",
+      "--space-1": "spacing",
+      "--space-2": "spacing",
+      "--space-3": "spacing",
+      "--space-4": "spacing",
+      "--space-6": "spacing",
+      "--space-8": "spacing",
+      "--radius-none": "radius",
+      "--radius-card": "radius",
+      "--ease-out": "other",
+      "--dur-fast": "other",
+      "--dur-base": "other",
+      "--dur-slow": "other",
+      "--glow-surface": "color",
+      "--glow-surface-strong": "color",
+      "--blur-panel": "other",
+      "--ease-theatrical": "other",
+      "--ease-snap": "other",
+      "--dur-snap": "other",
+      "--dur-quick": "other",
+      "--dur-curtain": "other"
+    },
+    "fontFamilies": [
+      "Cinzel",
+      "Cormorant Garamond",
+      "IPAexMincho",
+      "JetBrains Mono",
+      "Onryou"
+    ]
+  }
+}

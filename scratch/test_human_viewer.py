@@ -1,0 +1,35 @@
+import base64
+import os
+import time
+
+html_content = """<!DOCTYPE html>
+<html>
+<head>
+    <script src="https://cdn.babylonjs.com/babylon.js"></script>
+    <script src="https://cdn.babylonjs.com/loaders/babylonjs.loaders.min.js"></script>
+    <style>html, body { width: 100%; height: 100%; margin: 0; padding: 0; overflow: hidden; background: black; }</style>
+</head>
+<body>
+    <canvas id="renderCanvas" style="width: 100%; height: 100%; touch-action: none;"></canvas>
+    <script>
+        const canvas = document.getElementById("renderCanvas");
+        const engine = new BABYLON.Engine(canvas, true);
+        const scene = new BABYLON.Scene(engine);
+        scene.createDefaultCameraOrLight(true, true, true);
+        
+        BABYLON.SceneLoader.Append("", "human_skeleton.glb", scene, function (scene) {
+            scene.activeCamera.target = new BABYLON.Vector3(0, 160, 0); // Focus head
+            scene.activeCamera.radius = 30;
+            scene.activeCamera.alpha = 1.5;
+            scene.activeCamera.beta = 1.5;
+        });
+        
+        engine.runRenderLoop(() => { scene.render(); });
+    </script>
+</body>
+</html>"""
+
+with open('scratch/test_human.html', 'w') as f:
+    f.write(html_content)
+
+print("Created test_human.html")

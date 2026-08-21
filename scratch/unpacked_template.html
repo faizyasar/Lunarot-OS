@@ -1,0 +1,725 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CD Jewel Case</title>
+
+<style>
+  /* cyrillic-ext */
+@font-face {
+  font-family: 'Cormorant Garamond';
+  font-style: italic;
+  font-weight: 400;
+  font-display: swap;
+  src: url("70a36e7c-34c3-42fd-b03a-472e7a6d79dd") format('woff2');
+  unicode-range: U+0460-052F, U+1C80-1C8A, U+20B4, U+2DE0-2DFF, U+A640-A69F, U+FE2E-FE2F;
+}
+/* cyrillic */
+@font-face {
+  font-family: 'Cormorant Garamond';
+  font-style: italic;
+  font-weight: 400;
+  font-display: swap;
+  src: url("ee673892-db48-475e-a553-e87cd270eb8a") format('woff2');
+  unicode-range: U+0301, U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
+}
+/* vietnamese */
+@font-face {
+  font-family: 'Cormorant Garamond';
+  font-style: italic;
+  font-weight: 400;
+  font-display: swap;
+  src: url("961e9c0f-b42a-48bc-b5eb-181cab3b133b") format('woff2');
+  unicode-range: U+0102-0103, U+0110-0111, U+0128-0129, U+0168-0169, U+01A0-01A1, U+01AF-01B0, U+0300-0301, U+0303-0304, U+0308-0309, U+0323, U+0329, U+1EA0-1EF9, U+20AB;
+}
+/* latin-ext */
+@font-face {
+  font-family: 'Cormorant Garamond';
+  font-style: italic;
+  font-weight: 400;
+  font-display: swap;
+  src: url("718684ca-f67b-49ed-91fb-10c0e929577b") format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+/* latin */
+@font-face {
+  font-family: 'Cormorant Garamond';
+  font-style: italic;
+  font-weight: 400;
+  font-display: swap;
+  src: url("bcb79199-e742-4abf-bfb9-cb3b2da5e12a") format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+/* cyrillic-ext */
+@font-face {
+  font-family: 'JetBrains Mono';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url("c6b15f53-9e21-47b0-85f0-27f4205d5048") format('woff2');
+  unicode-range: U+0460-052F, U+1C80-1C8A, U+20B4, U+2DE0-2DFF, U+A640-A69F, U+FE2E-FE2F;
+}
+/* cyrillic */
+@font-face {
+  font-family: 'JetBrains Mono';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url("e63cca99-4bed-4805-b718-fbbb11ba103c") format('woff2');
+  unicode-range: U+0301, U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
+}
+/* greek */
+@font-face {
+  font-family: 'JetBrains Mono';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url("60bcc817-00b7-4278-9a4c-6c4e3c45f581") format('woff2');
+  unicode-range: U+0370-0377, U+037A-037F, U+0384-038A, U+038C, U+038E-03A1, U+03A3-03FF;
+}
+/* vietnamese */
+@font-face {
+  font-family: 'JetBrains Mono';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url("8ef74074-87ab-42c2-a45a-57719bebdb08") format('woff2');
+  unicode-range: U+0102-0103, U+0110-0111, U+0128-0129, U+0168-0169, U+01A0-01A1, U+01AF-01B0, U+0300-0301, U+0303-0304, U+0308-0309, U+0323, U+0329, U+1EA0-1EF9, U+20AB;
+}
+/* latin-ext */
+@font-face {
+  font-family: 'JetBrains Mono';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url("fbed6fa3-85da-45f0-9d5d-43c53fe1315f") format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+/* latin */
+@font-face {
+  font-family: 'JetBrains Mono';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url("f1d0f514-d3ec-4ff9-8781-d8bab3bc0c26") format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+/* cyrillic-ext */
+@font-face {
+  font-family: 'JetBrains Mono';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url("c6b15f53-9e21-47b0-85f0-27f4205d5048") format('woff2');
+  unicode-range: U+0460-052F, U+1C80-1C8A, U+20B4, U+2DE0-2DFF, U+A640-A69F, U+FE2E-FE2F;
+}
+/* cyrillic */
+@font-face {
+  font-family: 'JetBrains Mono';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url("e63cca99-4bed-4805-b718-fbbb11ba103c") format('woff2');
+  unicode-range: U+0301, U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
+}
+/* greek */
+@font-face {
+  font-family: 'JetBrains Mono';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url("60bcc817-00b7-4278-9a4c-6c4e3c45f581") format('woff2');
+  unicode-range: U+0370-0377, U+037A-037F, U+0384-038A, U+038C, U+038E-03A1, U+03A3-03FF;
+}
+/* vietnamese */
+@font-face {
+  font-family: 'JetBrains Mono';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url("8ef74074-87ab-42c2-a45a-57719bebdb08") format('woff2');
+  unicode-range: U+0102-0103, U+0110-0111, U+0128-0129, U+0168-0169, U+01A0-01A1, U+01AF-01B0, U+0300-0301, U+0303-0304, U+0308-0309, U+0323, U+0329, U+1EA0-1EF9, U+20AB;
+}
+/* latin-ext */
+@font-face {
+  font-family: 'JetBrains Mono';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url("fbed6fa3-85da-45f0-9d5d-43c53fe1315f") format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+/* latin */
+@font-face {
+  font-family: 'JetBrains Mono';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url("f1d0f514-d3ec-4ff9-8781-d8bab3bc0c26") format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html, body { width: 100%; height: 100%; overflow: hidden; background: #000; }
+  body { font-family: 'JetBrains Mono', monospace; color: #efede8; user-select: none; }
+  a { user-select: text; }
+
+  .viewport {
+    width: 100vw; height: 100vh;
+    display: flex; align-items: center; justify-content: center;
+    perspective: 2200px;
+  }
+  .stage-scale { transform: scale(1.7); }
+
+  /* ===== SCENE =====
+     Case body: 300w x 264h face, 24px deep.
+     z=0  : back panel (tray card)
+     z=24 : front lid (booklet + glass)
+     x=0  : spine plane, faces left            */
+  .scene {
+    position: relative;
+    width: 300px; height: 264px;
+    transform-style: preserve-3d;
+    transform: rotateX(4deg) rotateY(22deg);
+    transition: transform 0.5s cubic-bezier(0.2, 0.8, 0.2, 1);
+  }
+
+  /* ---- BACK COVER (music.index back card, faces backward) ---- */
+  .back-cover {
+    position: absolute; inset: 0;
+    transform: rotateY(180deg) translateZ(0.5px);
+    backface-visibility: hidden;
+    box-shadow: inset 0 0 0 1px rgba(255,255,255,0.2);
+    background: url("884ca11c-061b-4046-9d62-00ca1159c630");
+    background-size: 100% 100%;
+    font-family: 'JetBrains Mono', monospace;
+    color: #efede8;
+    padding: 12px 14px;
+    display: flex; flex-direction: column; gap: 8px;
+    overflow: hidden;
+  }
+  .bc-head {
+    display: flex; justify-content: space-between; align-items: baseline;
+    border-bottom: 1px solid rgba(255,255,255,0.25); padding-bottom: 5px;
+  }
+  .bc-title { font-size: 11px; font-weight: 700; letter-spacing: 0.2em; }
+  .bc-sub { font-size: 6px; color: #8a8a92; letter-spacing: 0.25em; text-transform: uppercase; }
+  .bc-tracks { display: flex; flex-direction: column; gap: 3px; flex: 1; }
+  .bc-track { display: flex; align-items: baseline; gap: 6px; font-size: 7.5px; letter-spacing: 0.08em; }
+  .bc-track .no { color: #e0453c; width: 12px; }
+  .bc-track .name { font-weight: 700; }
+  .bc-track .album { color: #6f6f77; font-size: 6px; margin-left: auto; font-style: italic; }
+  .bc-credits {
+    border-top: 1px dashed rgba(255,255,255,0.2); padding-top: 5px;
+    font-size: 5.5px; line-height: 1.7; color: #8a8a92;
+    letter-spacing: 0.1em; text-transform: uppercase;
+  }
+  .bc-credits b { color: #efede8; }
+  .bc-credits a { color: #a1a1aa; text-decoration: underline; }
+  .bc-credits a:hover { color: #efede8; }
+  .bc-credits .cy { color: #4fd8e8; }
+  .bc-footer {
+    display: flex; justify-content: space-between; align-items: flex-end;
+    border-top: 1px solid rgba(255,255,255,0.25); padding-top: 5px;
+  }
+  .bc-barcode {
+    width: 74px; height: 20px;
+    background: repeating-linear-gradient(90deg,
+      #efede8 0 1px, #050505 1px 3px, #efede8 3px 5px, #050505 5px 6px,
+      #efede8 6px 7px, #050505 7px 10px, #efede8 10px 12px, #050505 12px 13px);
+  }
+  .bc-code { font-size: 6px; letter-spacing: 0.2em; color: #8a8a92; text-align: right; line-height: 1.6; }
+  .bc-code b { color: #efede8; }
+
+  /* ---- BACK PANEL (tray card seen from behind) ---- */
+  .back-panel {
+    position: absolute; inset: 0;
+    background: #0a0a0a;
+    box-shadow: inset 0 0 0 1px rgba(255,255,255,0.15);
+    transform: translateZ(0px);
+    backface-visibility: hidden;
+  }
+
+  /* ---- CASE SIDE WALLS (top / bottom / right, clear plastic) ---- */
+  .wall {
+    position: absolute;
+    opacity: 0.55;
+    overflow: hidden;
+  }
+  .wall-right {
+    background-image: url("fde78338-f93f-44d7-91a3-192c75be6272");
+    background-size: 100% 100%;
+  }
+  .wall-top::before, .wall-bottom::before {
+    content: '';
+    position: absolute;
+    width: 24px; height: 300px;
+    top: 50%; left: 50%;
+    transform: translate(-50%, -50%) rotate(90deg);
+    background-image: url("fde78338-f93f-44d7-91a3-192c75be6272");
+    background-size: 100% 100%;
+  }
+  .wall-top {
+    width: 300px; height: 24px; top: 0; left: 0;
+    transform-origin: top center;
+    transform: rotateX(90deg) rotate(0deg);
+  }
+  .wall-bottom {
+    width: 300px; height: 24px; bottom: 0; left: 0;
+    transform-origin: bottom center;
+    transform: rotateX(-90deg);
+  }
+  .wall-right {
+    width: 24px; height: 264px; top: 0; right: 0;
+    transform-origin: center right;
+    transform: rotateY(90deg);
+  }
+
+  /* ---- SPINE: real plane on the left edge, facing left ---- */
+  .spine {
+    position: absolute;
+    left: 0; top: 0;
+    width: 24px; height: 264px;
+    transform-origin: left center;
+    transform: rotateY(-90deg);
+    background: #000;
+    box-shadow: inset 0 0 0 1px rgba(255,255,255,0.2);
+  }
+  .spine img { width: 100%; height: 100%; object-fit: fill; display: block; }
+
+  /* ---- INNER TRAY (black, holds disc) ---- */
+  .inner-tray {
+    position: absolute;
+    top: 0; bottom: 0; left: 0; right: 0;
+    background: #000;
+    box-shadow: inset 0 0 12px rgba(0,0,0,0.9), inset 0 0 0 1px rgba(255,255,255,0.07);
+    transform: translateZ(2px);
+    display: flex; align-items: center; justify-content: center;
+    overflow: hidden;
+  }
+  .inner-tray img.tray-art {
+    position: absolute; inset: 0;
+    width: 100%; height: 100%;
+    object-fit: fill; display: block;
+  }
+  .tray-notch {
+    position: absolute; width: 30px; height: 30px;
+    background: #060608; border-radius: 50%;
+    top: 50%; transform: translateY(-50%);
+    box-shadow: inset 2px 2px 5px rgba(0,0,0,0.8);
+  }
+  .tray-notch.left { left: 8px; }
+  .tray-notch.right { right: 8px; }
+  .spindle-hub {
+    position: relative; width: 40px; height: 40px; border-radius: 50%;
+    background: #1a1b20;
+    box-shadow: 0 0 8px rgba(0,0,0,0.8), inset 0 0 0 1px rgba(255,255,255,0.1);
+  }
+  .spindle-teeth {
+    position: absolute; inset: 4px; border-radius: 50%;
+    background: repeating-conic-gradient(#26272d 0deg 12deg, #101114 12deg 24deg);
+  }
+  .spindle-center {
+    position: absolute; inset: 13px; border-radius: 50%;
+    background: #08090b;
+    box-shadow: inset 0 0 4px rgba(0,0,0,0.9);
+  }
+
+  /* ---- DISC ---- */
+  .cd-disc {
+    position: absolute;
+    width: 236px; height: 236px;
+    top: 14px; left: 32px;
+    border-radius: 50%;
+    transform: translateZ(9px);
+    transform-style: preserve-3d;
+    transition: transform 0.5s cubic-bezier(0.34, 1.3, 0.5, 1);
+    cursor: pointer;
+  }
+  .cd-face {
+    position: absolute; inset: 0; border-radius: 50%;
+    backface-visibility: hidden;
+  }
+  .cd-face { overflow: hidden; }
+  .cd-face img { width: 100%; height: 100%; display: block; border-radius: 50%; object-fit: cover; }
+  .cd-back {
+    position: absolute; inset: 0; border-radius: 50%;
+    transform: rotateY(180deg);
+    backface-visibility: hidden;
+    background:
+      radial-gradient(circle at 36% 30%, rgba(255,255,255,0.95) 0%, rgba(255,255,255,0) 30%),
+      conic-gradient(from 0deg,
+        rgba(255,90,130,0.4) 0%, rgba(130,220,255,0.45) 8%, rgba(255,255,255,0.08) 16%,
+        rgba(255,225,130,0.4) 25%, rgba(170,130,255,0.45) 33%, rgba(255,255,255,0.08) 41%,
+        rgba(130,255,200,0.4) 50%, rgba(255,130,210,0.45) 58%, rgba(255,255,255,0.08) 66%,
+        rgba(130,185,255,0.4) 75%, rgba(255,205,130,0.45) 83%, rgba(255,255,255,0.08) 91%,
+        rgba(255,90,130,0.4) 100%),
+      radial-gradient(circle at 50% 50%, transparent 0%, transparent 6%, #0b0d12 6%, #0b0d12 7.5%, rgba(242,243,247,1) 7.5%, rgba(226,229,235,1) 40%, rgba(216,219,227,1) 75%, rgba(180,183,192,1) 100%);
+    box-shadow: inset 0 0 30px rgba(255,255,255,0.45), inset 0 0 4px rgba(255,255,255,0.6);
+  }
+  .cd-back::after {
+    content: ''; position: absolute; border-radius: 50%;
+    width: 14.5%; height: 14.5%; top: 42.75%; left: 42.75%;
+    background: transparent;
+    box-shadow: 0 0 0 2px rgba(255,255,255,0.4), inset 0 0 0 100px rgba(11,13,18,1);
+  }
+  .cd-surface {
+    position: absolute; inset: 0; border-radius: 50%;
+    background:
+      conic-gradient(from 90deg,
+        rgba(255,255,255,0.55), rgba(160,160,160,0.15) 12%,
+        rgba(255,255,255,0.5) 25%, rgba(120,120,120,0.2) 38%,
+        rgba(255,255,255,0.6) 50%, rgba(140,140,140,0.15) 63%,
+        rgba(255,255,255,0.5) 75%, rgba(150,150,150,0.2) 88%,
+        rgba(255,255,255,0.55)),
+      radial-gradient(circle, #d9d9d9 0%, #bfbfbf 100%);
+    box-shadow: 0 2px 10px rgba(0,0,0,0.6);
+  }
+  .cd-center-ring {
+    position: absolute; width: 84px; height: 84px;
+    top: 76px; left: 76px; border-radius: 50%;
+    background: rgba(230,230,230,0.9);
+    box-shadow: inset 0 0 0 1px rgba(0,0,0,0.15);
+  }
+  .cd-hole {
+    position: absolute; width: 34px; height: 34px;
+    top: 101px; left: 101px; border-radius: 50%;
+    background: #0b0d12;
+    box-shadow: inset 0 0 0 2px rgba(255,255,255,0.25);
+  }
+  .cd-disc:hover .cd-face { filter: brightness(1.12); }
+
+  /* ---- FRONT LID (hinged at left, holds booklet) ---- */
+  .front-lid {
+    position: absolute; inset: 0;
+    transform-style: preserve-3d;
+    transform-origin: left center;
+    transform: translateZ(24px);
+    transition: transform 0.55s cubic-bezier(0.2, 0.8, 0.25, 1);
+    cursor: pointer;
+  }
+  .scene.open .front-lid {
+    transform: translateZ(24px) rotateY(-125deg);
+  }
+  .booklet {
+    position: absolute; inset: 0;
+    background: #000;
+    transform: translateZ(-2px);
+    overflow: hidden;
+  }
+  .booklet img { width: 100%; height: 100%; object-fit: fill; display: block; }
+  .glass {
+    position: absolute; inset: 0;
+    background: linear-gradient(125deg,
+      rgba(255,255,255,0.18) 0%, rgba(255,255,255,0.04) 40%,
+      rgba(255,255,255,0.01) 60%, rgba(255,255,255,0.12) 100%);
+    box-shadow:
+      inset 0 0 0 1px rgba(255,255,255,0.3),
+      inset 0 0 15px rgba(255,255,255,0.08);
+  }
+  .front-lid:hover .glass {
+    box-shadow: inset 0 0 0 1px rgba(255,255,255,0.5), inset 0 0 20px rgba(255,255,255,0.15);
+  }
+  /* OBI strip — one continuous loop around the case (front, top, back, bottom) */
+  .obi {
+    position: absolute; left: 0; top: 0; width: 46px; height: 100%;
+    transform-style: preserve-3d;
+    transition: transform 0.55s cubic-bezier(0.2, 0.8, 0.25, 1);
+    pointer-events: none;
+    z-index: 30;
+  }
+  .scene.obi-off .obi { transform: translateX(-90px); }
+  .obi-f {
+    position: absolute; inset: 0;
+    background-color: #000;
+    background-image: url("bc8c3740-2544-4553-99b5-8ee7f43f5095");
+    background-size: 100% 100%;
+    background-position: center;
+    transform: translateZ(25px);
+    backface-visibility: hidden;
+  }
+  .obi-f-inner {
+    position: absolute; inset: 0;
+    background: #000;
+    transform: translateZ(24.5px) rotateY(180deg);
+    backface-visibility: hidden;
+  }
+  .obi-b {
+    position: absolute; inset: 0;
+    background: rgba(0,0,0,0.55);
+    transform: translateZ(-1px) rotateY(180deg);
+  }
+  .obi-wall {
+    position: absolute; left: 0; width: 100%; height: 26px;
+    background: rgba(0,0,0,0.75);
+  }
+  .obi-wall.top {
+    top: 0;
+    transform-origin: top center; transform: translateZ(-1px) rotateX(90deg);
+  }
+  .obi-wall.bottom {
+    bottom: 0;
+    transform-origin: bottom center; transform: translateZ(-1px) rotateX(-90deg);
+  }
+  /* lid edge walls so the open lid has thickness */
+  .lid-edge-right {
+    position: absolute; width: 8px; height: 264px; right: 0; top: 0;
+    transform-origin: center right; transform: rotateY(-90deg);
+    background-image: url("fde78338-f93f-44d7-91a3-192c75be6272");
+    background-size: 100% 100%;
+    opacity: 0.55;
+  }
+  .lid-edge-top, .lid-edge-bottom {
+    overflow: hidden;
+    opacity: 0.55;
+  }
+  .lid-edge-top::before, .lid-edge-bottom::before {
+    content: '';
+    position: absolute;
+    width: 8px; height: 300px;
+    top: 50%; left: 50%;
+    transform: translate(-50%, -50%) rotate(90deg);
+    background-image: url("fde78338-f93f-44d7-91a3-192c75be6272");
+    background-size: 100% 100%;
+  }
+  .lid-edge-top {
+    position: absolute; width: 300px; height: 8px; top: 0; left: 0;
+    transform-origin: top center; transform: rotateX(-90deg);
+  }
+  .lid-edge-bottom {
+    position: absolute; width: 300px; height: 8px; bottom: 0; left: 0;
+    transform-origin: bottom center; transform: rotateX(90deg);
+  }
+
+  /* disc extraction */
+  .scene.extracted .cd-disc {
+    transform: translateZ(70px) translateX(150px) translateY(-16px) rotateY(-16deg);
+  }
+
+  /* ---- UI ---- */
+  .ui-layer {
+    position: absolute; top: 18px; left: 0; right: 0;
+    display: flex; justify-content: center; gap: 12px; z-index: 100;
+  }
+  .btn {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px; letter-spacing: 0.15em; text-transform: uppercase;
+    background: rgba(0,0,0,0.7); color: #efede8;
+    border: 1px solid rgba(255,255,255,0.3);
+    padding: 8px 14px; cursor: pointer;
+  }
+  .btn:hover { background: #efede8; color: #000; }
+  .lid-inner {
+    position: absolute; inset: 0;
+    transform: rotateY(180deg) translateZ(3px);
+    backface-visibility: hidden;
+    box-shadow: inset 0 0 0 1px rgba(255,255,255,0.2);
+    font-family: 'JetBrains Mono', monospace;
+    padding: 16px 14px;
+    display: flex; flex-direction: column; gap: 6px;
+  }
+  .li-title {
+    font-size: 8px; font-weight: 700; letter-spacing: 0.2em; color: #efede8;
+    border-bottom: 1px solid rgba(255,255,255,0.25); padding-bottom: 6px; margin-bottom: 4px;
+  }
+  .li-track { display: flex; align-items: baseline; gap: 6px; font-size: 7.5px; letter-spacing: 0.08em; color: #efede8; text-decoration: none; }
+  a.li-track:hover .name { color: #e0453c; }
+  .li-track .no { color: #e0453c; width: 12px; }
+  .li-track .name { font-weight: 700; }
+  .li-track .album { color: #6f6f77; font-size: 6px; margin-left: auto; font-style: italic; }
+  .tray-list {
+    position: absolute; inset: 0;
+    font-family: 'JetBrains Mono', monospace;
+    color: #efede8;
+    z-index: 2;
+  }
+  .tl-title {
+    position: absolute; top: 12px; left: 50%; transform: translateX(-50%);
+    font-size: 7px; font-weight: 700; letter-spacing: 0.25em; background: #000; padding: 3px 6px; white-space: nowrap;
+  }
+  .tl-row {
+    position: absolute; top: 50%; left: 50%;
+    font-size: 8px; font-weight: 700; letter-spacing: 0.15em; display: flex; gap: 6px;
+    background: #000; padding: 2px 6px; white-space: nowrap;
+  }
+  /* spiral around the spindle catch — radius grows per row, text rotates with the turn */
+  .tl-row:nth-of-type(1) { transform: translate(-50%, -50%) rotate(0deg) translateY(-58px); }
+  .tl-row:nth-of-type(2) { transform: translate(-50%, -50%) rotate(72deg) translateY(-68px); }
+  .tl-row:nth-of-type(3) { transform: translate(-50%, -50%) rotate(144deg) translateY(-78px) rotate(180deg); }
+  .tl-row:nth-of-type(4) { transform: translate(-50%, -50%) rotate(216deg) translateY(-88px) rotate(180deg); }
+  .tl-row:nth-of-type(5) { transform: translate(-50%, -50%) rotate(288deg) translateY(-98px); }
+  .tl-row .no { color: #e0453c; }
+  .status-hint {
+    display: none;
+  }
+  .status-hint-off {
+    position: absolute; bottom: 20px; left: 0; right: 0;
+    text-align: center; font-size: 11px; letter-spacing: 0.2em;
+    text-transform: uppercase; color: rgba(239,237,232,0.6);
+    pointer-events: none;
+  }
+</style>
+</head>
+<body>
+
+<div class="viewport">
+  <div class="stage-scale">
+    <div class="scene" id="cdScene">
+
+      <div class="back-panel"></div>
+      <div class="back-cover">
+        <div class="bc-head">
+          <span class="bc-sub">music.index</span>
+        </div>
+        <div style="flex:1"></div>
+        <div class="bc-credits">
+          TOP ARTIST RESONANCE : <b>BOY HARSHER</b> · SCROBBLE FREQUENCY : <b>HEAVY ROTATION</b><br>
+          ALCHEMICAL ALIGNMENT : <span class="cy">99.8% RESONANCE</span> · VESSEL : <b>VANZAIKAISER</b><br>
+          <a href="https://www.last.fm/user/VANZAIKAISER" target="_blank" rel="noreferrer">[ LAST.FM PROFILE ]</a> · <a href="https://open.spotify.com/user/1277848177?si=8eef40800a9946b9" target="_blank" rel="noreferrer">[ SPOTIFY PROFILE ]</a>
+        </div>
+        <div class="bc-footer">
+          <div class="bc-code"><b>SF - 159</b> · LNRT CD-ROM<br>© 2026 lunarot÷deka · ステレオ Stereo</div>
+        </div>
+      </div>
+
+      <div class="wall wall-top"></div>
+      <div class="wall wall-bottom"></div>
+      <div class="wall wall-right"></div>
+      <div class="obi">
+        <div class="obi-f"></div>
+        <div class="obi-f-inner"></div>
+        <div class="obi-b"></div>
+        <div class="obi-wall top"></div>
+        <div class="obi-wall bottom"></div>
+      </div>
+
+      <div class="spine">
+        <img src="02e11278-c85b-4b46-9eec-010225c18542" alt="spine art">
+      </div>
+
+      <div class="inner-tray">
+        <img class="tray-art" src="35270d98-fc7f-4090-992e-96d79d8cf3f3" alt="tray art">
+        <div class="tray-list">
+          <div class="tl-title">TOP FIVE UNDERGROUND GENRES</div>
+          <div class="tl-row"><span class="no">01</span>DARKWAVE</div>
+          <div class="tl-row"><span class="no">02</span>EBM / INDUSTRIAL</div>
+          <div class="tl-row"><span class="no">03</span>GOTH</div>
+          <div class="tl-row"><span class="no">04</span>2000S INDONESIAN DNB</div>
+          <div class="tl-row"><span class="no">05</span>DDR / RHYTHM RAVE</div>
+        </div>
+        <div class="tray-notch left"></div>
+        <div class="tray-notch right"></div>
+        <div class="spindle-hub">
+          <div class="spindle-teeth"></div>
+          <div class="spindle-center"></div>
+        </div>
+      </div>
+
+      <div class="cd-disc" id="cdDisc">
+        <div class="cd-face"><img src="e348fcd5-82ad-4e49-afa6-3531bd2a85a9" alt="disc"></div>
+        <div class="cd-back"></div>
+      </div>
+
+      <div class="front-lid" id="frontLid">
+        <div class="lid-inner">
+          <div class="li-title">BOY HARSHER // ESSENTIAL ANTHEMS</div>
+          <a class="li-track" target="_blank" rel="noreferrer" href="https://www.youtube.com/results?search_query=boy+harsher+pain+official+video"><span class="no">01</span><span class="name">PAIN</span><span class="album">Lesser Man</span></a>
+          <a class="li-track" target="_blank" rel="noreferrer" href="https://www.youtube.com/results?search_query=boy+harsher+motion+official+video"><span class="no">02</span><span class="name">MOTION</span><span class="album">Yr Body Is Nothing</span></a>
+          <a class="li-track" target="_blank" rel="noreferrer" href="https://www.youtube.com/results?search_query=boy+harsher+country+girl+official+video"><span class="no">03</span><span class="name">COUNTRY GIRL</span><span class="album">Country Girl Uncut</span></a>
+          <a class="li-track" target="_blank" rel="noreferrer" href="https://www.youtube.com/results?search_query=boy+harsher+modulations+official+video"><span class="no">04</span><span class="name">MODULATIONS</span><span class="album">Careful</span></a>
+          <a class="li-track" target="_blank" rel="noreferrer" href="https://www.youtube.com/results?search_query=boy+harsher+tears+official+video"><span class="no">05</span><span class="name">TEARS</span><span class="album">Careful</span></a>
+          <a class="li-track" target="_blank" rel="noreferrer" href="https://www.youtube.com/results?search_query=boy+harsher+machina+official+video"><span class="no">06</span><span class="name">MACHINA (FT. MARIANA SALDAÑA)</span><span class="album">The Runner</span></a>
+        </div>
+        <div class="booklet">
+          <img src="c5789642-8e0b-4859-ad5d-8588b0c5f78c" alt="cover art">
+        </div>
+        <div class="glass"></div>
+        <div class="lid-edge-right"></div>
+        <div class="lid-edge-top"></div>
+        <div class="lid-edge-bottom"></div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<div class="status-hint" id="statusHint">Click case cover to open</div>
+
+<script>
+  const scene = document.getElementById('cdScene');
+  const frontLid = document.getElementById('frontLid');
+  const cdDisc = document.getElementById('cdDisc');
+  const statusHint = document.getElementById('statusHint');
+
+  let isOpen = false, isExtracted = false;
+  function postHint() {
+    var hint = !isOpen ? 'CLICK LID TO OPEN' : (!isExtracted ? 'CLICK DISC TO EXTRACT' : 'CLICK DISC TO RETURN');
+    try { parent.postMessage({ lunarotJewelHint: hint }, '*'); } catch (e) {}
+  }
+  postHint();
+  let rotX = 4, rotY = 22;
+
+  function applyRot() {
+    scene.style.transform = `rotateX(${rotX}deg) rotateY(${rotY}deg)`;
+  }
+
+  function setCaseState(open) {
+    isOpen = open;
+    setTimeout(postHint, 0);
+    if (isOpen) {
+      scene.classList.add('obi-off');
+      setTimeout(() => { scene.classList.add('open'); }, 420);
+      if (!isExtracted) statusHint.textContent = 'Click disc to extract';
+    } else {
+      if (isExtracted) {
+        setDiscState(false);
+        setTimeout(() => { scene.classList.remove('open'); }, 300);
+        setTimeout(() => { scene.classList.remove('obi-off'); }, 900);
+      } else {
+        scene.classList.remove('open');
+        setTimeout(() => { scene.classList.remove('obi-off'); }, 560);
+      }
+      statusHint.textContent = 'Click case cover to open';
+    }
+  }
+
+  function setDiscState(extracted) {
+    if (extracted && !isOpen) {
+      setCaseState(true);
+      setTimeout(() => { isExtracted = true; scene.classList.add('extracted'); statusHint.textContent = 'Click disc to return'; }, 300);
+      return;
+    }
+    isExtracted = extracted;
+    setTimeout(postHint, 0);
+    if (isExtracted) { scene.classList.add('extracted'); statusHint.textContent = 'Click disc to return'; }
+    else { scene.classList.remove('extracted'); statusHint.textContent = isOpen ? 'Click disc to extract' : 'Click case cover to open'; }
+  }
+
+  frontLid.addEventListener('click', e => { e.stopPropagation(); setCaseState(!isOpen); });
+  cdDisc.addEventListener('click', e => { e.stopPropagation(); setDiscState(!isExtracted); });
+
+
+  // drag to rotate
+  let dragging = false, lastX = 0, lastY = 0;
+  document.addEventListener('mousedown', e => {
+    if (e.target.closest('.btn')) return;
+    dragging = true; lastX = e.clientX; lastY = e.clientY;
+    scene.style.transition = 'none';
+  });
+  document.addEventListener('mousemove', e => {
+    if (!dragging) return;
+    rotY += (e.clientX - lastX) * 0.4;
+    rotX -= (e.clientY - lastY) * 0.4;
+    rotX = Math.max(-80, Math.min(80, rotX));
+    lastX = e.clientX; lastY = e.clientY;
+    applyRot();
+  });
+  document.addEventListener('mouseup', () => {
+    dragging = false;
+    scene.style.transition = 'transform 0.5s cubic-bezier(0.2, 0.8, 0.2, 1)';
+  });
+</script>
+
+
+
+</body></html>

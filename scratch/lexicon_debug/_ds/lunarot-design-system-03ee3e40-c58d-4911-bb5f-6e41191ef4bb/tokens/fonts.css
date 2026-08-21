@@ -1,0 +1,14 @@
+@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;800&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=JetBrains+Mono:wght@400;700&display=swap');
+
+/* Occult display faces — sourced from the legacy Lunarot Tarot build (assets/fonts/).
+   Used sparingly for corrupted/cursed text moments, never for body copy. */
+@font-face {
+  font-family: 'Onryou';
+  src: url('../assets/fonts/onryou.woff2') format('woff2');
+  font-display: swap;
+}
+@font-face {
+  font-family: 'IPAexMincho';
+  src: url('../assets/fonts/ipaexm.woff2') format('woff2');
+  font-display: swap;
+}

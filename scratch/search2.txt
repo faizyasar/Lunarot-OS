@@ -1,0 +1,2 @@
+removeTab not found
+closeTab not found

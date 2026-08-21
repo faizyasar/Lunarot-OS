@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Spinning CD</title>
+    <style>
+        body {
+            margin: 0;
+            overflow: hidden;
+            background-color: transparent; /* Transparent background */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        canvas {
+            display: block;
+        }
+        #controls {
+            position: absolute;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 10;
+            background: rgba(0, 0, 0, 0.7);
+            padding: 10px 20px;
+            border-radius: 8px;
+            color: white;
+            font-family: monospace;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            text-align: center;
+        }
+        button {
+            background: #fff;
+            color: #000;
+            border: none;
+            padding: 8px 16px;
+            font-family: monospace;
+            font-weight: bold;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+        button:hover {
+            background: #ccc;
+        }
+    </style>
+</head>
+<body>
+    <div id="controls">
+        <div>3D Spinning CD</div>
+        <div style="font-size: 10px; color: #aaa; margin-top: 4px;">Background is transparent.</div>
+        <button id="recordBtn">Record WebM (Transparent)</button>
+    </div>
+
+    <!-- Three.js -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+
+    <script>
+        // Setup Scene
+        const scene = new THREE.Scene();
+        
+        // Setup Camera
+        const camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 0.1, 1000);
+        camera.position.set(0, 5, 8);
+        camera.lookAt(0, 0, 0);
+
+        // Setup Renderer (Transparent Background)
+        const renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true });
+        renderer.setSize(window.innerWidth, window.innerHeight);
+        renderer.setClearColor(0x000000, 0); // Transparent
+        document.body.appendChild(renderer.domElement);
+
+        // Lighting
+        const ambientLight = new THREE.AmbientLight(0xffffff, 0.6);
+        scene.add(ambientLight);
+
+        const dirLight = new THREE.DirectionalLight(0xffffff, 0.8);
+        dirLight.position.set(5, 10, 5);
+        scene.add(dirLight);
+
+        const pointLight = new THREE.PointLight(0xffffff, 0.5);
+        pointLight.position.set(-5, -5, 5);
+        scene.add(pointLight);
+
+        // CD Geometry
+        // Outer radius 3, inner radius 0.5 (the hole), thickness 0.05
+        const cdGeometry = new THREE.CylinderGeometry(3, 3, 0.05, 64);
+        
+        // Load Texture for the top cover
+        const textureLoader = new THREE.TextureLoader();
+        // Placeholder texture (Replace with actual cover art URL)
+        const coverTexture = textureLoader.load('cd_cover.jpg'); // Local file
+        
+        // Materials
+        // 0: side, 1: top, 2: bottom
+        const sideMaterial = new THREE.MeshStandardMaterial({ 
+            color: 0xcccccc, 
+            metalness: 0.8, 
+            roughness: 0.2 
+        });
+        
+        const topMaterial = new THREE.MeshStandardMaterial({ 
+            map: coverTexture,
+            metalness: 0.1,
+            roughness: 0.5
+        });
+
+        const bottomMaterial = new THREE.MeshStandardMaterial({ 
+            color: 0xeeeeee, 
+            metalness: 1.0, 
+            roughness: 0.1 
+        });
+
+        const materials = [sideMaterial, topMaterial, bottomMaterial];
+        
+        const cdMesh = new THREE.Mesh(cdGeometry, materials);
+        
+        // Tilt the CD slightly
+        cdMesh.rotation.x = Math.PI / 6; // 30 degrees tilt
+        scene.add(cdMesh);
+
+        // Add inner hole (black cylinder to simulate hole)
+        const holeGeometry = new THREE.CylinderGeometry(0.5, 0.5, 0.06, 32);
+        const holeMaterial = new THREE.MeshBasicMaterial({ color: 0x000000 }); // Black hole, or we can use CSG for a real hole
+        const holeMesh = new THREE.Mesh(holeGeometry, holeMaterial);
+        cdMesh.add(holeMesh);
+
+        // Animation Loop
+        function animate() {
+            requestAnimationFrame(animate);
+            // Spin the CD
+            cdMesh.rotation.y += 0.02;
+            renderer.render(scene, camera);
+        }
+        animate();
+
+        // Handle Resize
+        window.addEventListener('resize', () => {
+            camera.aspect = window.innerWidth / window.innerHeight;
+            camera.updateProjectionMatrix();
+            renderer.setSize(window.innerWidth, window.innerHeight);
+        });
+
+        // Recording logic (WebM with transparency)
+        const recordBtn = document.getElementById('recordBtn');
+        let mediaRecorder;
+        let recordedChunks = [];
+        let isRecording = false;
+
+        recordBtn.addEventListener('click', () => {
+            if (!isRecording) {
+                startRecording();
+            } else {
+                stopRecording();
+            }
+        });
+
+        function startRecording() {
+            recordedChunks = [];
+            const stream = renderer.domElement.captureStream(30); // 30 FPS
+            // Request VP9 for alpha channel support in WebM
+            const options = { mimeType: 'video/webm; codecs=vp9' };
+            try {
+                mediaRecorder = new MediaRecorder(stream, options);
+            } catch (e) {
+                console.warn('VP9 not supported, falling back to default webm');
+                mediaRecorder = new MediaRecorder(stream, { mimeType: 'video/webm' });
+            }
+
+            mediaRecorder.ondataavailable = (e) => {
+                if (e.data.size > 0) {
+                    recordedChunks.push(e.data);
+                }
+            };
+
+            mediaRecorder.onstop = () => {
+                const blob = new Blob(recordedChunks, { type: 'video/webm' });
+                const url = URL.createObjectURL(blob);
+                const a = document.createElement('a');
+                a.style.display = 'none';
+                a.href = url;
+                a.download = 'spinning_cd.webm';
+                document.body.appendChild(a);
+                a.click();
+                setTimeout(() => {
+                    document.body.removeChild(a);
+                    URL.revokeObjectURL(url);
+                }, 100);
+            };
+
+            mediaRecorder.start();
+            isRecording = true;
+            recordBtn.textContent = 'Stop Recording';
+            recordBtn.style.background = '#ff4444';
+            recordBtn.style.color = '#fff';
+        }
+
+        function stopRecording() {
+            mediaRecorder.stop();
+            isRecording = false;
+            recordBtn.textContent = 'Record WebM (Transparent)';
+            recordBtn.style.background = '#fff';
+            recordBtn.style.color = '#000';
+        }
+    </script>
+</body>
+</html>

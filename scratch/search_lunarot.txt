@@ -1,0 +1,4 @@
+Found: data)return;if(e.data.type==='LUNAROT_OPEN_MAGAZINE'){window.open((window.__reso
+Found: lank')}else if(e.data.type==='LUNAROT_OPEN_PACHINKO'){window.open('/sacred-pachi
+Found: h=e=>{e.data&&e.data.type===\"LUNAROT_TAROT_INSPECT\"?(f(e.data),c&&e.data.cardN
+Found: []))):e.data&&e.data.type===\"LUNAROT_TAROT_DESELECT\"&&(f(null),c&&c(new Set())

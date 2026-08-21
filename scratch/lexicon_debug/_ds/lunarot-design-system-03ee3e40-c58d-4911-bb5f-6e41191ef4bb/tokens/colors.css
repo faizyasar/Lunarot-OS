@@ -1,0 +1,44 @@
+/* Lunarot — monochrome core palette. No accent hue anywhere in UI chrome.
+   Color is reserved for imagery only (card art, showcase carousel, the oval logo). */
+:root {
+  --ink: #000000;       /* page background, deepest layer */
+  --ash: #080808;       /* secondary background, panels-on-black */
+  --bone: #efede8;      /* off-white text / borders, warmer than pure white */
+  --surface: #ffffff;   /* brightest layer: primary text, active states, glow */
+
+  /* Opacity ramps express state (hover/active/disabled/emphasis) instead of introducing hue */
+  --surface-08: rgb(255 255 255 / 0.08);
+  --surface-15: rgb(255 255 255 / 0.15);
+  --surface-25: rgb(255 255 255 / 0.25);
+  --surface-40: rgb(255 255 255 / 0.40);
+  --surface-60: rgb(255 255 255 / 0.60);
+  --surface-80: rgb(255 255 255 / 0.80);
+
+  --ink-40: rgb(0 0 0 / 0.40);
+  --ink-60: rgb(0 0 0 / 0.60);
+  --ink-80: rgb(0 0 0 / 0.80);
+
+  /* Semantic aliases */
+  --bg-page: var(--ink);
+  --bg-panel: rgb(0 0 0 / 0.45);
+  --text-primary: var(--surface);
+  --text-body: var(--bone);
+  --text-muted: var(--surface-40);
+  --text-faint: var(--surface-25);
+  --border-default: var(--surface-15);
+  --border-strong: var(--surface-40);
+
+  /* Zodiac element colors — used ONLY inside natal-chart imagery/constellations, never in chrome */
+  --zodiac-aries: #e05050;
+  --zodiac-taurus: #80c860;
+  --zodiac-gemini: #f0d060;
+  --zodiac-cancer: #7ec8e3;
+  --zodiac-leo: #f5c842;
+  --zodiac-virgo: #b0e0b0;
+  --zodiac-libra: #f0a0e0;
+  --zodiac-scorpio: #c080a0;
+  --zodiac-sagittarius: #ffd580;
+  --zodiac-capricorn: #a08060;
+  --zodiac-aquarius: #80e8ff;
+  --zodiac-pisces: #8080ff;
+}
