@@ -5,6 +5,7 @@
 # ✦ 2026
 
 ## 01/09
+*   `[lunarot-os]` fix: update HTML title tags in index.html and lexicon.html to canonical Lunarot OS names.
 *   `[asset-pipeline]` Render and optimise 3D turntable GIF artefacts (`astral_pachinko_spinning.gif`, `cassette_spinning.gif`, `cd_jewel_case_spinning.gif`, `lunarot_tarot_deck_spinning.gif`) via headless Playwright capture.
 *   `[docs]` Synchronise README and CHANGELOG with canonical standalone architecture, zero-build deployment definitions, and complete commit history.
 
