@@ -181,7 +181,7 @@
     width: 300px; height: 264px;
     transform-style: preserve-3d;
     transform: rotateX(4deg) rotateY(22deg);
-    transition: transform 0.5s cubic-bezier(0.2, 0.8, 0.2, 1);
+    transition: none !important;
   }
 
   /* ---- BACK COVER (music.index back card, faces backward) ---- */
@@ -395,7 +395,7 @@
     transform-style: preserve-3d;
     transform-origin: left center;
     transform: translateZ(24px);
-    transition: transform 0.55s cubic-bezier(0.2, 0.8, 0.25, 1);
+    transition: none !important;
     cursor: pointer;
   }
   .scene.open .front-lid {
@@ -424,7 +424,7 @@
   .obi {
     position: absolute; left: 0; top: 0; width: 46px; height: 100%;
     transform-style: preserve-3d;
-    transition: transform 0.55s cubic-bezier(0.2, 0.8, 0.25, 1);
+    transition: none !important;
     pointer-events: none;
     z-index: 30;
   }
@@ -558,6 +558,7 @@
     text-transform: uppercase; color: rgba(239,237,232,0.6);
     pointer-events: none;
   }
+* { transition: none !important; animation: none !important; }
 </style>
 </head>
 <body>

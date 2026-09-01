@@ -1,0 +1,450 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Compact Cassette — corrected anatomy</title>
+<script type="importmap">
+{
+  "imports": {
+    "three": "https://unpkg.com/three@0.184.0/build/three.module.js",
+    "three/addons/controls/OrbitControls.js": "https://unpkg.com/three@0.184.0/examples/jsm/controls/OrbitControls.js"
+  },
+  "integrity": {
+    "https://unpkg.com/three@0.184.0/build/three.module.js": "sha384-8FCZ1eVO6it4+pbec2aDtnTrwjWXZLJRC+MAGCIPDgsYnUrl/E0A2YlF8ioMKI/J",
+    "https://unpkg.com/three@0.184.0/build/three.core.js": "sha384-dw2ooPewaEIrAgl6oFDBmmBWCE9oW9LxRGcfwZ0hLvEprzo202wXl7vCYHRlSnOT",
+    "https://unpkg.com/three@0.184.0/examples/jsm/controls/OrbitControls.js": "sha384-4rziNxOBZKQ69i+w+f89KJ55TCYquwchVbByQwmaOeIOXdOU2PLDn3kOfXHwIJC9"
+  }
+}
+</script>
+<style>
+  *{margin:0;padding:0;box-sizing:border-box}
+  html,body{height:100%}
+  body{background:#f4f5f7;font-family:ui-sans-serif,system-ui,sans-serif;color:#1c1d1f}
+  three-d-stage:not(:defined){visibility:hidden}
+</style>
+
+
+
+
+
+</head>
+<body>
+<three-d-stage name="compact-cassette" background="#f4f5f7"></three-d-stage>
+<script src="ea189173-f28b-4369-bc5c-8cda818a5274"></script>
+<script type="module">
+const stage = document.querySelector('three-d-stage');
+const { THREE } = await stage.ready;
+
+/* shadowless, high-key studio: nothing casts, everything lifts */
+stage._renderer.shadowMap.enabled = false;
+stage._key.castShadow = false;
+stage._key.intensity = 1.5;
+stage._ground.visible = false;
+stage._scene.add(new THREE.HemisphereLight(0xffffff, 0xf2f4f7, 1.4));
+{
+  const lift = new THREE.DirectionalLight(0xffffff, 0.8);
+  lift.position.set(-4, -6, 3);
+  stage._scene.add(lift);
+}
+
+/* ── materials ─────────────────────────────────────────────────────── */
+const texLoader = new THREE.TextureLoader();
+function skinTex(url) { const t = texLoader.load(url); t.colorSpace = THREE.SRGBColorSpace; return t; }
+const sideTex = skinTex(window.__resources.sideTexUrl);
+const caseScratchTex = skinTex(window.__resources.scratchTexUrl);
+caseScratchTex.wrapS = caseScratchTex.wrapT = THREE.RepeatWrapping;
+caseScratchTex.repeat.set(4, 3);
+const frontTex = skinTex(window.__resources.frontTexUrl);
+const backTex = skinTex(window.__resources.backTexUrl);
+for (const t of [frontTex, backTex]) { t.wrapS = t.wrapT = THREE.RepeatWrapping; t.center.set(0.5, 0.5); }
+const M = {
+  shell: new THREE.MeshPhysicalMaterial({ name:'shell_side_skin', map: sideTex, color:0xffffff, roughness:0.35,
+          transparent:true, opacity:0.2, side:THREE.DoubleSide, depthWrite:false }),
+  caseClear: new THREE.MeshPhysicalMaterial({ name:'case_clear', color:0xffffff, transparent:true,
+          opacity:0.15, roughness:0.25, roughnessMap: caseScratchTex, metalness:0.0, side:THREE.DoubleSide, depthWrite:false }),
+  paper: new THREE.MeshPhysicalMaterial({ name:'jcard_paper', color:0xe3dfd3, roughness:0.85, clearcoat:0.12, clearcoatRoughness:0.6, side:THREE.DoubleSide, transparent:true, opacity:0.4, depthWrite:false }),
+  tape: new THREE.MeshStandardMaterial({ name:'magnetic_tape', color:0x0a0a0a, roughness:0.75 }),
+  hub: new THREE.MeshStandardMaterial({ name:'hub_plastic', color:0xeeebe4, roughness:0.5 }),
+  dark: new THREE.MeshStandardMaterial({ name:'liner_black', color:0x6e6a64, roughness:0.55 }),
+  metal: new THREE.MeshStandardMaterial({ name:'steel', color:0xbcc2c8, roughness:0.3, metalness:0.2, transparent:true, opacity:0.85 }),
+  felt: new THREE.MeshStandardMaterial({ name:'pressure_pad', color:0xa08e76, roughness:0.95 }),
+  label: new THREE.MeshStandardMaterial({ name:'label_stock', color:0xfbf9f4, roughness:0.7 }),
+  accent: new THREE.MeshStandardMaterial({ name:'label_accent', color:0xd98a72, roughness:0.65 }),
+};
+
+const named = (geo, mat, name) => { const m = new THREE.Mesh(geo, mat); m.name = name; return m; };
+const box = (w,h,d,mat,name,x=0,y=0,z=0) => { const m = named(new THREE.BoxGeometry(w,h,d), mat, name); m.position.set(x,y,z); return m; };
+const cyl = (r,h,mat,name,seg=32) => named(new THREE.CylinderGeometry(r,r,h,seg), mat, name);
+
+/* ── shell outline (mm, XY plane, +Z = label side) ─────────────────── */
+const W = 100.4, H = 63.8, T = 12.0, HX = W/2, HY = H/2;
+const HUB_X = 21.25, HUB_Y = 3.0;      // 42.5 mm centres
+
+// front (reading) edge cut-outs: [centre x, half-width, depth]
+const FRONT = [
+  [-42.0, 3.4, 4.6],   // left tape-guide roller window
+  [-26.5, 2.4, 4.6],   // left capstan hole
+  [-13.5, 3.8, 5.0],   // erase-head opening
+  [  0.0, 7.2, 5.4],   // record/playback head opening (pressure pad behind)
+  [ 13.5, 3.8, 5.0],   // erase-head opening (side B)
+  [ 26.5, 2.4, 4.6],   // right capstan hole
+  [ 42.0, 3.4, 4.6],   // right tape-guide roller window
+];
+// rear edge: write-protect tab recesses
+const REAR = [[-44.5, 4.0, 4.0], [44.5, 4.0, 4.0]];
+
+function shellShape() {
+  const s = new THREE.Shape(), r = 3;
+  s.moveTo(-HX + r, -HY);
+  for (const [cx, hw, d] of FRONT) {
+    s.lineTo(cx - hw, -HY); s.lineTo(cx - hw, -HY + d);
+    s.lineTo(cx + hw, -HY + d); s.lineTo(cx + hw, -HY);
+  }
+  s.lineTo(HX - r, -HY);
+  s.quadraticCurveTo(HX, -HY, HX, -HY + r);
+  s.lineTo(HX, HY - r);
+  s.quadraticCurveTo(HX, HY, HX - r, HY);
+  for (const [cx, hw, d] of [...REAR].reverse()) {
+    s.lineTo(cx + hw, HY); s.lineTo(cx + hw, HY - d);
+    s.lineTo(cx - hw, HY - d); s.lineTo(cx - hw, HY);
+  }
+  s.lineTo(-HX + r, HY);
+  s.quadraticCurveTo(-HX, HY, -HX, HY - r);
+  s.lineTo(-HX, -HY + r);
+  s.quadraticCurveTo(-HX, -HY, -HX + r, -HY);
+
+  // through-holes: two hub windows + tape-view window
+  for (const sx of [-1, 1]) {
+    const h = new THREE.Path();
+    h.absarc(sx * HUB_X, HUB_Y, 10.2, 0, Math.PI * 2, true);
+    s.holes.push(h);
+  }
+  const win = new THREE.Path();
+  win.moveTo(-15, -20.5); win.lineTo(15, -20.5); win.lineTo(15, -10.5); win.lineTo(-15, -10.5);
+  s.holes.push(win);
+  return s;
+}
+
+const cassette = new THREE.Group(); cassette.name = 'cassette';
+
+const shellGeo = new THREE.ExtrudeGeometry(shellShape(), { depth: T, bevelEnabled: false, curveSegments: 24 });
+shellGeo.translate(0, 0, -T/2);
+{
+  // caps are hidden under the skin overlays and don't need remapping; only the
+  // side-wall group (identified by z varying within the group, unlike caps) is visible.
+  const pos = shellGeo.attributes.position, uv = shellGeo.attributes.uv;
+  const idx = shellGeo.index;
+  const vertAt = idx ? (i => idx.getX(i)) : (i => i);
+  for (const g of shellGeo.groups) {
+    let zMin = Infinity, zMax = -Infinity;
+    for (let i = g.start; i < g.start + g.count; i++) {
+      const vi = vertAt(i);
+      zMin = Math.min(zMin, pos.getZ(vi)); zMax = Math.max(zMax, pos.getZ(vi));
+    }
+    if (zMax - zMin < T * 0.5) continue;              // this is a flat cap group — skip
+    for (let i = g.start; i < g.start + g.count; i++) {
+      const vi = vertAt(i);
+      uv.setXY(vi, (pos.getX(vi) + HX) / W, (pos.getZ(vi) + T/2) / T);
+    }
+  }
+}
+cassette.add(named(shellGeo, M.shell, 'shell'));
+
+// front/back "skin" faces: full artwork slapped corner-to-corner over the whole shell footprint
+function skinFace(name, tex, z, flip) {
+  const geo = new THREE.ShapeGeometry(shellShape(), 24);
+  const uv2 = geo.attributes.uv, pos2 = geo.attributes.position;
+  for (let i = 0; i < pos2.count; i++) {
+    const u = (pos2.getX(i) + HX) / W, v = (pos2.getY(i) + HY) / H;
+    uv2.setXY(i, u, v);   // the 180° Y-rotation below already mirrors X for the back face — don't also flip u here
+  }
+  const mat = new THREE.MeshStandardMaterial({ name: name + '_mat', map: tex, roughness: 0.6, side: THREE.DoubleSide, transparent: true, alphaTest: 0 });
+  const m = named(geo, mat, name);
+  m.position.z = z;
+  if (flip) m.rotation.y = Math.PI;
+  return m;
+}
+cassette.add(skinFace('shell_front_skin', frontTex, T/2 + 0.05, false));
+cassette.add(skinFace('shell_back_skin', backTex, -T/2 - 0.05, true));
+
+/* write-protect tabs sitting in their rear recesses */
+for (const [cx, hw, d] of REAR) {
+  cassette.add(box(hw*2 - 0.6, d - 0.8, T - 1.4, M.dark, 'write_protect_tab', cx, HY - d/2 - 0.4, 0));
+}
+
+/* ── reels: splined hub + wound tape pack ──────────────────────────── */
+function reel(x, packR, name) {
+  const g = new THREE.Group(); g.name = name;
+  const pack = cyl(packR, 8.6, M.tape, name + '_tape_pack', 48);
+  pack.rotation.x = Math.PI/2; g.add(pack);
+
+  const flangeT = named(new THREE.CylinderGeometry(7.5, 7.5, 0.6, 40), M.hub, name + '_flange_top');
+  flangeT.rotation.x = Math.PI/2; flangeT.position.z = 4.5; g.add(flangeT);
+  const flangeB = flangeT.clone(); flangeB.name = name + '_flange_bottom'; flangeB.position.z = -4.5; g.add(flangeB);
+
+  const barrel = named(new THREE.CylinderGeometry(5.6, 5.6, 10.4, 32, 1, true), M.hub, name + '_hub');
+  barrel.rotation.x = Math.PI/2; g.add(barrel);
+
+  for (let i = 0; i < 6; i++) {                       // 6 drive teeth, radial
+    const t = box(1.5, 2.6, 10.2, M.hub, name + '_tooth_' + i);
+    const a = i * Math.PI/3;
+    t.position.set(Math.cos(a) * 4.6, Math.sin(a) * 4.6, 0);
+    t.rotation.z = a;
+    g.add(t);
+  }
+  g.position.set(x, HUB_Y, 0);
+  return g;
+}
+const packL = 17.4, packR = 11.8;                     // partly played: side A running
+cassette.add(reel(-HUB_X, packL, 'reel_supply'));
+cassette.add(reel( HUB_X, packR, 'reel_takeup'));
+
+/* ── tape path: pack → guide roller → head → guide roller → pack ───── */
+const ROLLER = [[-42.0, -25.6], [42.0, -25.6]];
+for (const [x, y] of ROLLER) {
+  const r = cyl(2.3, 9.0, M.metal, 'tape_guide_roller', 24);
+  r.rotation.x = Math.PI/2; r.position.set(x, y, 0);
+  cassette.add(r);
+}
+function tapeSpan(x1, y1, x2, y2, name) {
+  const len = Math.hypot(x2-x1, y2-y1);
+  const m = box(len, 0.16, 3.81, M.tape, name, (x1+x2)/2, (y1+y2)/2, 0);
+  m.rotation.z = Math.atan2(y2-y1, x2-x1);
+  return m;
+}
+function tangent(px, py, cx, cy, r, sign) {         // tangent point from external point
+  const d = Math.hypot(cx-px, cy-py), L = Math.sqrt(Math.max(d*d - r*r, 1));
+  const a = Math.atan2(cy-py, cx-px) + sign * Math.atan2(r, L);
+  return [px + Math.cos(a)*L, py + Math.sin(a)*L];
+}
+cassette.add(tapeSpan(-42.0, -27.9, 42.0, -27.9, 'tape_head_span'));
+{
+  const [tx, ty] = tangent(-39.7, -26.2, -HUB_X, HUB_Y, packL, -1);
+  cassette.add(tapeSpan(-39.7, -26.2, tx, ty, 'tape_supply_run'));
+  const [ux, uy] = tangent(39.7, -26.2, HUB_X, HUB_Y, packR, 1);
+  cassette.add(tapeSpan(39.7, -26.2, ux, uy, 'tape_takeup_run'));
+}
+
+/* ── head window internals: shield, leaf spring, pressure pad ──────── */
+cassette.add(box(30, 0.5, 9.0, M.metal, 'head_shield_plate', 0, -23.6, 0));
+cassette.add(box(13, 0.4, 5.4, M.metal, 'pad_leaf_spring', 0, -25.4, 0));
+cassette.add(box(6.4, 1.6, 4.4, M.felt, 'pressure_pad', 0, -26.6, 0));
+
+/* ── screws: 4 corners + 1 centre, on the rear face ────────────────── */
+for (const [x, y] of [[-44,-26],[44,-26],[-44,26],[44,26],[0,-24]]) {
+  const s = cyl(1.2, 0.8, M.shell, 'shell_screw', 12);
+  s.rotation.x = Math.PI/2; s.position.set(x, y, -T/2 + 0.3);
+  cassette.add(s);
+  const w = cyl(1.9, 0.9, M.shell, 'screw_boss', 14);
+  w.rotation.x = Math.PI/2; w.position.set(x, y, -T/2 + 0.75);
+  cassette.add(w);
+}
+
+/* ── Norelco case: tray + spine-hinged lid ─────────────────────────── */
+function roundedRectShape(w, h, r) {
+  const s = new THREE.Shape(), hw = w/2, hh = h/2;
+  s.moveTo(-hw + r, -hh);
+  s.lineTo(hw - r, -hh); s.quadraticCurveTo(hw, -hh, hw, -hh + r);
+  s.lineTo(hw, hh - r); s.quadraticCurveTo(hw, hh, hw - r, hh);
+  s.lineTo(-hw + r, hh); s.quadraticCurveTo(-hw, hh, -hw, hh - r);
+  s.lineTo(-hw, -hh + r); s.quadraticCurveTo(-hw, -hh, -hw + r, -hh);
+  return s;
+}
+function wallFrame(w, h, r, wall, depth, name) {
+  const outer = roundedRectShape(w, h, r);
+  outer.holes.push(roundedRectShape(w - 2 * wall, h - 2 * wall, Math.max(r - wall, 0.4)));
+  const geo = new THREE.ExtrudeGeometry(outer, { depth, bevelEnabled: false, curveSegments: 16 });
+  return named(geo, M.caseClear, name);
+}
+
+const CW = 110, CH = 70, WALL = 1.5, TRAY_D = 10.0, LID_D = 8.0, CORNER_R = 4.5;
+const caseG = new THREE.Group(); caseG.name = 'storage_case';
+
+caseG.add(named(new THREE.ShapeGeometry(roundedRectShape(CW, CH, CORNER_R), 16), M.caseClear, 'tray_floor'));
+caseG.children[caseG.children.length - 1].position.z = -WALL/2;
+caseG.add(wallFrame(CW, CH, CORNER_R, WALL, TRAY_D, 'tray_wall'));
+
+for (const sx of [-1, 1]) {                          // hub retaining prongs
+  const p = new THREE.Group(); p.name = 'hub_prong';
+  const shaft = named(new THREE.CylinderGeometry(4.3, 4.3, 8.0, 24, 1, true), M.caseClear, 'prong_shaft');
+  shaft.rotation.x = Math.PI/2; shaft.position.z = 4.0; p.add(shaft);
+  const collar = cyl(5.6, 1.2, M.caseClear, 'prong_collar', 24);
+  collar.rotation.x = Math.PI/2; collar.position.z = 0.6; p.add(collar);
+  p.position.set(sx * HUB_X, HUB_Y, 0);
+  caseG.add(p);
+}
+for (const sy of [-1, 1]) caseG.add(box(CW - 6, 1.4, 0.6, M.caseClear, 'tray_rib', 0, sy * 28, 0.3));
+for (const sx of [-1, 1]) caseG.add(box(1.0, CH - 14, TRAY_D - 4, M.caseClear, 'side_guide_rib', sx * 51.5, 0, TRAY_D/2 - 1));
+for (const sx of [-1, 1]) {                          // hinge pins, bottom edge, per spec
+  const pin = cyl(1.1, 2.5, M.caseClear, 'hinge_pin', 16);
+  pin.rotation.z = Math.PI / 2; pin.position.set(sx * 43, -CH/2, TRAY_D/2);
+  caseG.add(pin);
+}
+{
+  const insertW = CW - 16, insertH = CH - 10, sideDepth = TRAY_D - 2;
+  caseG.add(box(insertW, insertH, 0.3, M.paper, 'jcard_tray_insert', 0, 0, -WALL / 2 + 0.9));
+  caseG.add(box(0.3, insertH, sideDepth, M.paper, 'jcard_tray_insert_side',
+    -insertW / 2, 0, -WALL / 2 + 0.9 + sideDepth / 2));
+}
+
+const lid = new THREE.Group(); lid.name = 'case_lid';
+{
+  const face = named(new THREE.ShapeGeometry(roundedRectShape(CW, CH, CORNER_R), 16), M.caseClear, 'lid_face');
+  face.position.set(0, CH/2, 0.7); lid.add(face);
+}
+{
+  const w = wallFrame(CW, CH, CORNER_R, WALL, LID_D, 'lid_wall');
+  w.position.set(0, CH/2, -LID_D); lid.add(w);
+}
+for (const [x, y] of [[-30,16],[30,16],[-30,58],[30,58]])
+  lid.add(box(4, 1.0, 0.6, M.caseClear, 'lid_j_card_rib', x, y, -0.05));
+
+// J-card paper front cover, held against the lid by its ribs
+lid.add(box(CW - 14, CH - 8, 0.3, M.paper, 'jcard_front_cover', 0, CH/2, 0.15));
+lid.position.set(0, -CH/2, TRAY_D);
+caseG.add(lid);
+
+/* ── assemble, orient, scale to metres ─────────────────────────────── */
+const assembly = new THREE.Group(); assembly.name = 'assembly';
+caseG.visible = true;
+assembly.add(caseG, cassette);
+
+const POSE = { seatedZ: 6.6, liftZ: 16.6, outY: -74, outZ: 4.4, lidOpen: 0.68 };
+function setPose(lidT, ejectT) {
+  lid.rotation.x = POSE.lidOpen * lidT;
+  if (ejectT < 0.34) {
+    const k = ejectT / 0.34;
+    cassette.position.set(0, 0, POSE.seatedZ + (POSE.liftZ - POSE.seatedZ) * k);
+  } else {
+    const k = (ejectT - 0.34) / 0.66;
+    cassette.position.set(0, POSE.outY * k, POSE.liftZ + (POSE.outZ - POSE.liftZ) * k);
+  }
+}
+setPose(0, 0);
+
+const root = new THREE.Group(); root.name = 'compact_cassette_assembly';
+assembly.rotation.x = -Math.PI/2;                    // lay flat, +Z becomes up
+root.add(assembly);
+
+root.updateMatrixWorld(true);
+const bbClosed = new THREE.Box3().setFromObject(root);
+const cClosed = bbClosed.getCenter(new THREE.Vector3());
+assembly.position.set(-cClosed.x, -bbClosed.min.y, -cClosed.z);
+root.scale.setScalar(0.001);
+
+{ const sr = stage.shadowRoot;
+  for (const sel of ['.toolbar', '.note']) { const el = sr && sr.querySelector(sel); if (el) el.remove(); } }
+
+stage._setButtonsEnabled = () => {};
+stage.setObject(root);
+
+/* airy studio: no shadows, high-key wash */
+{
+  const r = stage._renderer, sc = stage._scene;
+  r.shadowMap.enabled = false;
+  if (stage._ground) { sc.remove(stage._ground); stage._ground = null; }
+  root.traverse(o => { if (o.isMesh) { o.castShadow = false; o.receiveShadow = false; } });
+  sc.traverse(o => { if (o.isLight) o.castShadow = false; });
+  if (stage._key) stage._key.intensity = 1.5;
+  sc.add(new THREE.HemisphereLight(0xffffff, 0xf0eee8, 1.5));
+  const rim = new THREE.DirectionalLight(0xffffff, 0.9);
+  rim.position.set(-5, 4, -4);
+  sc.add(rim);
+}
+root.traverse(o => { if (o.isMesh) { o.castShadow = false; o.receiveShadow = false; } });
+
+/* ── camera: refit per pose so each state is framed tight, never clipped ── */
+let poseLid = 0, poseEject = 0;
+function fitFor(lidT, ejectT) {
+  setPose(lidT, ejectT); root.updateMatrixWorld(true);
+  const b = new THREE.Box3().setFromObject(root);
+  setPose(poseLid, poseEject); root.updateMatrixWorld(true);
+  const ctr = b.getCenter(new THREE.Vector3());
+  const corners = [];
+  for (const x of [b.min.x, b.max.x])
+    for (const y of [b.min.y, b.max.y])
+      for (const z of [b.min.z, b.max.z]) corners.push(new THREE.Vector3(x, y, z));
+  const radius = Math.max(...corners.map(p => p.distanceTo(ctr)));
+  const cam = stage._camera, fovR = THREE.MathUtils.degToRad(cam.fov);
+  const hFovR = Math.atan(Math.tan(fovR / 2) * cam.aspect);
+  let dist = Math.max(radius / Math.sin(fovR / 2), radius / Math.sin(hFovR)) * 0.88;
+  // verify against the real corners at the candidate distance — the sphere fit
+  // runs tight for elongated poses (the ejected cassette sits 74 mm out).
+  const probe = cam.clone();
+  const dir = cam.position.clone().sub(stage._controls.target).normalize();
+  for (let i = 0; i < 16; i++) {
+    probe.position.copy(dir).multiplyScalar(dist).add(ctr);
+    probe.lookAt(ctr); probe.updateMatrixWorld(true); probe.updateProjectionMatrix();
+    if (corners.every(c => { const p = c.clone().project(probe); return Math.abs(p.x) <= 0.96 && Math.abs(p.y) <= 0.96; })) break;
+    dist *= 1.05;
+  }
+  return { ctr, dist };
+}
+function applyFit(f) {
+  const cam = stage._camera, ctrl = stage._controls;
+  const dir = cam.position.clone().sub(ctrl.target).normalize();
+  ctrl.target.copy(f.ctr);
+  cam.position.copy(dir).multiplyScalar(f.dist).add(f.ctr);
+  cam.updateProjectionMatrix(); ctrl.update();
+}
+applyFit(fitFor(0, 0));
+
+/* ── click: closed → lid open → cassette out → closed ───────────────── */
+{
+  const ease = t => 1 - Math.pow(1 - t, 3);   // fast out, soft landing
+  let step = 0, busy = false;
+  const run = (dur, fit, fn) => new Promise(res => {
+    const cam = stage._camera, ctrl = stage._controls;
+    const dir = cam.position.clone().sub(ctrl.target).normalize();
+    const c0 = ctrl.target.clone(), d0 = cam.position.distanceTo(ctrl.target);
+    const camDur = dur * 0.75;                       // settles before the pose lands
+    const start = performance.now();
+    (function tick() {
+      const t = performance.now() - start;
+      fn(ease(Math.min(t / dur, 1)));
+      const q = ease(Math.min(t / camDur, 1));
+      ctrl.target.lerpVectors(c0, fit.ctr, q);
+      cam.position.copy(dir).multiplyScalar(d0 + (fit.dist - d0) * q).add(ctrl.target);
+      ctrl.update();
+      t < dur ? requestAnimationFrame(tick) : res();
+    })();
+  });
+  async function advance() {
+    if (busy) return;
+    busy = true;
+    if (step === 0) {
+      await run(380, fitFor(1, 0), p => setPose(poseLid = p, poseEject));
+      step = 1;
+    } else if (step === 1) {
+      await run(460, fitFor(1, 1), p => setPose(poseLid, poseEject = p));
+      step = 2;
+    } else {
+      await run(420, fitFor(1, 0), p => setPose(poseLid, poseEject = 1 - p));
+      await run(320, fitFor(0, 0), p => setPose(poseLid = 1 - p, poseEject));
+      step = 0;
+    }
+    busy = false;
+  }
+
+  const ray = new THREE.Raycaster();
+  let downAt = null;
+  stage.addEventListener('pointerdown', e => { downAt = [e.clientX, e.clientY]; });
+  stage.addEventListener('pointerup', e => {
+    if (!downAt) return;
+    const moved = Math.hypot(e.clientX - downAt[0], e.clientY - downAt[1]);
+    downAt = null;
+    if (moved > 5) return;
+    const r = stage.getBoundingClientRect();
+    ray.setFromCamera(new THREE.Vector2(
+      ((e.clientX - r.left) / r.width) * 2 - 1,
+      -((e.clientY - r.top) / r.height) * 2 + 1
+    ), stage._camera);
+    if (ray.intersectObject(root, true).length) advance();
+  });
+  stage.toggleCase = advance;
+}
+
+</script>
+
+
+</body></html>

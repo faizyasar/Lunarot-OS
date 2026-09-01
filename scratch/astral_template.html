@@ -1,0 +1,917 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="color-scheme" content="dark">
+<title>Astral Pachinko — Conduit Cartridge</title>
+
+
+<style>
+  /* latin-ext */
+@font-face {
+  font-family: 'Cinzel';
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url("6c4e1d7d-df26-4d55-baf2-f44a537229c1") format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+/* latin */
+@font-face {
+  font-family: 'Cinzel';
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url("72ee9c9d-a8fd-463b-86cb-d1f6998984ff") format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+/* latin-ext */
+@font-face {
+  font-family: 'Cinzel';
+  font-style: normal;
+  font-weight: 800;
+  font-display: swap;
+  src: url("6c4e1d7d-df26-4d55-baf2-f44a537229c1") format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+/* latin */
+@font-face {
+  font-family: 'Cinzel';
+  font-style: normal;
+  font-weight: 800;
+  font-display: swap;
+  src: url("72ee9c9d-a8fd-463b-86cb-d1f6998984ff") format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+/* cyrillic-ext */
+@font-face {
+  font-family: 'Cormorant Garamond';
+  font-style: italic;
+  font-weight: 400;
+  font-display: swap;
+  src: url("8a463656-68aa-43df-b960-f96c9d688d5e") format('woff2');
+  unicode-range: U+0460-052F, U+1C80-1C8A, U+20B4, U+2DE0-2DFF, U+A640-A69F, U+FE2E-FE2F;
+}
+/* cyrillic */
+@font-face {
+  font-family: 'Cormorant Garamond';
+  font-style: italic;
+  font-weight: 400;
+  font-display: swap;
+  src: url("b80fa436-c53b-4c6e-8074-5f5fabcac877") format('woff2');
+  unicode-range: U+0301, U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
+}
+/* vietnamese */
+@font-face {
+  font-family: 'Cormorant Garamond';
+  font-style: italic;
+  font-weight: 400;
+  font-display: swap;
+  src: url("646076be-c397-4123-b091-c89e76b45162") format('woff2');
+  unicode-range: U+0102-0103, U+0110-0111, U+0128-0129, U+0168-0169, U+01A0-01A1, U+01AF-01B0, U+0300-0301, U+0303-0304, U+0308-0309, U+0323, U+0329, U+1EA0-1EF9, U+20AB;
+}
+/* latin-ext */
+@font-face {
+  font-family: 'Cormorant Garamond';
+  font-style: italic;
+  font-weight: 400;
+  font-display: swap;
+  src: url("678d7f02-3ab0-47fd-a11a-13844c3266c2") format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+/* latin */
+@font-face {
+  font-family: 'Cormorant Garamond';
+  font-style: italic;
+  font-weight: 400;
+  font-display: swap;
+  src: url("3ff297a7-9872-48ec-ad84-b6fa7a3a3f2d") format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+/* cyrillic-ext */
+@font-face {
+  font-family: 'Cormorant Garamond';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url("fb137047-e245-4814-8d4c-1da013ef7972") format('woff2');
+  unicode-range: U+0460-052F, U+1C80-1C8A, U+20B4, U+2DE0-2DFF, U+A640-A69F, U+FE2E-FE2F;
+}
+/* cyrillic */
+@font-face {
+  font-family: 'Cormorant Garamond';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url("74fedb3d-3526-47e6-8ccd-841179854b23") format('woff2');
+  unicode-range: U+0301, U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
+}
+/* vietnamese */
+@font-face {
+  font-family: 'Cormorant Garamond';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url("8ce88f64-2ff7-48a2-887b-3ee622b05182") format('woff2');
+  unicode-range: U+0102-0103, U+0110-0111, U+0128-0129, U+0168-0169, U+01A0-01A1, U+01AF-01B0, U+0300-0301, U+0303-0304, U+0308-0309, U+0323, U+0329, U+1EA0-1EF9, U+20AB;
+}
+/* latin-ext */
+@font-face {
+  font-family: 'Cormorant Garamond';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url("d0aa4fe4-2931-4211-b123-b352f07b0eef") format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+/* latin */
+@font-face {
+  font-family: 'Cormorant Garamond';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url("6c73ee2f-35f3-4ee0-ab12-7877278d2e3e") format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+/* cyrillic-ext */
+@font-face {
+  font-family: 'JetBrains Mono';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url("4cf8c514-bd42-4209-b9b1-bbf9944eaa0f") format('woff2');
+  unicode-range: U+0460-052F, U+1C80-1C8A, U+20B4, U+2DE0-2DFF, U+A640-A69F, U+FE2E-FE2F;
+}
+/* cyrillic */
+@font-face {
+  font-family: 'JetBrains Mono';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url("900cb7b0-f0ba-4930-9682-19a29f00ab20") format('woff2');
+  unicode-range: U+0301, U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
+}
+/* greek */
+@font-face {
+  font-family: 'JetBrains Mono';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url("aef5b302-6c04-45e2-b485-08a5c0929e2b") format('woff2');
+  unicode-range: U+0370-0377, U+037A-037F, U+0384-038A, U+038C, U+038E-03A1, U+03A3-03FF;
+}
+/* vietnamese */
+@font-face {
+  font-family: 'JetBrains Mono';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url("97fd3405-2fdc-4cf7-a252-0ef7dc76b9e3") format('woff2');
+  unicode-range: U+0102-0103, U+0110-0111, U+0128-0129, U+0168-0169, U+01A0-01A1, U+01AF-01B0, U+0300-0301, U+0303-0304, U+0308-0309, U+0323, U+0329, U+1EA0-1EF9, U+20AB;
+}
+/* latin-ext */
+@font-face {
+  font-family: 'JetBrains Mono';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url("f6074579-607c-460b-bdd7-90ce9f04eada") format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+/* latin */
+@font-face {
+  font-family: 'JetBrains Mono';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url("510bc4dd-aa77-461a-8e0a-d885075116d8") format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+/* cyrillic-ext */
+@font-face {
+  font-family: 'JetBrains Mono';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url("4cf8c514-bd42-4209-b9b1-bbf9944eaa0f") format('woff2');
+  unicode-range: U+0460-052F, U+1C80-1C8A, U+20B4, U+2DE0-2DFF, U+A640-A69F, U+FE2E-FE2F;
+}
+/* cyrillic */
+@font-face {
+  font-family: 'JetBrains Mono';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url("900cb7b0-f0ba-4930-9682-19a29f00ab20") format('woff2');
+  unicode-range: U+0301, U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
+}
+/* greek */
+@font-face {
+  font-family: 'JetBrains Mono';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url("aef5b302-6c04-45e2-b485-08a5c0929e2b") format('woff2');
+  unicode-range: U+0370-0377, U+037A-037F, U+0384-038A, U+038C, U+038E-03A1, U+03A3-03FF;
+}
+/* vietnamese */
+@font-face {
+  font-family: 'JetBrains Mono';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url("97fd3405-2fdc-4cf7-a252-0ef7dc76b9e3") format('woff2');
+  unicode-range: U+0102-0103, U+0110-0111, U+0128-0129, U+0168-0169, U+01A0-01A1, U+01AF-01B0, U+0300-0301, U+0303-0304, U+0308-0309, U+0323, U+0329, U+1EA0-1EF9, U+20AB;
+}
+/* latin-ext */
+@font-face {
+  font-family: 'JetBrains Mono';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url("f6074579-607c-460b-bdd7-90ce9f04eada") format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+/* latin */
+@font-face {
+  font-family: 'JetBrains Mono';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url("510bc4dd-aa77-461a-8e0a-d885075116d8") format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
+  :root { color-scheme: dark; }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html, body { width: 100%; height: 100%; overflow: hidden; background: transparent; touch-action: none; }
+  html.solo, body.solo { background: radial-gradient(circle at 50% 46%, #0b0b0b, #000 78%); }
+  body { font-family: 'JetBrains Mono', monospace; color: #efede8; user-select: none; }
+
+  .viewport { width: 100vw; height: 100vh; display: flex; align-items: center; justify-content: center; perspective: 2200px; }
+  .stage-scale { transform: scale(1.1); transition: transform 0.6s cubic-bezier(0.2,0.8,0.2,1); }
+  .stage {
+    position: relative; width: 0; height: 0;
+    transform-style: preserve-3d;
+    transform: rotateX(8deg) rotateY(-26deg);
+    transition: transform 0.6s cubic-bezier(0.2,0.8,0.2,1);
+    opacity: 0;
+  }
+  .stage.ready { opacity: 1; transition: transform 0.6s cubic-bezier(0.2,0.8,0.2,1), opacity 0.24s linear; }
+  /* opening the case swings the whole object so the interior faces you */
+  .viewport.open .stage { transform: rotateX(6deg) rotateY(-8deg) translateX(-52px); }
+
+  /* ============ texture slots ============ */
+  .slot { position: absolute; top: 0; left: 0; width: 100%; height: 100%; overflow: hidden; background: #0a0a0a; }
+  .slot img { width: 100%; height: 100%; object-fit: fill; display: block; }
+  .slot .hint {
+    position: absolute; inset: 0; display: flex; flex-direction: column;
+    align-items: center; justify-content: center; gap: 4px; text-align: center;
+    font-size: 5px; letter-spacing: 0.24em; text-transform: uppercase;
+    color: rgba(239,237,232,0.34); padding: 6px;
+    background: repeating-linear-gradient(45deg, rgba(255,255,255,0.05) 0 4px, transparent 4px 9px), #070707;
+    box-shadow: inset 0 0 0 1px rgba(255,255,255,0.14);
+  }
+  .slot .hint b { font-size: 5.5px; color: rgba(239,237,232,0.62); letter-spacing: 0.2em; }
+  .slot.filled .hint, .slot.filled .mag-print { display: none; }
+
+  /* ================================================================
+     RETAIL CLAMSHELL CASE — two hinged half-shells, 200 x 300 x 12 each
+     ================================================================ */
+  .case {
+    position: absolute; width: 200px; height: 300px;
+    left: -100px; top: -150px;
+    transform-style: preserve-3d;
+  }
+
+  /* ---- BASE half : holds the moulded cartridge tray ---- */
+  .base { position: absolute; inset: 0; transform-style: preserve-3d; }
+  .base-outer {                                   /* rear cover, faces away */
+    position: absolute; inset: 0; transform: rotateY(180deg);
+    background: #060606; box-shadow: inset 0 0 0 1px rgba(255,255,255,0.15);
+  }
+  .base-inner {                                   /* interior floor, faces you */
+    position: absolute; inset: 0; transform: translateZ(12px);
+    background: linear-gradient(158deg, #121214, #08080a 62%, #0e0e10);
+    box-shadow: inset 0 0 0 1px rgba(255,255,255,0.1), inset 0 0 22px rgba(0,0,0,0.85);
+  }
+  .bwall { position: absolute; background: #101013; box-shadow: inset 0 0 0 1px rgba(255,255,255,0.13); }
+  .bwall.t { width: 200px; height: 12px; top: 0; left: 0; transform-origin: top center; transform: rotateX(90deg); }
+  .bwall.b { width: 200px; height: 12px; bottom: 0; left: 0; transform-origin: bottom center; transform: rotateX(-90deg); }
+  .bwall.r { width: 12px; height: 300px; top: 0; right: 0; transform-origin: center right; transform: rotateY(90deg); }
+
+  /* moulded tray + retention ribs the cartridge clips into */
+  .tray {
+    position: absolute; left: 30px; top: 62px; width: 140px; height: 175px;
+    transform: translateZ(13px); transform-style: preserve-3d;
+    background: linear-gradient(160deg, #17171a, #0b0b0d 55%, #131316);
+    box-shadow: inset 0 0 0 1px rgba(255,255,255,0.09), 0 3px 10px rgba(0,0,0,0.85);
+  }
+  .rib { position: absolute; height: 6px; left: 10px; right: 10px; background: #1e1e22; box-shadow: inset 0 0 0 1px rgba(255,255,255,0.07); }
+  .rib.t { top: 6px; }
+  .rib.b { bottom: 6px; }
+  .tray-tag {
+    position: absolute; left: 0; right: 0; bottom: -20px; text-align: center;
+    font-size: 5px; letter-spacing: 0.3em; color: rgba(239,237,232,0.3);
+  }
+  .base-crest {
+    position: absolute; left: 0; right: 0; top: 22px; text-align: center;
+    transform: translateZ(13px);
+    font-family: 'Cinzel', serif; font-weight: 800; font-size: 8px;
+    letter-spacing: 0.32em; color: rgba(239,237,232,0.4);
+  }
+
+  /* ---- LID half : cover art outside, booklet clipped inside ---- */
+  .lid {
+    position: absolute; inset: 0; transform-style: preserve-3d;
+    transform-origin: left center;
+    transform: translateZ(12px);
+    transition: transform 0.75s cubic-bezier(0.3,0.85,0.25,1);
+    cursor: pointer;
+  }
+  .case.open .lid { transform: translateZ(12px) rotateY(-166deg); }
+  /* front cover and interior are swapped by opacity mid-swing — deterministic
+     across engines, unlike backface-visibility on these flattened slot planes */
+  .lid-front { position: absolute; inset: 0; transform: translateZ(12px); transition: opacity 0.12s linear 0.3s; }
+  .case.open .lid-front, .case.open .lid-glass { opacity: 0; }
+  .lid-glass {
+    position: absolute; inset: 0; transform: translateZ(12.6px); transition: opacity 0.12s linear 0.3s;
+    background: linear-gradient(128deg, rgba(255,255,255,0.2) 0%, rgba(255,255,255,0.04) 42%, rgba(255,255,255,0.015) 62%, rgba(255,255,255,0.15) 100%);
+    box-shadow: inset 0 0 0 1px rgba(255,255,255,0.3), inset 0 0 18px rgba(255,255,255,0.07);
+  }
+  .lid:hover .lid-glass { box-shadow: inset 0 0 0 1px rgba(255,255,255,0.55), inset 0 0 24px rgba(255,255,255,0.15); }
+  .lid-inner {                                    /* interior of the lid */
+    position: absolute; inset: 0; transform: rotateY(180deg) translateZ(0.4px);
+    opacity: 0; transition: opacity 0.12s linear 0.3s;
+    background: linear-gradient(158deg, #101012, #07070a 60%, #0d0d10);
+    box-shadow: inset 0 0 0 1px rgba(255,255,255,0.1), inset 0 0 20px rgba(0,0,0,0.8);
+    padding: 16px 14px; display: flex; flex-direction: column;
+  }
+  .case.open .lid-inner { opacity: 1; }
+  .lwall { position: absolute; background: #0e0e11; box-shadow: inset 0 0 0 1px rgba(255,255,255,0.12); }
+  .lwall.t { width: 200px; height: 12px; top: 0; left: 0; transform-origin: top center; transform: rotateX(-90deg); }
+  .lwall.b { width: 200px; height: 12px; bottom: 0; left: 0; transform-origin: bottom center; transform: rotateX(90deg); }
+  .lwall.r { width: 12px; height: 300px; top: 0; right: 0; transform-origin: center right; transform: rotateY(-90deg); }
+
+  /* spine, printed with the title — the edge you'd see on a shelf */
+  .spine {
+    position: absolute; left: 0; top: 0; width: 24px; height: 300px;
+    transform-origin: left center; transform: rotateY(-90deg);
+    background: #050506; box-shadow: inset 0 0 0 1px rgba(255,255,255,0.18);
+    overflow: hidden;
+  }
+  .spine .hint { font-size: 4.5px; }
+  .spine-print { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; }
+  .spine-print span {
+    font-size: 6.5px; font-weight: 700; letter-spacing: 0.3em; white-space: nowrap;
+    transform: rotate(90deg); color: rgba(239,237,232,0.8);
+  }
+
+  /* booklet clipped into the lid, behind two retention flaps */
+  .bk-clip {
+    position: relative; width: 100%; height: 100%;
+    box-shadow: inset 0 0 0 1px rgba(255,255,255,0.07);
+    display: flex; align-items: center; justify-content: center;
+  }
+  .flap {
+    position: absolute; width: 26px; height: 5px; background: #24242a;
+    box-shadow: inset 0 0 0 1px rgba(255,255,255,0.09); z-index: 3;
+  }
+  .flap.tl { top: -1px; left: 8px; } .flap.tr { top: -1px; right: 8px; }
+  .flap.bl { bottom: -1px; left: 8px; } .flap.br { bottom: -1px; right: 8px; }
+  .booklet {
+    position: relative; width: 150px; height: 236px;
+    background: #e9e5da; color: #131313;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.8);
+    cursor: pointer; overflow: hidden;
+    padding: 13px 12px; display: flex; flex-direction: column; gap: 7px;
+    transition: transform 0.3s cubic-bezier(0.2,0.8,0.2,1);
+  }
+  .booklet:hover { transform: translateY(-3px); }
+  .bk-kicker { font-size: 4.5px; letter-spacing: 0.34em; text-transform: uppercase; opacity: 0.6; }
+  .bk-rule { height: 1px; background: #131313; opacity: 0.5; }
+  .bk-title { font-family: 'Cinzel', serif; font-weight: 800; font-size: 13px; line-height: 1.1; letter-spacing: 0.05em; text-transform: uppercase; }
+  .bk-sub { font-family: 'Cormorant Garamond', serif; font-style: italic; font-size: 8px; line-height: 1.4; opacity: 0.72; }
+  .bk-seal { position: absolute; right: 12px; bottom: 26px; width: 28px; height: 28px; border-radius: 50%; box-shadow: inset 0 0 0 1px #131313; display: flex; align-items: center; justify-content: center; font-size: 10px; opacity: 0.45; }
+  .bk-open { margin-top: auto; font-size: 4.5px; letter-spacing: 0.3em; text-transform: uppercase; opacity: 0.55; }
+
+  /* ================================================================
+     CARTRIDGE — 118 x 132 x 14, seated in the tray
+     ================================================================ */
+  .cart {
+    position: absolute; width: 118px; height: 133px;
+    left: 41px; top: 84px;
+    transform-style: preserve-3d;
+    transform: translateZ(18px);
+    transition: transform 0.6s cubic-bezier(0.25,1.1,0.4,1), opacity 0.5s linear;
+    cursor: pointer;
+  }
+  .cart.out { transform: translateZ(230px) translateX(34px) translateY(-58px) rotateY(-13deg); }
+  .cart.launch {
+    transform: translateZ(230px) translateX(34px) translateY(-1100px) rotateZ(-10deg) rotateY(-13deg);
+    opacity: 0;
+    transition: transform 0.66s cubic-bezier(0.34,0,0.72,0), opacity 0.66s linear 0.12s;
+  }
+  /* top-right insertion bevel, applied only to flat background planes */
+  .notch { clip-path: polygon(0 0, calc(100% - 16px) 0, calc(100% - 16px) 13px, 100% 13px, 100% 100%, 0 100%); }
+  .cart-face { position: absolute; inset: 0; transform: translateZ(7px); }
+  .cart-face-bg {
+    position: absolute; inset: 0;
+    background: linear-gradient(150deg, #a5a49e 0%, #9a998f 40%, #8d8c86 74%, #9c9b91 100%);
+    box-shadow: inset 0 0 0 1px rgba(255,255,255,0.14), inset 0 -2px 7px rgba(0,0,0,0.3);
+  }
+  /* back plane: unrotated so it can never win depth-sorting against the face */
+  .cart-rear {
+    position: absolute; inset: 0; transform: translateZ(-7.5px);
+    background: linear-gradient(150deg, #8f8e88 0%, #83827c 55%, #8d8c86 100%);
+    box-shadow: inset 0 0 0 1px rgba(0,0,0,0.35);
+  }
+  .kwall { position: absolute; background: #7d7c76; box-shadow: inset 0 0 0 1px rgba(0,0,0,0.22); }
+  .kwall.t { width: 118px; height: 15px; top: 0; left: 0; transform-origin: top center; transform: rotateX(90deg); }
+  .kwall.b { width: 118px; height: 15px; bottom: 0; left: 0; transform-origin: bottom center; transform: rotateX(-90deg); background: #63625e; }
+  .kwall.l { width: 15px; height: 133px; top: 0; left: 0; transform-origin: left center; transform: rotateY(-90deg); }
+  .kwall.r { width: 15px; height: 133px; top: 0; right: 0; transform-origin: center right; transform: rotateY(90deg); }
+
+  /* raised side rails running the full height of the shell */
+  .rail-v {
+    position: absolute; top: 2px; bottom: 2px; width: 5px;
+    background: linear-gradient(90deg, rgba(255,255,255,0.16), rgba(0,0,0,0.16));
+  }
+  .rail-v.l { left: 2px; }
+  .rail-v.r { right: 2px; background: linear-gradient(90deg, rgba(0,0,0,0.16), rgba(255,255,255,0.14)); }
+
+  /* recessed label well with a raised bezel */
+  .label-well {
+    position: absolute; left: 10px; top: 17px; width: 98px; height: 84px;
+    background: #6f6e6a;
+    box-shadow: inset 0 2px 3px rgba(0,0,0,0.45), 0 1px 0 rgba(255,255,255,0.18);
+  }
+  .label-recess {
+    position: absolute; left: 13px; top: 20px; width: 92px; height: 78px;
+    background: #08080a;
+    box-shadow: inset 0 0 0 1px rgba(0,0,0,0.55);
+  }
+
+  /* moulded grip band across the bottom */
+  .grip {
+    position: absolute; left: 4px; right: 4px; top: 106px; height: 20px;
+    background:
+      repeating-linear-gradient(90deg, rgba(0,0,0,0.16) 0 1px, rgba(255,255,255,0.09) 1px 2px, transparent 2px 5px),
+      linear-gradient(180deg, #a8a7a1, #8e8d87);
+    box-shadow: inset 0 1px 0 rgba(255,255,255,0.24), inset 0 -1px 2px rgba(0,0,0,0.32);
+    display: flex; align-items: center; justify-content: center;
+  }
+  .grip span {
+    font-size: 5px; font-weight: 700; letter-spacing: 0.2em; font-style: italic;
+    color: #6d6c67; text-shadow: 0 1px 0 rgba(255,255,255,0.28);
+  }
+  /* insertion arrow beside the bevel */
+  .ins {
+    position: absolute; right: 20px; top: 3px;
+    font-size: 6px; letter-spacing: 0.1em; color: #74736f;
+    text-shadow: 0 1px 0 rgba(255,255,255,0.2);
+  }
+  .side-code { position: absolute; font-size: 3.8px; letter-spacing: 0.16em; color: #75746f; white-space: nowrap; text-transform: uppercase; }
+  .side-code.l { left: 3px; top: 100px; transform: rotate(-90deg); transform-origin: left bottom; }
+  .cart:hover .cart-face-bg { filter: brightness(1.1); }
+
+  /* ================================================================
+     MAGAZINE — issue 01, lying beside the case
+     ================================================================ */
+  .mag {
+    position: absolute; width: 138px; height: 184px;
+    left: 224px; top: 104px;
+    transform-style: preserve-3d;
+    transform: translateZ(-10px) rotateY(11deg) rotateZ(-2deg);
+    transition: transform 0.5s cubic-bezier(0.25,1.1,0.4,1);
+    cursor: pointer;
+  }
+  .mag:hover { transform: translateZ(4px) rotateY(11deg) rotateZ(-2deg) translateY(-8px); }
+  .mag-pages {                       /* the paper block, seen as a stacked edge */
+    position: absolute; inset: 0; transform: translateZ(-1px);
+    background: linear-gradient(90deg, #cdc8bb, #e7e3d8 60%, #b9b4a7);
+    box-shadow: 0 6px 18px rgba(0,0,0,0.7);
+  }
+  .mag-edge {
+    position: absolute; top: 0; right: 0; width: 7px; height: 184px;
+    transform-origin: center right; transform: rotateY(90deg);
+    background: repeating-linear-gradient(180deg, #e9e5da 0 1.4px, #c3bfb2 1.4px 2.8px);
+  }
+  .mag-cover {
+    position: absolute; inset: 0; transform: translateZ(1px);
+    background: #0a0a0a; overflow: hidden;
+    box-shadow: inset 0 0 0 1px rgba(255,255,255,0.14);
+  }
+  .mag-print {
+    position: absolute; inset: 0; padding: 11px 10px;
+    display: flex; flex-direction: column; gap: 5px; background: #e9e5da; color: #131313;
+  }
+  .mag-mast {
+    font-family: 'Cinzel', serif; font-weight: 800; font-size: 17px; line-height: 0.88;
+    letter-spacing: 0.01em; text-transform: uppercase; color: #b8352c;
+    -webkit-text-stroke: 0.6px #131313;
+  }
+  .mag-rule { height: 2px; background: #131313; }
+  .mag-strap { font-size: 4.5px; letter-spacing: 0.26em; text-transform: uppercase; opacity: 0.65; }
+  .mag-shot { flex: 1; box-shadow: inset 0 0 0 1px rgba(19,19,19,0.3); background: repeating-linear-gradient(45deg, rgba(19,19,19,0.06) 0 5px, transparent 5px 11px); }
+  .mag-lead { font-family: 'Cinzel', serif; font-weight: 800; font-size: 9px; line-height: 1.05; text-transform: uppercase; }
+  .mag-dek { font-family: 'Cormorant Garamond', serif; font-style: italic; font-size: 7px; line-height: 1.35; opacity: 0.75; }
+  .mag-issue { position: absolute; right: 10px; top: 10px; font-size: 4.5px; letter-spacing: 0.24em; text-transform: uppercase; opacity: 0.6; }
+  .mag-tag {
+    position: absolute; left: 0; right: 0; bottom: -20px; text-align: center;
+    font-size: 5px; letter-spacing: 0.3em; color: rgba(239,237,232,0.34);
+  }
+  .mag:hover .mag-tag { color: rgba(239,237,232,0.75); }
+
+  /* ================================================================
+     MANUAL OVERLAY — the booklet, read flat
+     ================================================================ */
+  .manual {
+    position: fixed; inset: 0; z-index: 80;
+    display: flex; align-items: center; justify-content: center;
+    background: rgba(0,0,0,0.72);
+    opacity: 0; pointer-events: none; transition: opacity 0.3s linear;
+  }
+  .manual.on { opacity: 1; pointer-events: auto; }
+  .man-page {
+    width: 380px; max-width: calc(100vw - 40px); height: min(560px, calc(100vh - 48px));
+    background: #e9e5da; color: #131313; position: relative;
+    padding: 26px 28px 30px; overflow-y: auto;
+    box-shadow: 0 18px 60px rgba(0,0,0,0.8);
+    background-image: repeating-linear-gradient(0deg, rgba(19,19,19,0.02) 0 1px, transparent 1px 3px);
+    transform: translateY(16px) scale(0.97); transition: transform 0.34s cubic-bezier(0.2,0.9,0.2,1);
+    font-size: 9px; line-height: 1.8;
+  }
+  .manual.on .man-page { transform: none; }
+  .man-page h1 { font-family: 'Cinzel', serif; font-size: 17px; letter-spacing: 0.1em; text-transform: uppercase; }
+  .man-page .dek { font-family: 'Cormorant Garamond', serif; font-style: italic; font-size: 12px; line-height: 1.45; opacity: 0.72; margin: 4px 0 18px; }
+  .man-page h2 {
+    font-size: 8.5px; font-weight: 700; letter-spacing: 0.24em; text-transform: uppercase;
+    border-top: 1px solid rgba(19,19,19,0.25); padding-top: 9px; margin: 18px 0 6px;
+    display: flex; gap: 8px;
+  }
+  .man-page h2 i { font-style: normal; color: #b8352c; }
+  .man-page p { font-family: 'Cormorant Garamond', serif; font-size: 12.5px; line-height: 1.55; margin-bottom: 6px; text-wrap: pretty; }
+  .man-page ol { padding-left: 16px; }
+  .man-page li { font-family: 'Cormorant Garamond', serif; font-size: 12.5px; line-height: 1.55; margin-bottom: 5px; }
+  .man-notice { margin-top: 18px; padding: 10px 11px; box-shadow: inset 0 0 0 1px rgba(19,19,19,0.5); font-size: 7.5px; line-height: 1.8; letter-spacing: 0.1em; text-transform: uppercase; }
+  .man-notice b { color: #b8352c; }
+  .man-actions { margin-top: 18px; display: flex; flex-direction: column; gap: 7px; }
+  .man-act {
+    appearance: none; background: none; border: 0; text-align: left; cursor: pointer;
+    font-family: 'JetBrains Mono', monospace; font-size: 8px; letter-spacing: 0.22em;
+    text-transform: uppercase; color: #131313; padding: 7px 0;
+    box-shadow: inset 0 -1px 0 rgba(19,19,19,0.4);
+  }
+  .man-act:hover { color: #b8352c; box-shadow: inset 0 -1px 0 #b8352c; }
+  .man-close {
+    position: absolute; top: 12px; right: 14px; z-index: 5;
+    appearance: none; background: none; border: 0; cursor: pointer;
+    font-family: 'JetBrains Mono', monospace; font-size: 8px; letter-spacing: 0.2em; color: #131313; opacity: 0.55;
+  }
+  .man-close:hover { opacity: 1; color: #b8352c; }
+
+  .hint-bar {
+    position: fixed; bottom: 16px; left: 0; right: 0; text-align: center;
+    font-size: 8px; letter-spacing: 0.28em; text-transform: uppercase;
+    color: rgba(239,237,232,0.5); pointer-events: none; z-index: 50;
+  }
+</style>
+<style id="lnrt-noscroll">*{scrollbar-width:none!important;-ms-overflow-style:none!important}*::-webkit-scrollbar{width:0!important;height:0!important;display:none!important}*::-webkit-scrollbar-thumb,*::-webkit-scrollbar-track,*::-webkit-scrollbar-corner,*::-webkit-scrollbar-button{display:none!important;background:0 0!important}</style>
+</head>
+<body>
+
+<div class="viewport" id="vp">
+  <div class="stage-scale">
+    <div class="stage" id="stage">
+      <div class="case" id="case">
+        <!-- ===== MAGAZINE ===== -->
+        <div class="mag" id="mag">
+          <div class="mag-pages"></div>
+          <div class="mag-edge"></div>
+          <div class="mag-cover slot" data-tex="assets/pachinko/mag-cover.webp">
+            <img alt="" data-src="assets/pachinko/mag-cover.webp">
+            <div class="mag-print hint-print">
+              <div class="mag-mast">Lunarot<br>Power</div>
+              <div class="mag-rule"></div>
+              <div class="mag-strap">Issue 01 · unsealed</div>
+              <div class="mag-shot"></div>
+              <div class="mag-lead">Making it<br>feel cursed</div>
+              <div class="mag-dek">Twelve pages inside the possessed board.</div>
+              <div class="mag-issue">✶ 01</div>
+            </div>
+          </div>
+          <div class="mag-tag">◆ ISSUE 01 — READ</div>
+        </div>
+
+
+        <!-- ===== BASE HALF ===== -->
+        <div class="base">
+          <div class="base-outer slot" data-tex="assets/pachinko/case-back.webp">
+            <img alt="" data-src="assets/pachinko/case-back.webp">
+            <div class="hint"><b>CASE BACK</b>SLOT · 200×300<br>assets/pachinko/case-back.webp</div>
+          </div>
+          <div class="bwall t"></div>
+          <div class="bwall b"></div>
+          <div class="bwall r"></div>
+          <div class="spine slot" data-tex="assets/pachinko/case-spine.webp">
+            <img alt="" data-src="assets/pachinko/case-spine.webp">
+            <div class="hint spine-print"><span>ASTRAL PACHINKO · LNRT-01</span></div>
+          </div>
+          <div class="base-inner"></div>
+          <div class="base-crest">LUNAROT ✶ CONDUIT SERIES</div>
+          <div class="tray">
+            <div class="rib t"></div>
+            <div class="rib b"></div>
+            <div class="tray-tag">CONDUIT SEATED</div>
+          </div>
+
+          <!-- cartridge, clipped into the tray -->
+          <div class="cart" id="cart">
+            <div class="cart-rear"></div>
+            <div class="kwall t"></div>
+            <div class="kwall b"></div>
+            <div class="kwall l"></div>
+            <div class="kwall r"></div>
+            <div class="cart-face">
+              <div class="cart-face-bg notch"></div>
+              <div class="rail-v l"></div>
+              <div class="rail-v r"></div>
+              <div class="ins">▲</div>
+              <div class="label-well"></div>
+              <div class="label-recess slot" data-tex="assets/pachinko/cart-label.webp">
+                <img alt="" data-src="assets/pachinko/cart-label.webp">
+                <div class="hint"><b>LABEL ART</b>SLOT · 92×78<br>assets/pachinko/<br>cart-label.webp</div>
+              </div>
+              <div class="grip"><span>LUNAROT ✶ DEKA</span></div>
+              <div class="side-code l">LNRT-APAE-IDN 1</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- ===== LID HALF ===== -->
+        <div class="lid" id="lid">
+          <div class="lid-front slot" data-tex="assets/pachinko/case-front.webp">
+            <img alt="" data-src="assets/pachinko/case-front.webp">
+            <div class="hint"><b>CASE FRONT ART</b>SLOT · 200×300<br>assets/pachinko/case-front.webp</div>
+          </div>
+          <div class="lid-glass"></div>
+          <div class="lwall t"></div>
+          <div class="lwall b"></div>
+          <div class="lwall r"></div>
+          <div class="lid-inner">
+            <div class="bk-clip">
+              <div class="flap tl"></div><div class="flap tr"></div>
+              <div class="flap bl"></div><div class="flap br"></div>
+              <div class="booklet" id="booklet">
+                <div class="bk-kicker">Lunarot Engine · 8-bit conduit</div>
+                <div class="bk-rule"></div>
+                <div class="bk-title">Astral<br>Pachinko</div>
+                <div class="bk-sub">Instruction booklet. Read before releasing a bead.</div>
+                <div class="bk-seal">✶</div>
+                <div class="bk-open">◆ Click to read</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ===== MANUAL ===== -->
+<div class="manual" id="manual">
+  <div class="man-page" id="manPage">
+    <button class="man-close" id="manClose">✕ CLOSE</button>
+    <h1>Instruction Booklet</h1>
+    <div class="dek">Sacred Pachinko — a possessed board, a skeleton behind the glass, tarot deciding your fate.</div>
+
+    <h2><i>01</i> Seating the conduit</h2>
+    <p>Take the cartridge from its tray and press it home. The board wakes on contact — there is no power switch, and there never was one.</p>
+
+    <h2><i>02</i> Releasing a bead</h2>
+    <ol>
+      <li>Drop a bead from the top of the board.</li>
+      <li>Pegs kick it sideways; every other row gives it a random upward hop, so nothing falls straight.</li>
+      <li>The bottom row kicks hardest and least predictably.</li>
+      <li>Side walls launch the bead rather than cushion it. Expect chaos.</li>
+      <li>A bead that touches nothing on the way down is refunded — an unearned draw is no draw.</li>
+    </ol>
+
+    <h2><i>03</i> The gates</h2>
+    <p>Each gate is marked with a glowing suit symbol. Whichever gate takes the bead chooses the card, and the card chooses the reading. You do not get to appeal.</p>
+
+    <h2><i>04</i> The arbiter</h2>
+    <p>A skull sits behind the glass and watches. It reddens and grows angrier the higher your score climbs. Its tilt and shake are honest telemetry: if it lurches, something went wrong.</p>
+
+    <h2><i>05</i> Score &amp; victory</h2>
+    <p>Score glows gold and should be read as a prize rather than a statistic. There is a real victory at the top of the ladder, and it arrives with a flash.</p>
+
+    <h2><i>06</i> Failure</h2>
+    <p>Game over hits with a flash and a shatter, the text stumbling in piece by piece. Restart flashes and pulls back before it returns you to the start.</p>
+
+    <h2><i>07</i> Care of your conduit</h2>
+    <p>Do not blow into the connector. Do not purge the registry mid-draw. Store away from direct sunlight and from anyone who would use it on your behalf.</p>
+
+    <div class="man-notice"><b>Notice ·</b> This device draws cards for you. Lunarot Corporation reserves no rights, accepts no returns, and retains every attempt.</div>
+
+    <div class="man-actions">
+      <button class="man-act" id="actLaunch">◆ Insert cartridge — run astral-pachinko.bin</button>
+      <button class="man-act" id="actMag">✶ Lunarot Power, issue 01 — the build diary</button>
+    </div>
+  </div>
+</div>
+
+<div class="hint-bar" id="hintBar">Click the case to open it</div>
+
+<script>
+  var embedded = false;
+  try { embedded = !!(window.parent !== window && window.parent.OS_BUILD); } catch (e) {}
+  if (!embedded) { document.documentElement.classList.add('solo'); document.body.classList.add('solo'); }
+
+  var vp = document.getElementById('vp');
+  var stage = document.getElementById('stage');
+  var kase = document.getElementById('case');
+  var lid = document.getElementById('lid');
+  var booklet = document.getElementById('booklet');
+  var cart = document.getElementById('cart');
+  var manual = document.getElementById('manual');
+  var mag = document.getElementById('mag');
+  var hintBar = document.getElementById('hintBar');
+
+  var isOpen = false, isOut = false, isReading = false, launching = false;
+
+  function setHint(t) {
+    hintBar.textContent = t;
+    try { parent.postMessage({ lunarotJewelHint: t.toUpperCase() }, '*'); } catch (e) {}
+  }
+  function focusParent() {
+    if (!embedded) return;
+    try { window.parent.postMessage({ type: 'LUNAROT_FOCUS' }, '*'); } catch (e) {}
+  }
+  function refreshHint() {
+    if (isReading) setHint('Scroll the booklet · ✕ to close');
+    else if (isOut) setHint('Click cartridge to run · magazine to read');
+    else if (isOpen) setHint('Click cartridge to lift it out · booklet or magazine to read');
+    else setHint('Click the case to open it · magazine to read');
+  }
+  refreshHint();
+
+  function setOpen(v) {
+    isOpen = v;
+    kase.classList.toggle('open', v);
+    vp.classList.toggle('open', v);
+    if (v) focusParent();
+    if (!v) { setReading(false); setOut(false); }
+    refreshHint();
+  }
+  function setOut(v) {
+    if (v && !isOpen) { setOpen(true); setTimeout(function () { setOut(true); }, 480); return; }
+    isOut = v;
+    cart.classList.toggle('out', v);
+    refreshHint();
+  }
+  function setReading(v) {
+    isReading = v;
+    manual.classList.toggle('on', v);
+    if (v) focusParent();
+    refreshHint();
+  }
+  function launch() {
+    if (launching) return;
+    launching = true;
+    setHint('Conduit launching');
+    cart.classList.add('launch');
+    setTimeout(function () {
+      if (embedded) {
+        try { window.parent.postMessage({ type: 'LUNAROT_OPEN_PACHINKO' }, '*'); } catch (e) {}
+      } else {
+        try { window.open('/sacred-pachinko', '_blank'); } catch (e) {}
+      }
+    }, 500);
+    setTimeout(function () {
+      cart.classList.remove('launch');
+      cart.classList.remove('out');
+      isOut = false; launching = false;
+      refreshHint();
+    }, 1600);
+  }
+
+  lid.addEventListener('click', function (e) { e.stopPropagation(); setOpen(!isOpen); });
+  booklet.addEventListener('click', function (e) { e.stopPropagation(); setReading(true); });
+  document.getElementById('manClose').addEventListener('click', function (e) { e.stopPropagation(); setReading(false); });
+  manual.addEventListener('click', function (e) { if (e.target === manual) setReading(false); });
+  cart.addEventListener('click', function (e) {
+    e.stopPropagation();
+    if (!isOut) setOut(true); else launch();
+  });
+  document.getElementById('actLaunch').addEventListener('click', function (e) {
+    e.stopPropagation(); setReading(false); setOut(true); setTimeout(launch, 420);
+  });
+  function openMag() {
+    if (embedded) {
+      try { window.parent.postMessage({ type: 'LUNAROT_OPEN_MAGAZINE' }, '*'); } catch (err) {}
+    } else {
+      try { window.open((window.__resources && window.__resources.pachinkoMagazine) || 'pachinko-magazine.html', '_blank'); } catch (err) {}
+    }
+  }
+  mag.addEventListener('click', function (e) { e.stopPropagation(); openMag(); });
+  document.getElementById('actMag').addEventListener('click', function (e) { e.stopPropagation(); openMag(); });
+  document.addEventListener('keydown', function (e) { if (e.key === 'Escape') { if (isReading) setReading(false); else if (isOpen) setOpen(false); } });
+
+  /* ---- texture slots ---- */
+  (function fillSlots() {
+    var slots = [].slice.call(document.querySelectorAll('.slot'));
+    var left = slots.length;
+    function done() { if (--left <= 0) stage.classList.add('ready'); }
+    slots.forEach(function (s) {
+      var img = s.querySelector('img');
+      var src = s.getAttribute('data-tex');
+      if (!img || !src) { done(); return; }
+      var probe = new Image();
+      probe.onload = function () { img.src = src; s.classList.add('filled'); done(); };
+      probe.onerror = function () { img.remove(); done(); };
+      probe.src = src;
+    });
+    setTimeout(function () { stage.classList.add('ready'); }, 2000);
+  })();
+
+  /* ---- drag to rotate + pinch/wheel zoom ---- */
+  var dragging = false, lastX = 0, lastY = 0, moved = 0;
+  var rotX = 8, rotY = -26, scale = 1.1, pinchStart = 0, pinchBase = 1.1;
+  var scaler = document.querySelector('.stage-scale');
+  function applyRot() {
+    stage.style.transform = 'rotateX(' + rotX + 'deg) rotateY(' + rotY + 'deg)' + (isOpen ? ' translateX(-52px)' : '');
+  }
+  function applyScale() { scaler.style.transform = 'scale(' + scale + ')'; }
+
+  document.addEventListener('mousedown', function (e) {
+    if (isReading) return;
+    dragging = true; moved = 0; lastX = e.clientX; lastY = e.clientY;
+    stage.style.transition = 'none';
+  });
+  document.addEventListener('mousemove', function (e) {
+    if (!dragging) return;
+    moved += Math.abs(e.clientX - lastX) + Math.abs(e.clientY - lastY);
+    rotY += (e.clientX - lastX) * 0.4;
+    rotX -= (e.clientY - lastY) * 0.4;
+    rotX = Math.max(-80, Math.min(80, rotX));
+    lastX = e.clientX; lastY = e.clientY;
+    applyRot();
+  });
+  document.addEventListener('mouseup', function () {
+    dragging = false;
+    stage.style.transition = 'transform 0.6s cubic-bezier(0.2,0.8,0.2,1)';
+  });
+  document.addEventListener('click', function (e) { if (moved > 8) { e.stopPropagation(); moved = 0; } }, true);
+  document.addEventListener('wheel', function (e) {
+    if (isReading) return;
+    e.preventDefault();
+    scale = Math.max(0.6, Math.min(2.6, scale - e.deltaY * 0.0012));
+    applyScale();
+  }, { passive: false });
+
+  document.addEventListener('touchstart', function (e) {
+    if (isReading) return;
+    if (e.touches.length === 2) {
+      pinchStart = Math.hypot(e.touches[0].clientX - e.touches[1].clientX, e.touches[0].clientY - e.touches[1].clientY);
+      pinchBase = scale; dragging = false;
+    } else if (e.touches.length === 1) {
+      dragging = true; moved = 0; lastX = e.touches[0].clientX; lastY = e.touches[0].clientY;
+      stage.style.transition = 'none';
+    }
+  }, { passive: false });
+  document.addEventListener('touchmove', function (e) {
+    if (e.touches.length === 2 && pinchStart) {
+      e.preventDefault();
+      var d = Math.hypot(e.touches[0].clientX - e.touches[1].clientX, e.touches[0].clientY - e.touches[1].clientY);
+      scale = Math.max(0.6, Math.min(2.6, pinchBase * d / pinchStart));
+      applyScale();
+    } else if (dragging && e.touches.length === 1) {
+      e.preventDefault();
+      moved += 4;
+      rotY += (e.touches[0].clientX - lastX) * 0.4;
+      rotX -= (e.touches[0].clientY - lastY) * 0.4;
+      rotX = Math.max(-80, Math.min(80, rotX));
+      lastX = e.touches[0].clientX; lastY = e.touches[0].clientY;
+      applyRot();
+    }
+  }, { passive: false });
+  document.addEventListener('touchend', function (e) {
+    if (e.touches.length < 2) pinchStart = 0;
+    if (e.touches.length === 0) { dragging = false; stage.style.transition = 'transform 0.6s cubic-bezier(0.2,0.8,0.2,1)'; }
+  });
+</script>
+
+<script>
+(function(){
+  function send(e){ if (window.parent && window.parent !== window) window.parent.postMessage({type:'LUNAROT_POINTER', x:e.clientX, y:e.clientY}, '*'); }
+  window.addEventListener('pointermove', send, {passive:true});
+  window.addEventListener('mousemove', send, {passive:true});
+})();
+</script>
+
+
+</body></html>
