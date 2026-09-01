@@ -6,17 +6,24 @@ UI of the Lunarot Ecosystem // Standalone Shell & Production Pipeline
 
 ---
 
-## ✦ Repository Architecture & Deletion History Log
+## ✦ Repository Architecture & System Overview
 
-### Current Canonical Production Architecture
-- **`index.html`**: Canonical production build of Lunarot OS (Lunarot-OS54 standalone single-file bundle).
-- **`pachinkoLATEST.html`**: Standalone production build of Sacred Pachinko (served live at `/pachinko` and `/sacred-pachinko`).
-- **`public/history.html`**: Interactive web history log (served live at `/history`).
-- **`vite.config.ts` & `package.json`**: Minimalist, clean Vite pipeline using `vite-plugin-singlefile` for instant Vercel deployments.
+### Canonical Production Files
+- **`index.html`**: Canonical production build of Lunarot OS (standalone single-file bundle with integrated tarot engine, baked pachinko index, and touch gesture layer).
+- **`golem.html` & `golem_data.js`**: Interactive 3D golem visualizer subsystem with real-time transformation telemetry and model inspection.
+- **`lexicon.html`**: Alchemical index and ecosystem terminology catalogue.
+- **`vercel.json`**: Zero-build static routing configuration for high-performance edge deployment.
+- **`package.json` & `vite.config.ts`**: Minimal build definitions for local single-file bundling and static serving.
+
+### Rendered 3D Media Artefacts
+- **`astral_pachinko_spinning.gif`**: Seamless 360-degree rotation capture of the Astral Pachinko cabinet.
+- **`cassette_spinning.gif`**: Turntable rotation of the retro magnetic audio cassette.
+- **`cd_jewel_case_spinning.gif`**: Optimised jewel case turntable animation with transparency support.
+- **`lunarot_tarot_deck_spinning.gif`**: Full-orbit spinning render of the Lunarot gilded tarot deck.
 
 ---
 
-## 📜 Full Version & Deletion Log
+## 📜 Full Version & Evolution Log
 
 ### Phase 1: Modular React/TypeScript Genesis
 - Multi-component React application located in `src/` featuring `OracleView`, `ShowcaseView`, `ASCIIWaves`, `SmokyText`, `VariableFontProximity`, and `ViewStack`.
@@ -34,15 +41,21 @@ UI of the Lunarot Ecosystem // Standalone Shell & Production Pipeline
 - Temporary redirection layers (`osLATEST.html` and `sacred-pachinko.html`).
 
 ### Phase 3: The Great Deletion & Consolidation
-- **Deleted Obsolete Source Code**: Removed `src/`, `projects/` (submodules), `dumbsets/`, `dist/`, and legacy node artifacts.
+- **Deleted Obsolete Source Code**: Removed `src/`, `projects/` (submodules), `dumbsets/`, `dist/`, and legacy node artefacts.
 - **Unlinked Submodules**: Completely removed `.gitmodules` and unlinked external repository references.
-- **Banished Redirection Hacks**: Deleted intermediate redirect files (`osLATEST.html`, `sacred-pachinko.html`).
+- **Cleaned Redirection Layers**: Removed intermediate redirect files to ensure direct root resolution.
 
 ### Phase 4: Direct OS54 Integration & Clean Vite Pipeline
 - **Root Promotion**: Set `Lunarot-OS54.html` directly as the canonical root `index.html`.
-- **Sacred Pachinko**: Retained `pachinkoLATEST.html` in `public/` and configured Vercel clean rewrites.
 - **Clean Build Pipeline**: Restored lightweight `package.json` and `vite.config.ts` (`vite-plugin-singlefile`) so Vercel builds natively without dependencies or mock scripts.
-- **Website History**: Added `/history` (`public/history.html`) and `CHANGELOG.md` to permanently record all ecosystem iterations.
+- **Permanent Change Tracking**: Added `CHANGELOG.md` to permanently record all ecosystem iterations and commit history.
+
+### Phase 5: Standalone Monolith, 3D Subsystems & Asset Pipeline
+- **Monolith Bundle**: Unified all application logic, CSS animations, and asset buffers directly into `index.html` (Builds v6.8, v0.68, v0.191, up to current canonical).
+- **Mobile Gesture Layer**: Added dedicated swipe and touch event listeners for fluid card stack navigation on touch devices.
+- **Baked Pachinko Index**: Integrated local pachinko engine logic directly into the primary payload to remove runtime network bottlenecks.
+- **Zero-Build Edge Deployment**: Configured `vercel.json` with direct static directory routing (`outputDirectory: "."`).
+- **3D Asset Capture Suite**: Added automated Playwright frame capture and colour-quantised GIF optimisation pipelines under `scratch/`.
 
 ---
 

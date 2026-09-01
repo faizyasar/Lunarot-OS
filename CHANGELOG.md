@@ -4,6 +4,50 @@
 
 # ✦ 2026
 
+## 01/09
+*   `[asset-pipeline]` Render and optimise 3D turntable GIF artefacts (`astral_pachinko_spinning.gif`, `cassette_spinning.gif`, `cd_jewel_case_spinning.gif`, `lunarot_tarot_deck_spinning.gif`) via headless Playwright capture.
+*   `[docs]` Synchronise README and CHANGELOG with canonical standalone architecture, zero-build deployment definitions, and complete commit history.
+
+## 22/08
+*   `[lunarot-os:6da1a00]` feat: update standalone index.html with baked pachinko index and mobile gesture layer for tarot
+*   `[lunarot-os:b7114ec]` fix(deploy): update index.html to latest standalone export and configure static zero-build deployment for Vercel
+*   `[lunarot-os:bc8ac01]` fix(html): move fallback div from head noscript to body noscript for HTML standard compliance
+*   `[lunarot-os:958b947]` Update index.html to standalone v0.191
+
+## 07/08
+*   `[lunarot-os:cb363e5]` feat: update index.html to v0.68 standalone build
+*   `[lunarot-os:cf23b2c]` force: trigger fresh vercel deployment [v6.811]
+*   `[lunarot-os:911fb45]` fix(loader): separate style and div in noscript tag and move div to body
+*   `[lunarot-os:b850373]` feat: update index.html to v6.811 standalone
+
+## 05/08
+*   `[lunarot-os:f94b897]` fix: safely force vercel rebuild with UTF-8 comment
+*   `[lunarot-os:9124eb6]` fix(loader): separate style and div in noscript tag and move div to body
+*   `[lunarot-os:097418b]` revert: restore Lunarot OS v6.8 - Standalone.html from Desktop
+*   `[lunarot-os:9eb4a20]` fix(loader): move noscript fallback div to body to prevent HTML parse error
+*   `[lunarot-os:31e16ab]` feat: update index.html with Lunarot OS v6.8 - Standalone
+
+## 04/08
+*   `[lunarot-os:4ce1794]` chore: delete all extra HTML files
+*   `[lunarot-os:97c9a0b]` feat(loader): apply index1.html loading screen UI design
+*   `[lunarot-os:e12b717]` fix(loader): restore build 671342 title and original svg thumbnail in loading screen
+*   `[lunarot-os:e708beb]` fix(loader): restore original clean unpacking loading screen
+*   `[lunarot-os:dd810de]` revert: restore last working iteration of index.html
+*   `[lunarot-os:aadfc80]` fix(build): move noscript tag from head to body to fix parse5 HTML build error
+*   `[lunarot-os:534778e]` build(os): update index.html to build 671342 with occult loading animation
+
+## 03/08
+*   `[lunarot-os:96844ec]` revert: rollback index.html to stable backup while preserving favicons
+*   `[lunarot-os:ae765a8]` fix: properly json-escape component injection for __bundler/template to resolve unpacking error
+*   `[lunarot-os:a535268]` fix: correct component injection boundaries to prevent JS syntax error on boot
+*   `[lunarot-os:372dfa0]` feat: redesign Sacred Pachinko dashboard into Steam Library layout with 3D mouse parallax
+*   `[lunarot-os:960cdcf]` fix: update page titles to LUNAROT OS
+*   `[lunarot-os:afefded]` fix: add cache-busting version query and icon fallback tags for Vercel favicon updates
+*   `[lunarot-os:c874289]` feat: add custom favicons for Lunarot OS and Sacred Pachinko
+*   `[lunarot-os:d113ed3]` fix: anchor right hand to right edge in Sacred Pachinko
+*   `[lunarot-os:59dc911]` feat: integrate CRT video background into Sacred Pachinko
+*   `[lunarot-os:aee5f27]` feat: update Lunarot OS to Build 671341
+
 ## 29/07
 *   `[lunarot-os:4006ef0]` feat: add music conduit tab, boy harsher lastfm stats, letterboxd and pi.fyi links
 *   `[lunarot-os:9b6d2de]` fix: place music.index and deka-archive.index under database, fix bottom bar faizyasar.life link
@@ -19,7 +63,7 @@
 
 ## 16/07
 *   `[lunarot-os:5419300]` Update compiled lunarot-os.html bundle
-*   `[lunarot-os:6f15070]` Standardize header nav tabs to use index.css .nav-btn classes
+*   `[lunarot-os:6f15070]` Standardise header nav tabs to use index.css .nav-btn classes
 *   `[lunarot-os:ef68893]` Restore header nav selectors (tabs) and sync active card stack highlights
 *   `[lunarot-os:c329e32]` Add standalone lunarot-os-2.html copy-paste template
 *   `[lunarot-os:0bfa55a]` Optimise backgrounds rendering inside lunarot-os.html
