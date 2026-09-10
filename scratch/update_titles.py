@@ -13,10 +13,12 @@ old_title_pattern = r'<title>.*?</title>'
 new_title = '<title>LUNAROT OS</title>'
 
 if re.search(old_title_pattern, idx_content):
-    idx_content = re.sub(old_title_pattern, new_title, idx_content, count=1)
+    idx_content = re.sub(old_title_pattern, new_title, idx_content)
+    # Also explicitly replace any remaining references
+    idx_content = idx_content.replace("My Google AI Studio App", "LUNAROT OS")
     with open("index.html", "w", encoding="utf-8") as f:
         f.write(idx_content)
-    print("[SUCCESS] Updated title in index.html to 'LUNAROT OS'!")
+    print("[SUCCESS] Updated all titles in index.html to 'LUNAROT OS'!")
 else:
     print("[WARN] <title> tag not found in index.html")
 
